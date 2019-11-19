@@ -16,8 +16,8 @@ class NavBar extends React.Component {
           <Header inverted as='h1'>Simply savory</Header>
         </Menu.Item>
         <Menu.Item as={NavLink} activeClassName="active" exact to="/" ><Icon name='home' /></Menu.Item>
-        <Menu.Item as={NavLink} activeClassName="active" exact to="/Discover" ><Icon name='compass' /></Menu.Item>
-        <Input action='Search' placeholder='Search...' />
+        <Menu.Item as={NavLink} activeClassName="active" exact to="/Discover" ><Icon name='compass' />Discover</Menu.Item>
+        <Input action='Search' placeholder='Search for recipe' />
         {this.props.currentUser ? (
             [<Menu.Item as={NavLink} activeClassName="active" exact to="/add" key='add'>Add Recipe</Menu.Item>,
               <Menu.Item as={NavLink} activeClassName="active" exact to="/list" key='list'>My Recipe</Menu.Item>]
@@ -30,13 +30,16 @@ class NavBar extends React.Component {
             <Dropdown text="Login" pointing="top right" icon={'user'}>
               <Dropdown.Menu>
                 <Dropdown.Item icon="user" text="Sign In" as={NavLink} exact to="/signin"/>
-                <Dropdown.Item icon="add user" text="Sign Up" as={NavLink} exact to="/signup"/>
+                <Dropdown.Item icon="user" text="Sign Up" as={NavLink} exact to="/signup"/>
               </Dropdown.Menu>
             </Dropdown>
           ) : (
             <Dropdown text={this.props.currentUser} pointing="top right" icon={'user'}>
               <Dropdown.Menu>
                 <Dropdown.Item icon="sign out" text="Sign Out" as={NavLink} exact to="/signout"/>
+                <Dropdown.Item icon="address card" text="account setting" />
+                <Dropdown.Item icon="archive" text="My favorites" />
+                <Dropdown.Item icon="file alternate" text="My recipes" />
               </Dropdown.Menu>
             </Dropdown>
           )}
