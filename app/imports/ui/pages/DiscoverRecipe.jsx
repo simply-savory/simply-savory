@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Card, Image, Button, Icon, Discover } from 'semantic-ui-react';
+import { Container, Header, Card, Image, Button, Icon, Divider } from 'semantic-ui-react';
 
 /** A simple static component to render some text for the landing page. */
 class DiscoverRecipe extends React.Component {
@@ -8,13 +8,10 @@ class DiscoverRecipe extends React.Component {
         <Container>
           <Header as="h1" textAlign="center" size={'huge'}>Discover Recipe </Header>
           <Header as="h2" textAlign="left">Popular Recipe </Header>
-          <Card.Group itemsPerRow={6}>
+          <Card.Group itemsPerRow={4}>
             <Card>
               <Card.Content>
                 <Card.Header>Egg on burger</Card.Header>
-                <Button icon color={'red'}>
-                  <Icon name='heart' />
-                </Button>
                 <Image
                     floated='middle'
                     size='medium'
@@ -26,12 +23,15 @@ class DiscoverRecipe extends React.Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <div className='ui two buttons'>
+                <div className='ui three buttons'>
                   <Button basic color='green'>
                     Like
                   </Button>
                   <Button basic color='red'>
                     Dislike
+                  </Button>
+                  <Button icon color={'red'}>
+                    <Icon name='heart' />
                   </Button>
                 </div>
               </Card.Content>
@@ -50,12 +50,15 @@ class DiscoverRecipe extends React.Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <div className='ui two buttons'>
+                <div className='ui three buttons'>
                   <Button basic color='green'>
                     Like
                   </Button>
                   <Button basic color='red'>
                     Dislike
+                  </Button>
+                  <Button icon color={'red'}>
+                    <Icon name='heart' />
                   </Button>
                 </div>
               </Card.Content>
@@ -74,12 +77,15 @@ class DiscoverRecipe extends React.Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <div className='ui two buttons'>
+                <div className='ui three buttons'>
                   <Button basic color='green'>
                     Like
                   </Button>
                   <Button basic color='red'>
                     Dislike
+                  </Button>
+                  <Button icon color={'red'}>
+                    <Icon name='heart' />
                   </Button>
                 </div>
               </Card.Content>
@@ -98,15 +104,18 @@ class DiscoverRecipe extends React.Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <div className='ui two buttons'>
-                  <Button basic color='green'>
-                    Like
-                  </Button>
-                  <Button basic color='red'>
-                    Dislike
-                  </Button>
-                </div>
-              </Card.Content>
+                  <div className='ui three buttons'>
+                    <Button basic color='green'>
+                      Like
+                    </Button>
+                    <Button basic color='red'>
+                      Dislike
+                    </Button>
+                    <Button icon color={'red'}>
+                      <Icon name='heart' />
+                    </Button>
+                  </div>
+                </Card.Content>
             </Card>
             <Card>
               <Card.Content>
@@ -122,12 +131,15 @@ class DiscoverRecipe extends React.Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <div className='ui two buttons'>
+                <div className='ui three buttons'>
                   <Button basic color='green'>
                     Like
                   </Button>
                   <Button basic color='red'>
                     Dislike
+                  </Button>
+                  <Button icon color={'red'}>
+                    <Icon name='heart' />
                   </Button>
                 </div>
               </Card.Content>
@@ -136,7 +148,7 @@ class DiscoverRecipe extends React.Component {
           <Divider horizontal></Divider>
 
           <Header as="h2" textAlign="left">Recent search results </Header>
-          <Card.Group itemsPerRow={6}>
+          <Card.Group itemsPerRow={4}>
             <Card>
               <Card.Content>
                 <Card.Header>Egg on burger</Card.Header>
@@ -151,14 +163,19 @@ class DiscoverRecipe extends React.Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <div className='ui two buttons'>
-                  <Button basic color='green'>
-                    Like
-                  </Button>
-                  <Button basic color='red'>
-                    Dislike
-                  </Button>
-                </div>
+                <Card.Content extra>
+                  <div className='ui three buttons'>
+                    <Button basic color='green'>
+                      Like
+                    </Button>
+                    <Button basic color='red'>
+                      Dislike
+                    </Button>
+                    <Button icon color={'red'}>
+                      <Icon name='heart' />
+                    </Button>
+                  </div>
+                </Card.Content>
               </Card.Content>
             </Card>
             <Card>
@@ -175,12 +192,15 @@ class DiscoverRecipe extends React.Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <div className='ui two buttons'>
+                <div className='ui three buttons'>
                   <Button basic color='green'>
                     Like
                   </Button>
                   <Button basic color='red'>
                     Dislike
+                  </Button>
+                  <Button icon color={'red'}>
+                    <Icon name='heart' />
                   </Button>
                 </div>
               </Card.Content>
@@ -199,12 +219,15 @@ class DiscoverRecipe extends React.Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <div className='ui two buttons'>
+                <div className='ui three buttons'>
                   <Button basic color='green'>
                     Like
                   </Button>
                   <Button basic color='red'>
                     Dislike
+                  </Button>
+                  <Button icon color={'red'}>
+                    <Icon name='heart' />
                   </Button>
                 </div>
               </Card.Content>
@@ -223,12 +246,15 @@ class DiscoverRecipe extends React.Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <div className='ui two buttons'>
+                <div className='ui three buttons'>
                   <Button basic color='green'>
                     Like
                   </Button>
                   <Button basic color='red'>
                     Dislike
+                  </Button>
+                  <Button icon color={'red'}>
+                    <Icon name='heart' />
                   </Button>
                 </div>
               </Card.Content>
@@ -247,12 +273,15 @@ class DiscoverRecipe extends React.Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <div className='ui two buttons'>
+                <div className='ui three buttons'>
                   <Button basic color='green'>
                     Like
                   </Button>
                   <Button basic color='red'>
                     Dislike
+                  </Button>
+                  <Button icon color={'red'}>
+                    <Icon name='heart' />
                   </Button>
                 </div>
               </Card.Content>
