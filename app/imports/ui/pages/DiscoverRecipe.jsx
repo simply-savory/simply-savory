@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Header, Card, Image, Button, Icon, Divider } from 'semantic-ui-react';
+import { withRouter, Link } from 'react-router-dom';
 
 /** A simple static component to render some text for the landing page. */
 class DiscoverRecipe extends React.Component {
@@ -36,7 +37,7 @@ class DiscoverRecipe extends React.Component {
                 </div>
               </Card.Content>
             </Card>
-            <Card>
+            <Card as={ Link } to='/Recipe'>
               <Card.Content>
                 <Card.Header>Egg omelet</Card.Header>
                 <Image
@@ -178,7 +179,7 @@ class DiscoverRecipe extends React.Component {
                 </Card.Content>
               </Card.Content>
             </Card>
-            <Card>
+            <Card as={ Link } to='/Recipe'>
               <Card.Content>
                 <Card.Header>Egg omelet</Card.Header>
                 <Image

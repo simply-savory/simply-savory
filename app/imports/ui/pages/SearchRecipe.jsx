@@ -33,7 +33,7 @@ class SearchRecipe extends React.Component {
                 </div>
               </Card.Content>
             </Card>
-            <Card>
+            <Card as={ Link } to='/Recipe'>
               <Card.Content>
                 <Card.Header>Egg omelet</Card.Header>
                 <Image
