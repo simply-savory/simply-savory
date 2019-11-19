@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Card, Image, Button, Divider } from 'semantic-ui-react';
+import { Container, Header, Card, Image, Button, Icon, Discover } from 'semantic-ui-react';
 
 /** A simple static component to render some text for the landing page. */
 class DiscoverRecipe extends React.Component {
@@ -12,6 +12,9 @@ class DiscoverRecipe extends React.Component {
             <Card>
               <Card.Content>
                 <Card.Header>Egg on burger</Card.Header>
+                <Button icon color={'red'}>
+                  <Icon name='heart' />
+                </Button>
                 <Image
                     floated='middle'
                     size='medium'
@@ -130,7 +133,7 @@ class DiscoverRecipe extends React.Component {
               </Card.Content>
             </Card>
           </Card.Group>
-          <div class={'ui divider'}></div>
+          <Divider horizontal></Divider>
 
           <Header as="h2" textAlign="left">Recent search results </Header>
           <Card.Group itemsPerRow={6}>
