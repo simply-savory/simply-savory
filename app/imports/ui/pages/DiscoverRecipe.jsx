@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Header, Card, Image, Button, Icon, Divider } from 'semantic-ui-react';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 /** A simple static component to render some text for the landing page. */
 class DiscoverRecipe extends React.Component {
