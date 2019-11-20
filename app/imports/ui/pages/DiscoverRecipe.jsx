@@ -14,7 +14,7 @@ class DiscoverRecipe extends React.Component {
               <Card.Content>
                 <Card.Header>Egg on burger</Card.Header>
                 <Image
-                    floated='middle'
+                    centered
                     size='medium'
                     src='../../../images/sampleegg.jpg'
                 />
@@ -41,7 +41,7 @@ class DiscoverRecipe extends React.Component {
               <Card.Content>
                 <Card.Header>Egg omelet</Card.Header>
                 <Image
-                    floated='middle'
+                    centered
                     size='medium'
                     src='../../../images/eggomm.jpg'
                 />
@@ -68,7 +68,7 @@ class DiscoverRecipe extends React.Component {
               <Card.Content>
                 <Card.Header>Cup noodles</Card.Header>
                 <Image
-                    floated='middle'
+                    centered
                     size='medium'
                     src='../../../images/Cup-Noodles-Curry.png'
                 />
@@ -95,7 +95,7 @@ class DiscoverRecipe extends React.Component {
               <Card.Content>
                 <Card.Header>Wagu steak</Card.Header>
                 <Image
-                    floated='middle'
+                    centered
                     size='medium'
                     src='../../../images/wagu-steak.jpg'
                 />
@@ -122,7 +122,7 @@ class DiscoverRecipe extends React.Component {
               <Card.Content>
                 <Card.Header>Kat</Card.Header>
                 <Image
-                    floated='middle'
+                    centered
                     size='medium'
                     src='../../../images/kat.jpg'
                 />
@@ -154,7 +154,7 @@ class DiscoverRecipe extends React.Component {
               <Card.Content>
                 <Card.Header>Egg on burger</Card.Header>
                 <Image
-                    floated='middle'
+                   centered
                     size='medium'
                     src='../../../images/sampleegg.jpg'
                 />
@@ -183,7 +183,7 @@ class DiscoverRecipe extends React.Component {
               <Card.Content>
                 <Card.Header>Egg omelet</Card.Header>
                 <Image
-                    floated='middle'
+                   centered
                     size='medium'
                     src='../../../images/eggomm.jpg'
                 />
@@ -210,7 +210,7 @@ class DiscoverRecipe extends React.Component {
               <Card.Content>
                 <Card.Header>Cup noodles</Card.Header>
                 <Image
-                    floated='middle'
+                   centered
                     size='medium'
                     src='../../../images/Cup-Noodles-Curry.png'
                 />
@@ -237,7 +237,7 @@ class DiscoverRecipe extends React.Component {
               <Card.Content>
                 <Card.Header>Wagu steak</Card.Header>
                 <Image
-                    floated='middle'
+                   centered
                     size='medium'
                     src='../../../images/wagu-steak.jpg'
                 />
@@ -264,7 +264,7 @@ class DiscoverRecipe extends React.Component {
               <Card.Content>
                 <Card.Header>Kat</Card.Header>
                 <Image
-                    floated='middle'
+                   centered
                     size='medium'
                     src='../../../images/kat.jpg'
                 />
