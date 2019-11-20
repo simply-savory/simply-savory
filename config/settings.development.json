@@ -1,13 +1,33 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
-    { "email": "john@foo.com", "password": "changeme" }
+    {
+      "email": "admin@foo.com",
+      "password": "changeme",
+      "role": "admin"
+    },
+    {
+      "email": "john@foo.com",
+      "password": "changeme"
+    }
   ],
-
-  "defaultData": [
-    { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
-    { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
-    { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
-    { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
+  "defaultRecipes": [
+    {
+      "name": "Grilled Cheese",
+      "cooktime": "5 Minutes",
+      "owner": "john@foo.com",
+      "likes": 5,
+      "ingredients": "2 Slices of Bread 2 slices of american cheese 1 pat of butter",
+      "image": "https://assets.bonappetit.com/photos/57acf62a53e63daf11a4dbee/1:1/w_1536,h_1536,c_limit/best-ever-grilled-cheese.jpg",
+      "instructions": "Place bread on a cutting board and spread mayonnaise over top side of each; this is key to a golden, delectable crunch. Heat a small skillet (nonstick, ideally) over medium. Slide in half of butter. When it melts, place 1 slice of bread, mayonnaise side down, in skillet; top with cheese; season with pepper. Top with second slice of bread, mayonnaise side up. When underside is golden brown, about 4 minutes, turn sandwich and add remaining butter to skillet. Press down on sandwich to encourage even browning and to help melt cheese—be gentle, don’t smash it. Cook until second side is golden brown and cheese is melted. Eat immediately, preferably with soup."
+    },
+    {
+      "name": "Sunny Side Egg",
+      "cooktime": "5 Minutes",
+      "owner": "john@foo.com",
+      "likes": 2,
+      "ingredients": "1 Large Egg",
+      "image": "https://www.wikihow.com/images/thumb/8/8e/Make-Sunny-Side-up-Eggs-Step-11-Version-2.jpg/aid139404-v4-900px-Make-Sunny-Side-up-Eggs-Step-11-Version-2.jpg",
+      "instructions": "Throw egg in pan"
+    }
   ]
 }
