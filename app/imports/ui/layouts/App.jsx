@@ -18,7 +18,7 @@ import DisplayRecipe from '../pages/DisplayRecipe';
 import DiscoverRecipe from '../pages/DiscoverRecipe';
 import SearchRecipe from '../pages/SearchRecipe';
 import MyRecipe from '../pages/MyRecipe';
-import FeelingLucky from '../pages/FeelingLucky';
+import RandomRecipe from '../pages/RandomRecipe';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -32,7 +32,7 @@ class App extends React.Component {
               <Route path="/signin" component={Signin}/>
               <Route path="/Recipe" component={DisplayRecipe}/>
               <Route path="/Discover" component={DiscoverRecipe}/>
-              <Route path="/Random" component={FeelingLucky}/>
+              <Route path="/Random" component={RandomRecipe}/>
               <Route path="/signup" component={Signup}/>
               <Route path="/Search" component={SearchRecipe}/>
               <ProtectedRoute path="/myrecipe" component={MyRecipe}/>
