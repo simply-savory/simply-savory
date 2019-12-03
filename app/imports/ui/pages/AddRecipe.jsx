@@ -1,10 +1,10 @@
 import React from 'react';
-import { Recipe } from '/imports/api/recipe/Recipe';
+import { Recipe } from '/imports/api/recipe/Recipes';
 import { Grid, Segment, Header } from 'semantic-ui-react';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
 import LongTextField from 'uniforms-semantic/LongTextField';
-import NumField from 'uniforms-semantic/NumField';
+import HiddenField from 'uniforms-semantic/HiddenField';
 import SubmitField from 'uniforms-semantic/SubmitField';
 import ErrorsField from 'uniforms-semantic/ErrorsField';
 import swal from 'sweetalert';
@@ -51,7 +51,7 @@ class AddRecipe extends React.Component {
               <Segment>
                 <TextField label='Recipe Name' name='name'/>
                 <TextField name='cooktime'/>
-                <NumField name='likes' decimal={false}/>
+                <HiddenField name='likes' value={0}/>
                 <TextField name='ingredients'/>
                 <TextField label='Recipe Image URL' name='image'/>
                 <LongTextField name='instructions'/>
