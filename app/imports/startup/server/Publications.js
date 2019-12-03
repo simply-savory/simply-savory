@@ -1,8 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
-import { Recipes } from '../../api/recipe/Recipes';
-import { Reviews } from '../../api/review/Reviews';
+import { Recipes } from '../../api/recipe/Recipe';
 
 /** This subscription publishes only the documents associated with the logged in user */
 Meteor.publish('Stuff', function publish() {
@@ -21,26 +20,17 @@ Meteor.publish('StuffAdmin', function publish() {
   return this.ready();
 });
 
-Meteor.publish('RecipesAdmin', function publish() {
+Meteor.publish('RecipeAdmin', function publish() {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return Recipes.find();
   }
   return this.ready();
 });
 
-Meteor.publish('Recipes', function publish() {
+Meteor.publish('Recipe', function publish() {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return Recipes.find({ owner: username });
-  }
-  return this.ready();
-});
-
-/** This subscription publishes only the documents associated with the logged in user */
-Meteor.publish('Reviews', function publish() {
-  if (this.userId) {
-    const username = Meteor.users.findOne(this.userId).username;
-    return Reviews.find({ owner: username });
   }
   return this.ready();
 });
