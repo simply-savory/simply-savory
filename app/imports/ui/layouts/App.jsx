@@ -14,10 +14,10 @@ import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
-import OldRecipe from '../components/OldRecipe';
+import DisplayRecipe from '../pages/DisplayRecipe';
 import DiscoverRecipe from '../pages/DiscoverRecipe';
 import SearchRecipe from '../pages/SearchRecipe';
-import MyRecipe from '../pages/RenderRecipe';
+import MyRecipe from '../pages/MyRecipe';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -29,11 +29,11 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={Landing}/>
               <Route path="/signin" component={Signin}/>
-              <Route path="/Recipe" component={OldRecipe}/>
+              <Route path="/Recipe" component={DisplayRecipe}/>
               <Route path="/Discover" component={DiscoverRecipe}/>
               <Route path="/signup" component={Signup}/>
               <Route path="/Search" component={SearchRecipe}/>
-              <ProtectedRoute path="/view" component={MyRecipe}/>
+              <ProtectedRoute path="/myrecipe" component={MyRecipe}/>
               <ProtectedRoute path="/add" component={AddRecipe}/>
               <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
               <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>

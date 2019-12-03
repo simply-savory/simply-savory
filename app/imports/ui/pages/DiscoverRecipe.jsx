@@ -11,7 +11,6 @@ class DiscoverRecipe extends React.Component {
           <Header as="h2" textAlign="left">Popular Recipe </Header>
           <Card.Group itemsPerRow={4}>
             <Card>
-
               <Card.Content>
                 <Card.Header>Egg on burger</Card.Header>
                 <Image
@@ -38,7 +37,7 @@ class DiscoverRecipe extends React.Component {
                 </div>
               </Card.Content>
             </Card>
-            <Card as={ Link } to={`/view/${'Grilled Cheese'}`}>
+            <Card as={ Link } to='/Recipe'>
               <Card.Content>
                 <Card.Header>Egg omelet</Card.Header>
                 <Image
