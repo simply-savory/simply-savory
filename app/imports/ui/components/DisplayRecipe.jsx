@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Icon, Feed, Button, Card } from 'semantic-ui-react';
+import { Image, Icon, Feed, Grid, Header, Segment, Container, GridColumn } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import AddReview from './AddReview';
@@ -8,43 +8,28 @@ import Review from './Review';
 class DisplayRecipe extends React.Component {
   render() {
     return (
-        <Card centered>
-          <Card.Content>
-            <Card.Header>{this.props.recipe.name}</Card.Header>
-            <Card.Meta>
-              {this.props.recipe.cooktime}
-            </Card.Meta>
-            <Image
-                centered
-                size='medium'
-                src={this.props.recipe.image}/>
-            <Card.Description>
+        <Container>
+          <Header textAlign='center' size='large'>{this.props.recipe.name}</Header> <br/>
+          <Segment raised><b>Cook Time:</b> {this.props.recipe.cooktime} <b>Likes</b> {this.props.recipe.likes} <Icon
+              size='small' name='star'/><Icon
+              size='small' name='star'/><Icon size='small' name='star'/><Icon size='small' name='star'/><Icon
+              size='small' name='star half'/> <b>Category:</b>Breakfast</Segment> <br/>
+          <Image size='big' centered src={this.props.recipe.image}/>
+          <Grid>
+            <GridColumn width={4}>
+              <Header textAlign='center' size='medium'>Ingredients List </Header>
               {this.props.recipe.ingredients}
-            </Card.Description>
-          </Card.Content>
-          <Card.Content extra>
-            {this.props.recipe.instructions}
-          </Card.Content>
-          <Card.Content extra>
+            </GridColumn>
+            <GridColumn width={12}>
+              <Header textAlign='center' size='medium'> Steps & Procedure </Header>
+              {this.props.recipe.instructions}
+            </GridColumn>
             <Feed>
               {this.props.reviews.map((review, index) => <Review key={index} review={review}/>)}
             </Feed>
-          </Card.Content>
-          <Card.Content extra>
             <AddReview owner={this.props.recipe.owner} recipeId={this.props.recipe._id}/>
-          </Card.Content>
-          <Card.Content extra>
-            <div className='ui three buttons'>
-              <Button basic color='green'>
-                Like
-              </Button>
-              <Button icon color={'red'}>
-                <Icon name='heart' />
-                <Icon name='heart' />
-              </Button>
-            </div>
-          </Card.Content>
-        </Card>
+          </Grid>
+        </Container>
     );
   }
 }

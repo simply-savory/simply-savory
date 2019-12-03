@@ -20,7 +20,7 @@ class ShowRecipe extends React.Component {
               model={this.props.doc}
               key={index}
               recipe={recipe}
-              notes={this.props.reviews.filter(review => (review.recipeId === recipe._id))}/>)}
+              reviews={this.props.reviews.filter(review => (review.recipeId === recipe._id))}/>)}
         </Container>
     );
   }

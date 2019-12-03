@@ -15,8 +15,8 @@ class AddReview extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
-    const { review, contactId, owner, createdAt } = data;
-    Reviews.insert({ review, contactId, owner, createdAt },
+    const { review, recipeId, owner, createdAt } = data;
+    Reviews.insert({ review, recipeId, owner, createdAt },
         (error) => {
           if (error) {
             swal('Error', error.message, 'error');

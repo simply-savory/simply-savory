@@ -6,7 +6,7 @@ import { Tracker } from 'meteor/tracker';
 const Recipes = new Mongo.Collection('Recipes');
 
 /** Define a schema to specify the structure of each document in the collection. */
-const RecipeSchema = new SimpleSchema({
+const RecipesSchema = new SimpleSchema({
   name: String,
   cooktime: String,
   owner: String,
@@ -18,7 +18,7 @@ const RecipeSchema = new SimpleSchema({
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */
-Recipes.attachSchema(RecipeSchema);
+Recipes.attachSchema(RecipesSchema);
 
 /** Make the collection and schema available to other code. */
-export { Recipes, RecipeSchema };
+export { Recipes, RecipesSchema };
