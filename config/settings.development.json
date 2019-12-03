@@ -28,6 +28,33 @@
       "ingredients": "1 Large Egg",
       "image": "https://www.wikihow.com/images/thumb/8/8e/Make-Sunny-Side-up-Eggs-Step-11-Version-2.jpg/aid139404-v4-900px-Make-Sunny-Side-up-Eggs-Step-11-Version-2.jpg",
       "instructions": "Throw egg in pan"
+    },
+    {
+      "name": "Bacon",
+      "cooktime": "5 Minutes",
+      "owner": "john@foo.com",
+      "likes": 2,
+      "ingredients": "6 Slices of Bacon",
+      "image": "https://www.simplyrecipes.com/wp-content/uploads/2019/08/baked-bacon-Lead-2-768x1075.jpg",
+      "instructions": "Cook bacon on griddle till crisp"
+    },
+    {
+      "name": "Scrambled Eggs",
+      "cooktime": "2 Minutes",
+      "owner": "john@foo.com",
+      "likes": 2,
+      "ingredients": "2 large eggs",
+      "image": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/7/17/1/FN_Simple-Scrambled-Eggs_s4x3.jpg.rend.hgtvcom.826.620.suffix/1408069256231.jpeg",
+      "instructions": "Preheat pan to medium heat, add eggs and agitate constantly"
+    },
+    {
+      "name": "Boiled Eggs",
+      "cooktime": "8 Mins",
+      "owner": "admin@foo.com",
+      "likes": 7,
+      "ingredients": "2x large eggs",
+      "image": "https://www.onceuponachef.com/images/2017/10/How-To-Make-Hard-Boiled-Eggs-1150x781.jpg",
+      "instructions": "Raise water to boiling, leave egg in for 8 minutes and remove when done"
     }
   ]
 }
