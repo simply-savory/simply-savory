@@ -18,7 +18,7 @@
       "likes": 5,
       "ingredients": "2 Slices of Bread 2 slices of american cheese 1 pat of butter",
       "image": "https://assets.bonappetit.com/photos/57acf62a53e63daf11a4dbee/1:1/w_1536,h_1536,c_limit/best-ever-grilled-cheese.jpg",
-      "instructions": "Place bread on a cutting board and spread mayonnaise over top side of each; this is key to a golden, delectable crunch. Heat a small skillet (nonstick, ideally) over medium. Slide in half of butter. When it melts, place 1 slice of bread, mayonnaise side down, in skillet; top with cheese; season with pepper. Top with second slice of bread, mayonnaise side up. When underside is golden brown, about 4 minutes, turn sandwich and add remaining butter to skillet. Press down on sandwich to encourage even browning and to help melt cheese—be gentle, don’t smash it. Cook until second side is golden brown and cheese is melted. Eat immediately, preferably with soup."
+      "instructions": "1.Butter both sides of each bread slice \n 2.Add cheese as desired \n 3.Toast until golden brown and cheese melted \n 4.Slice and serve"
     },
     {
       "name": "Sunny Side Egg",
@@ -27,7 +27,7 @@
       "likes": 2,
       "ingredients": "1 Large Egg",
       "image": "https://www.wikihow.com/images/thumb/8/8e/Make-Sunny-Side-up-Eggs-Step-11-Version-2.jpg/aid139404-v4-900px-Make-Sunny-Side-up-Eggs-Step-11-Version-2.jpg",
-      "instructions": "Throw egg in pan"
+      "instructions": "1.Pre-heat a pan to medium heat with small knob of butter inside \n 2.Crack 1 large egg into pan \n 3.Cook until edges are golden brown \n 4.Serve and enjoy"
     },
     {
       "name": "Bacon",
@@ -36,7 +36,7 @@
       "likes": 2,
       "ingredients": "6 Slices of Bacon",
       "image": "https://www.simplyrecipes.com/wp-content/uploads/2019/08/baked-bacon-Lead-2-768x1075.jpg",
-      "instructions": "Cook bacon on griddle till crisp"
+      "instructions": "1.Remove bacon from packaging and slice in half \n 2.Place bacon into cast iron skillet on medium heat \n 3.Sear until fat rendered and bacon crispy"
     },
     {
       "name": "Scrambled Eggs",
@@ -45,7 +45,7 @@
       "likes": 2,
       "ingredients": "2 large eggs",
       "image": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/7/17/1/FN_Simple-Scrambled-Eggs_s4x3.jpg.rend.hgtvcom.826.620.suffix/1408069256231.jpeg",
-      "instructions": "Preheat pan to medium heat, add eggs and agitate constantly"
+      "instructions": "1.Crack eggs into bowl \n 2.Season with salt and pepper to taste \n 3.Pour eggs into non-stick pan, agitating until soft curds form \n 4.Turn off stove and allow residual heat to cook eggs \n 5.Serve and Enjoy"
     },
     {
       "name": "Boiled Eggs",
@@ -54,7 +54,7 @@
       "likes": 7,
       "ingredients": "2x large eggs",
       "image": "https://www.onceuponachef.com/images/2017/10/How-To-Make-Hard-Boiled-Eggs-1150x781.jpg",
-      "instructions": "Raise water to boiling, leave egg in for 8 minutes and remove when done"
+      "instructions": "1.Prepare a pot of water, allow to reach boiling temp \n 2.Place 2 large eggs in pot, allow to boil for 8 minutes \n 3.Remove from water, serve and enjoy"
     }
   ]
 }
