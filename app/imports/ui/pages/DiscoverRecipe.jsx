@@ -1,10 +1,27 @@
 import React from 'react';
 import { Container, Header, Card, Image, Button, Icon, Divider } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+
 
 /** A simple static component to render some text for the landing page. */
 class DiscoverRecipe extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      search: '',
+    };
+  }
+
+  updateSearch(event) {
+    // console.log(event.target.value);
+    this.setState({ search: event.target.value });
+  }
+
   render() {
+    const filteredRecipe = this.props.recipe.filter(
+        (recipe) => recipe.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1,
+    );
     return (
         <Container>
           <Header as="h1" textAlign="center" size={'huge'}>Discover Recipe </Header>
@@ -32,12 +49,12 @@ class DiscoverRecipe extends React.Component {
                     Dislike
                   </Button>
                   <Button icon color={'red'}>
-                    <Icon name='heart' />
+                    <Icon name='heart'/>
                   </Button>
                 </div>
               </Card.Content>
             </Card>
-            <Card as={ Link } to='/Recipe'>
+            <Card as={Link} to='/Recipe'>
               <Card.Content>
                 <Card.Header>Egg omelet</Card.Header>
                 <Image
@@ -59,7 +76,7 @@ class DiscoverRecipe extends React.Component {
                     Dislike
                   </Button>
                   <Button icon color={'red'}>
-                    <Icon name='heart' />
+                    <Icon name='heart'/>
                   </Button>
                 </div>
               </Card.Content>
@@ -86,7 +103,7 @@ class DiscoverRecipe extends React.Component {
                     Dislike
                   </Button>
                   <Button icon color={'red'}>
-                    <Icon name='heart' />
+                    <Icon name='heart'/>
                   </Button>
                 </div>
               </Card.Content>
@@ -105,18 +122,18 @@ class DiscoverRecipe extends React.Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                  <div className='ui three buttons'>
-                    <Button basic color='green'>
-                      Like
-                    </Button>
-                    <Button basic color='red'>
-                      Dislike
-                    </Button>
-                    <Button icon color={'red'}>
-                      <Icon name='heart' />
-                    </Button>
-                  </div>
-                </Card.Content>
+                <div className='ui three buttons'>
+                  <Button basic color='green'>
+                    Like
+                  </Button>
+                  <Button basic color='red'>
+                    Dislike
+                  </Button>
+                  <Button icon color={'red'}>
+                    <Icon name='heart'/>
+                  </Button>
+                </div>
+              </Card.Content>
             </Card>
             <Card>
               <Card.Content>
@@ -140,7 +157,7 @@ class DiscoverRecipe extends React.Component {
                     Dislike
                   </Button>
                   <Button icon color={'red'}>
-                    <Icon name='heart' />
+                    <Icon name='heart'/>
                   </Button>
                 </div>
               </Card.Content>
@@ -154,7 +171,7 @@ class DiscoverRecipe extends React.Component {
               <Card.Content>
                 <Card.Header>Egg on burger</Card.Header>
                 <Image
-                   centered
+                    centered
                     size='medium'
                     src='../../../images/sampleegg.jpg'
                 />
@@ -173,17 +190,17 @@ class DiscoverRecipe extends React.Component {
                       Dislike
                     </Button>
                     <Button icon color={'red'}>
-                      <Icon name='heart' />
+                      <Icon name='heart'/>
                     </Button>
                   </div>
                 </Card.Content>
               </Card.Content>
             </Card>
-            <Card as={ Link } to='/Recipe'>
+            <Card as={Link} to='/Recipe'>
               <Card.Content>
                 <Card.Header>Egg omelet</Card.Header>
                 <Image
-                   centered
+                    centered
                     size='medium'
                     src='../../../images/eggomm.jpg'
                 />
@@ -201,7 +218,7 @@ class DiscoverRecipe extends React.Component {
                     Dislike
                   </Button>
                   <Button icon color={'red'}>
-                    <Icon name='heart' />
+                    <Icon name='heart'/>
                   </Button>
                 </div>
               </Card.Content>
@@ -210,7 +227,7 @@ class DiscoverRecipe extends React.Component {
               <Card.Content>
                 <Card.Header>Cup noodles</Card.Header>
                 <Image
-                   centered
+                    centered
                     size='medium'
                     src='../../../images/Cup-Noodles-Curry.png'
                 />
@@ -228,7 +245,7 @@ class DiscoverRecipe extends React.Component {
                     Dislike
                   </Button>
                   <Button icon color={'red'}>
-                    <Icon name='heart' />
+                    <Icon name='heart'/>
                   </Button>
                 </div>
               </Card.Content>
@@ -237,7 +254,7 @@ class DiscoverRecipe extends React.Component {
               <Card.Content>
                 <Card.Header>Wagu steak</Card.Header>
                 <Image
-                   centered
+                    centered
                     size='medium'
                     src='../../../images/wagu-steak.jpg'
                 />
@@ -255,7 +272,7 @@ class DiscoverRecipe extends React.Component {
                     Dislike
                   </Button>
                   <Button icon color={'red'}>
-                    <Icon name='heart' />
+                    <Icon name='heart'/>
                   </Button>
                 </div>
               </Card.Content>
@@ -264,7 +281,7 @@ class DiscoverRecipe extends React.Component {
               <Card.Content>
                 <Card.Header>Kat</Card.Header>
                 <Image
-                   centered
+                    centered
                     size='medium'
                     src='../../../images/kat.jpg'
                 />
@@ -282,7 +299,7 @@ class DiscoverRecipe extends React.Component {
                     Dislike
                   </Button>
                   <Button icon color={'red'}>
-                    <Icon name='heart' />
+                    <Icon name='heart'/>
                   </Button>
                 </div>
               </Card.Content>
@@ -292,5 +309,8 @@ class DiscoverRecipe extends React.Component {
     );
   }
 }
+DiscoverRecipe.propTypes = {
+  recipe: PropTypes.object.isRequired,
+};
 
 export default DiscoverRecipe;
