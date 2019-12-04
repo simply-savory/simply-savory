@@ -3,22 +3,18 @@ import SimpleSchema from 'simpl-schema';
 import { Tracker } from 'meteor/tracker';
 
 /** Define a Mongo collection to hold the data. */
-const Recipes = new Mongo.Collection('Recipes');
+const Reviews = new Mongo.Collection('Reviews');
 
 /** Define a schema to specify the structure of each document in the collection. */
-const RecipeSchema = new SimpleSchema({
-  name: String,
-  cooktime: String,
+const ReviewsSchema = new SimpleSchema({
+  review: String,
+  recipeId: String,
   owner: String,
-  likes: Number,
-  ingredients: String,
-  image: String,
-  instructions: String,
-
+  createdAt: Date,
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */
-Recipes.attachSchema(RecipeSchema);
+Reviews.attachSchema(ReviewsSchema);
 
 /** Make the collection and schema available to other code. */
-export { Recipes, RecipeSchema };
+export { Reviews, ReviewsSchema };
