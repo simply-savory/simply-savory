@@ -1,5 +1,5 @@
 import React from 'react';
-import { Recipe } from '/imports/api/recipe/Recipes';
+import { Recipes } from '/imports/api/recipe/Recipes';
 import { Grid, Segment, Header } from 'semantic-ui-react';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
@@ -29,7 +29,7 @@ class AddRecipe extends React.Component {
   submit(data, formRef) {
     const { name, cooktime, likes, ingredients, image, instructions } = data;
     const owner = Meteor.user().username;
-    Recipe.insert({ name, cooktime, likes, ingredients, image, instructions, owner },
+    Recipes.insert({ name, cooktime, likes, ingredients, image, instructions, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');

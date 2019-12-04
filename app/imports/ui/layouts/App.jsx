@@ -18,6 +18,7 @@ import OldRecipe from '../components/OldRecipe';
 import DiscoverRecipe from '../pages/DiscoverRecipe';
 import SearchRecipe from '../pages/SearchRecipe';
 import MyRecipe from '../pages/RenderRecipe';
+import EditRecipe from '../pages/EditRecipe';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -36,6 +37,7 @@ class App extends React.Component {
               <ProtectedRoute path="/view" component={MyRecipe}/>
               <ProtectedRoute path="/add" component={AddRecipe}/>
               <ProtectedRoute path="/show/:_id" component={ShowRecipe}/>
+              <ProtectedRoute path="/edit/:_id" component={EditRecipe}/>
               <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
               <ProtectedRoute path="/signout" component={Signout}/>
               <Route component={NotFound}/>
