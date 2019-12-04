@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/Stuff.js';
-import { Recipes } from '../../api/recipe/Recipe.js';
-
+import { Recipes } from '../../api/recipe/Recipes.js';
 /* eslint-disable no-console */
 
 /** Initialize the database with a default data document. */
