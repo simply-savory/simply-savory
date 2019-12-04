@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Loader } from 'semantic-ui-react';
+import { Loader } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { Recipes } from '/imports/api/recipe/Recipes';
 import { Reviews } from '/imports/api/review/Reviews';
@@ -15,13 +15,11 @@ class ShowRecipe extends React.Component {
 
   renderPage() {
     return (
-        <Container>
-          {this.props.recipes.map((recipe, index) => <DisplayRecipe
-              model={this.props.doc}
-              key={index}
-              recipe={recipe}
-              reviews={this.props.reviews.filter(review => (review.recipeId === recipe._id))}/>)}
-        </Container>
+        <div>
+          <DisplayRecipe
+              recipe={this.props.doc}
+              reviews={this.props.reviews.filter((review, recipe) => (review.recipeId === recipe._id))}/>
+        </div>
     );
   }
 }

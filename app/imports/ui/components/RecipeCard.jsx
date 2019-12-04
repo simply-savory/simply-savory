@@ -16,15 +16,13 @@ class RecipeCard extends React.Component {
             <Image
                 centered
                 size='medium'
-                src={this.props.recipe.image}
-                href={`/show/${this.props.recipe._id}`}
-                target='_blank'/>
+                src={this.props.recipe.image}/>
             <Card.Description>
               {this.props.recipe.ingredients}
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <Link to={`/show/${this.props.recipe._id}`}>Edit</Link>
+            <Link to={`/show/${this.props.recipe._id}`}>Show Recipe</Link>
           </Card.Content>
           <Card.Content extra>
             <div className='ui three buttons'>

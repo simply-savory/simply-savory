@@ -21,7 +21,7 @@ class AddReview extends React.Component {
           if (error) {
             swal('Error', error.message, 'error');
           } else {
-            swal('Success', 'Reviews added successfully', 'success');
+            swal('Success', 'Review added successfully', 'success');
             formRef.reset();
           }
         });
