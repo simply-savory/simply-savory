@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Card, Loader } from 'semantic-ui-react';
+import { Container, Header, Card, Loader, Input } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { Reviews } from '/imports/api/review/Reviews';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -17,30 +17,35 @@ class DiscoverRecipe extends React.Component {
   }
 
   updateSearch(event) {
-    // console.log(event.target.value);
     this.setState({ search: event.target.value });
   }
 
   render() {
-    const filteredRecipe = this.props.recipe.filter(
-        (recipe) => recipe.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1,
-    );
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
   renderPage() {
+    const filteredRecipe = this.props.recipes.filter(
+        (recipe) => (recipe.ingredients.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1 ||
+            (recipe.name.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1,
+    );
     return (
         <Container>
           <Header as="h2" textAlign="center" inverted>List Contacts</Header>
+          <Input
+              type='text'
+              value={this.state.search}
+              onChange={this.updateSearch.bind(this)}
+          />
           <Card.Group>
-            {this.props.recipes.map((recipe, index) => <RecipeCard
-                key={index}
-                recipe={recipe}/>)}
+            {filteredRecipe.map((recipe, index) => <RecipeCard key={index} recipe={recipe} Recipes={Recipes}/>)}
           </Card.Group>
+
         </Container>
     );
   }
 }
+
 DiscoverRecipe.propTypes = {
   recipe: PropTypes.object.isRequired,
 };
