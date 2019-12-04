@@ -32,11 +32,15 @@ class DiscoverRecipe extends React.Component {
     return (
         <Container>
           <Header as="h2" textAlign="center" inverted>List Contacts</Header>
-          <Input
-              type='text'
-              value={this.state.search}
-              onChange={this.updateSearch.bind(this)}
-          />
+            <Input
+                action={{
+                  content: 'Search',
+                }}
+                placeholder='Search by name or ingredient'
+                type='text'
+                value={this.state.search}
+                onChange={this.updateSearch.bind(this)}
+            />
           <Card.Group>
             {filteredRecipe.map((recipe, index) => <RecipeCard key={index} recipe={recipe} Recipes={Recipes}/>)}
           </Card.Group>
