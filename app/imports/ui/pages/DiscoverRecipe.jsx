@@ -18,8 +18,7 @@ class DiscoverRecipe extends React.Component {
         <Container>
           <Header as="h2" textAlign="center" inverted>List Contacts</Header>
           <Card.Group>
-            const sortRecipes = {this.props.recipes.sortBy('likes')}
-            {sortRecipes.map((recipe, index) => <RecipeCard
+            {this.props.recipes.map((recipe, index) => <RecipeCard
                 key={index}
                 recipe={recipe}/>)}
           </Card.Group>
@@ -41,7 +40,7 @@ export default withTracker(() => {
   const subscription1 = Meteor.subscribe('Recipes');
   const subscription2 = Meteor.subscribe('Reviews');
   return {
-    recipes: Recipes.find({}).fetch(),
+    recipes: Recipes.find({}, { sort: { likes: 1 } }).fetch(),
     reviews: Reviews.find({}).fetch(),
     ready: subscription1.ready() && subscription2.ready(),
   };
