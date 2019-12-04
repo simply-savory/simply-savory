@@ -18,7 +18,8 @@ class DiscoverRecipe extends React.Component {
         <Container>
           <Header as="h2" textAlign="center" inverted>List Contacts</Header>
           <Card.Group>
-            {this.props.recipes.map((recipe, index) => <RecipeCard
+            const sortRecipes = {this.props.recipes.sortBy('likes')}
+            {sortRecipes.map((recipe, index) => <RecipeCard
                 key={index}
                 recipe={recipe}/>)}
           </Card.Group>
