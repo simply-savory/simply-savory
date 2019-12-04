@@ -16,7 +16,7 @@
       "cooktime": "5 Minutes",
       "owner": "john@foo.com",
       "likes": 5,
-      "ingredients": "2 Slices of Bread 2 slices of american cheese 1 pat of butter",
+      "ingredients": "2 Slices of Bread <br> 2 slices of american cheese\n 1 pat of butter",
       "image": "https://assets.bonappetit.com/photos/57acf62a53e63daf11a4dbee/1:1/w_1536,h_1536,c_limit/best-ever-grilled-cheese.jpg",
       "instructions": "1.Butter both sides of each bread slice \n 2.Add cheese as desired \n 3.Toast until golden brown and cheese melted \n 4.Slice and serve"
     },
@@ -25,8 +25,8 @@
       "cooktime": "5 Minutes",
       "owner": "john@foo.com",
       "likes": 2,
-      "ingredients": "1 Large Egg",
-      "image": "https://www.wikihow.com/images/thumb/8/8e/Make-Sunny-Side-up-Eggs-Step-11-Version-2.jpg/aid139404-v4-900px-Make-Sunny-Side-up-Eggs-Step-11-Version-2.jpg",
+      "ingredients": "1 Large Egg \n 2 tablespoons oil",
+      "image": "https://i.pinimg.com/originals/53/af/3b/53af3b60c3d6cfb0cfc62241a39fae20.jpg",
       "instructions": "1.Pre-heat a pan to medium heat with small knob of butter inside \n 2.Crack 1 large egg into pan \n 3.Cook until edges are golden brown \n 4.Serve and enjoy"
     },
     {
@@ -34,16 +34,16 @@
       "cooktime": "5 Minutes",
       "owner": "john@foo.com",
       "likes": 2,
-      "ingredients": "6 Slices of Bacon",
-      "image": "https://www.simplyrecipes.com/wp-content/uploads/2019/08/baked-bacon-Lead-2-768x1075.jpg",
-      "instructions": "1.Remove bacon from packaging and slice in half \n 2.Place bacon into cast iron skillet on medium heat \n 3.Sear until fat rendered and bacon crispy"
+      "ingredients": "6 Slices of Bacon \n 2 tablespoons oil",
+      "image": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-190621-air-fryer-bacon-0035-landscape-pf-1567632709.jpg?crop=0.645xw:0.967xh;0.170xw,0.0204xh&resize=980:*",
+      "instructions": "1.Remove bacon from packaging and slice in half <br> 2.Place bacon into cast iron skillet on medium heat \n 3.Sear until fat rendered and bacon crispy"
     },
     {
       "name": "Scrambled Eggs",
       "cooktime": "2 Minutes",
       "owner": "john@foo.com",
       "likes": 2,
-      "ingredients": "2 large eggs",
+      "ingredients": "2 large eggs \n 2 tablespoons oil \n Salt \n Pepper \nShoyu",
       "image": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/7/17/1/FN_Simple-Scrambled-Eggs_s4x3.jpg.rend.hgtvcom.826.620.suffix/1408069256231.jpeg",
       "instructions": "1.Crack eggs into bowl \n 2.Season with salt and pepper to taste \n 3.Pour eggs into non-stick pan, agitating until soft curds form \n 4.Turn off stove and allow residual heat to cook eggs \n 5.Serve and Enjoy"
     },
