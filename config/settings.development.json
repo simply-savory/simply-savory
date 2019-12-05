@@ -16,7 +16,7 @@
       "cooktime": "5 Minutes",
       "owner": "john@foo.com",
       "likes": 5,
-      "ingredients": "2 Slices of Bread <br> 2 slices of american cheese\n 1 pat of butter",
+      "ingredients": "2 Slices of Bread \n 2 slices of american cheese\n 1 pat of butter",
       "image": "https://assets.bonappetit.com/photos/57acf62a53e63daf11a4dbee/1:1/w_1536,h_1536,c_limit/best-ever-grilled-cheese.jpg",
       "instructions": "1.Butter both sides of each bread slice \n 2.Add cheese as desired \n 3.Toast until golden brown and cheese melted \n 4.Slice and serve"
     },
@@ -26,7 +26,7 @@
       "owner": "john@foo.com",
       "likes": 2,
       "ingredients": "1 Large Egg \n 2 tablespoons oil",
-      "image": "https://i.pinimg.com/originals/53/af/3b/53af3b60c3d6cfb0cfc62241a39fae20.jpg",
+      "image": "https://breakfastwithnick.files.wordpress.com/2014/04/img_0586.jpg",
       "instructions": "1.Pre-heat a pan to medium heat with small knob of butter inside \n 2.Crack 1 large egg into pan \n 3.Cook until edges are golden brown \n 4.Serve and enjoy"
     },
     {
