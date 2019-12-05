@@ -24,7 +24,7 @@ class RecipeCard extends React.Component {
             </Card.Meta>
             <Link to={`/show/${this.props.recipe._id}`}>
               <Image centered
-                     size='medium'
+                     className={"cardimage"}
                      src={this.props.recipe.image}/>
             </Link>
             <Card.Description>
