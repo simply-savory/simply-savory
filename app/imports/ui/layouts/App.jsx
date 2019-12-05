@@ -17,7 +17,7 @@ import Signout from '../pages/Signout';
 import OldRecipe from '../components/OldRecipe';
 import DiscoverRecipe from '../pages/DiscoverRecipe';
 import SearchRecipe from '../pages/SearchRecipe';
-import MyRecipe from '../pages/RenderRecipe';
+import MyRecipe from '../pages/MyRecipe';
 import EditRecipe from '../pages/EditRecipe';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
@@ -34,7 +34,7 @@ class App extends React.Component {
               <Route path="/Discover" component={DiscoverRecipe}/>
               <Route path="/signup" component={Signup}/>
               <Route path="/Search" component={SearchRecipe}/>
-              <ProtectedRoute path="/view" component={MyRecipe}/>
+              <ProtectedRoute path="/myrecipe" component={MyRecipe}/>
               <ProtectedRoute path="/add" component={AddRecipe}/>
               <ProtectedRoute path="/show/:_id" component={ShowRecipe}/>
               <ProtectedRoute path="/edit/:_id" component={EditRecipe}/>
