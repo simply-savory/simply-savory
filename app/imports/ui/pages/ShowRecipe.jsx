@@ -18,7 +18,7 @@ class ShowRecipe extends React.Component {
         <div>
           <DisplayRecipe
               recipe={this.props.doc}
-              reviews={this.props.reviews.filter((review, recipe) => (review.recipeId === recipe._id))}/>
+              reviews={this.props.reviews.filter((review) => (review.recipeId === this.props.doc._id))}/>
         </div>
     );
   }
