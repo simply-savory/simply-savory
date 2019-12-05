@@ -9,6 +9,8 @@ class RecipeCard extends React.Component {
   handleRate = ({ likes, _id }) => Recipes.update(_id, { $set: { likes } })
 
   render() {
+    const ingreds = this.props.recipe.ingredients;
+    const result = ingreds.split('\n');
     return (
         <Card centered>
           <Card.Content>
@@ -16,12 +18,15 @@ class RecipeCard extends React.Component {
             <Card.Meta>
               {this.props.recipe.cooktime}
             </Card.Meta>
-            <Image
+            <Image className={"cardimage"}
                 centered
                 size='medium'
                 src={this.props.recipe.image}/>
             <Card.Description>
-              {this.props.recipe.ingredients}
+              <h3>Ingredients: </h3>
+              {_.map(result, function (item) {
+                return (<div>{item}</div>);
+              })}
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
