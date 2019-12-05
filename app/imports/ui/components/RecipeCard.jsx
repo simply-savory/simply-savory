@@ -1,12 +1,18 @@
 import React from 'react';
-import { Card, Image, Rating } from 'semantic-ui-react';
+import { Card, Image, Rating, Icon, Segment } from 'semantic-ui-react';
 import { Recipes, RecipesSchema } from '/imports/api/recipe/Recipes';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class RecipeCard extends React.Component {
-  handleRate = ({ likes, _id }) => Recipes.update(_id, { $set: { likes } })
+  handleRate = (e, { rating }) => {
+    if (rating === 1) {
+      Recipes.update(this.props.recipe._id, { $inc: { likes: 1 } });
+    } else {
+      Recipes.update(this.props.recipe._id, { $inc: { likes: -1 } });
+    }
+  }
 
   render() {
     return (
@@ -16,20 +22,23 @@ class RecipeCard extends React.Component {
             <Card.Meta>
               {this.props.recipe.cooktime}
             </Card.Meta>
-            <Image
-                centered
-                size='medium'
-                src={this.props.recipe.image}/>
+            <Link to={`/show/${this.props.recipe._id}`}>
+              <Image centered
+                     size='medium'
+                     src={this.props.recipe.image}/>
+            </Link>
             <Card.Description>
               {this.props.recipe.ingredients}
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <Link to={`/show/${this.props.recipe._id}`}>Show Recipe</Link>
-          </Card.Content>
-          <Card.Content extra>
-            <Rating icon='heart' schema={RecipesSchema} onRate={this.handleRate} maxRating={1} />
-            {this.props.recipe.likes}
+            <Segment.Group horizontal>
+              <Segment>
+                <Rating icon='heart' schema={RecipesSchema} onRate={this.handleRate} maxRating={1}/>
+                {this.props.recipe.likes}</Segment>
+              <Segment><Link to={`/show/${this.props.recipe._id}`}><Icon name='file alternate' />View</Link></Segment>
+              <Segment><Link to={`/edit/${this.props.recipe._id}`}><Icon name='edit' />Edit</Link></Segment>
+            </Segment.Group>
           </Card.Content>
         </Card>
     );
