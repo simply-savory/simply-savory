@@ -16,8 +16,8 @@ class DiscoverRecipe extends React.Component {
   renderPage() {
     return (
         <Container>
-          <Header as="h2" textAlign="center" inverted>List Contacts</Header>
-          <Card.Group>
+          <Header as="h2" textAlign="center" inverted>Try these popular recipes</Header>
+          <Card.Group itemsPerRow={4}>
             {this.props.recipes.map((recipe, index) => <RecipeCard
                 key={index}
                 recipe={recipe}/>)}
