@@ -52,7 +52,7 @@ class AddRecipe extends React.Component {
                 <TextField label='Recipe Name' name='name'/>
                 <TextField name='cooktime'/>
                 <HiddenField name='likes' value={0}/>
-                <TextField name='ingredients'/>
+                <LongTextField name='ingredients'/>
                 <TextField label='Recipe Image URL' name='image'/>
                 <LongTextField name='instructions'/>
                 <SubmitField value='Submit'/>

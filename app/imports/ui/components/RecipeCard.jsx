@@ -1,10 +1,13 @@
 import React from 'react';
-import { Card, Image, Button, Icon } from 'semantic-ui-react';
+import { Card, Image, Rating } from 'semantic-ui-react';
+import { Recipes, RecipesSchema } from '/imports/api/recipe/Recipes';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class RecipeCard extends React.Component {
+  handleRate = ({ likes, _id }) => Recipes.update(_id, { $set: { likes } })
+
   render() {
     return (
         <Card centered>
@@ -25,14 +28,8 @@ class RecipeCard extends React.Component {
             <Link to={`/show/${this.props.recipe._id}`}>Show Recipe</Link>
           </Card.Content>
           <Card.Content extra>
-            <div className='ui three buttons'>
-              <Button basic color='green'>
-                Like
-              </Button>
-              <Button icon color={'red'}>
-                <Icon name='heart' />
-              </Button>
-            </div>
+            <Rating icon='heart' schema={RecipesSchema} onRate={this.handleRate} maxRating={1} />
+            {this.props.recipe.likes}
           </Card.Content>
         </Card>
     );
