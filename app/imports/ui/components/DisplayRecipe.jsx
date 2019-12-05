@@ -10,9 +10,12 @@ class DisplayRecipe extends React.Component {
     return (
         <Container>
           <Header textAlign='center' size='large'>{this.props.recipe.name}</Header> <br/>
-          <Segment raised><b>Cook Time:</b> {this.props.recipe.cooktime} <b>Likes</b> {this.props.recipe.likes}
-               </Segment> <br/>
-          <Image size='big' centered src={this.props.recipe.image}/>
+          <Segment.Group horizontal>
+            <Segment><b>Cook Time:</b> {this.props.recipe.cooktime}</Segment>
+            <Segment><b>Likes:</b> {this.props.recipe.likes}</Segment>
+            <Segment><Link to={`/edit/${this.props.recipe._id}`}>Edit Recipe</Link></Segment>
+          </Segment.Group>
+          <Image size='large' centered src={this.props.recipe.image}/>
           <Grid>
             <GridColumn width={4}>
               <Header textAlign='center' size='medium'>Ingredients List </Header>
@@ -21,13 +24,11 @@ class DisplayRecipe extends React.Component {
             <GridColumn width={12}>
               <Header textAlign='center' size='medium'> Steps & Procedure </Header>
               {this.props.recipe.instructions}
-              <Segment>
+
                 <Feed>
                 {this.props.reviews.map((review, index) => <Review key={index} review={review}/>)}
               </Feed>
                 <AddReview owner={this.props.recipe.owner} recipeId={this.props.recipe._id}/>
-              </Segment>
-              <Link to={`/edit/${this.props.recipe._id}`}>Edit Recipe</Link>
             </GridColumn>
           </Grid>
         </Container>
