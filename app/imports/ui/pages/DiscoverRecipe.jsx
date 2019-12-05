@@ -42,15 +42,6 @@ class DiscoverRecipe extends React.Component {
               onChange={this.updateSearch.bind(this)}
           />
           <Header as="h2" textAlign="center" inverted>Try these popular recipes</Header>
-          <Input
-              action={{
-                content: 'Search',
-              }}
-              placeholder='Search by name or ingredient'
-              type='text'
-              value={this.state.search}
-              onChange={this.updateSearch.bind(this)}
-          />
           <Card.Group itemsPerRow={4}>
             {filteredRecipe.map((recipe, index) => <RecipeCard
                 key={index}
