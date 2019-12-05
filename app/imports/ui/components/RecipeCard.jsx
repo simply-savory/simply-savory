@@ -15,6 +15,8 @@ class RecipeCard extends React.Component {
   }
 
   render() {
+    const ingreds = this.props.recipe.ingredients;
+    const result = ingreds.split('\n');
     return (
         <Card centered>
           <Card.Content>
@@ -28,7 +30,9 @@ class RecipeCard extends React.Component {
                      src={this.props.recipe.image}/>
             </Link>
             <Card.Description>
-              {this.props.recipe.ingredients}
+              {_.map(result, function (item) {
+                return (<div>{item}</div>);
+              })}
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
