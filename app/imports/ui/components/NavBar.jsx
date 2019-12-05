@@ -16,7 +16,6 @@ class NavBar extends React.Component {
           <Image size={'small'} src='../../../images/simply-savory-logo.png'/>
         </Menu.Item>
         <Menu.Item as={NavLink} activeClassName="active" exact to="/Discover" ><Icon name='compass' />Discover</Menu.Item>
-        <Input action='Search' placeholder='Search for recipe' as={ Link } to='/Search' />
         {this.props.currentUser ? (
             [<Menu.Item as={NavLink} activeClassName="active" exact to="/add" key='add'>Add Recipe</Menu.Item>,
               <Menu.Item as={NavLink} activeClassName="active" exact to="/myrecipe" key='myrecipe'>My Recipe

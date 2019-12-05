@@ -14,7 +14,7 @@ class MyRecipe extends React.Component {
   render() {
     return (
         <Container>
-          <Header as="h1" textAlign="center" size={'huge'}>My Recipes </Header>
+          <Header as="h1" textAlign="center" size={'huge'}>My Recipe Book </Header>
 
           <Header as="h2" textAlign="left">Most Recent </Header>
           <Card.Group itemsPerRow={4}>
