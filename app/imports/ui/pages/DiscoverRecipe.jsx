@@ -31,6 +31,16 @@ class DiscoverRecipe extends React.Component {
     );
     return (
         <Container>
+          <Header as="h2" textAlign="center" inverted>List Contacts</Header>
+          <Input
+              action={{
+                content: 'Search',
+              }}
+              placeholder='Search by name or ingredient'
+              type='text'
+              value={this.state.search}
+              onChange={this.updateSearch.bind(this)}
+          />
           <Header as="h2" textAlign="center" inverted>Try these popular recipes</Header>
           <Card.Group itemsPerRow={4}>
             {this.props.recipes.map((recipe, index) => <RecipeCard
