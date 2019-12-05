@@ -31,18 +31,11 @@ class DiscoverRecipe extends React.Component {
     );
     return (
         <Container>
-          <Header as="h2" textAlign="center" inverted>List Contacts</Header>
-            <Input
-                action={{
-                  content: 'Search',
-                }}
-                placeholder='Search by name or ingredient'
-                type='text'
-                value={this.state.search}
-                onChange={this.updateSearch.bind(this)}
-            />
-          <Card.Group>
-            {filteredRecipe.map((recipe, index) => <RecipeCard key={index} recipe={recipe} Recipes={Recipes}/>)}
+          <Header as="h2" textAlign="center" inverted>Try these popular recipes</Header>
+          <Card.Group itemsPerRow={4}>
+            {this.props.recipes.map((recipe, index) => <RecipeCard
+                key={index}
+                recipe={recipe}/>)}
           </Card.Group>
 
         </Container>
@@ -67,7 +60,7 @@ export default withTracker(() => {
   const subscription1 = Meteor.subscribe('Recipes');
   const subscription2 = Meteor.subscribe('Reviews');
   return {
-    recipes: Recipes.find({}).fetch(),
+    recipes: Recipes.find({}, { sort: { likes: 1 } }).fetch(),
     reviews: Reviews.find({}).fetch(),
     ready: subscription1.ready() && subscription2.ready(),
   };
