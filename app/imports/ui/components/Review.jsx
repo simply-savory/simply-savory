@@ -1,5 +1,5 @@
 import React from 'react';
-import { Feed } from 'semantic-ui-react';
+import { Comment } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
@@ -7,14 +7,15 @@ import { withRouter } from 'react-router-dom';
 class DisplayRecipe extends React.Component {
   render() {
     return (
-        <Feed.Event >
-          <Feed.Content>
-            <Feed.Date content={this.props.review.createdAt.toLocaleDateString('en-US')} />
-            <Feed.Summary>
+        <Comment >
+          <Comment.Content>
+            <Comment.Author content={this.props.review.owner} />
+            <Comment.Metadata content={this.props.review.createdAt.toLocaleDateString('en-US')} />
+            <Comment.Text>
               {this.props.review.review}
-            </Feed.Summary>
-          </Feed.Content>
-        </Feed.Event>
+            </Comment.Text>
+          </Comment.Content>
+        </Comment>
     );
   }
 }

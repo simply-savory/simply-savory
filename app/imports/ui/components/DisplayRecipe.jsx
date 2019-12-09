@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Feed, Grid, Header, Segment, Container, GridColumn } from 'semantic-ui-react';
+import { Image, Comment, Grid, Header, Segment, Container, GridColumn } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import AddReview from './AddReview';
@@ -35,9 +35,12 @@ class DisplayRecipe extends React.Component {
             </GridColumn>
           </Grid>
           <hr/>
-          <Feed>
+          <Header as='h3' dividing>
+            Reviews
+          </Header>
+          <Comment.Group>
             {this.props.reviews.map((review, index) => <Review key={index} review={review}/>)}
-          </Feed>
+          </Comment.Group>
           <AddReview owner={this.props.recipe.owner} recipeId={this.props.recipe._id}/>
         </Container>
     );
