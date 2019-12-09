@@ -26,10 +26,11 @@ class RecipeCardEdit extends React.Component {
             </Card.Meta>
             <Link to={`/show/${this.props.recipe._id}`}>
               <Image centered
-                     className={"cardimage"}
+                     className={'cardimage'}
                      src={this.props.recipe.image}/>
             </Link>
             <Card.Description>
+              {/* eslint-disable-next-line no-undef */}
               {_.map(result, function (item) {
                 return (<div>{item}</div>);
               })}
