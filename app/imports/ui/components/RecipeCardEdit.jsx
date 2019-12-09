@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-class RecipeCard extends React.Component {
+class RecipeCardEdit extends React.Component {
   handleRate = (e, { rating }) => {
     if (rating === 1) {
       Recipes.update(this.props.recipe._id, { $inc: { likes: 1 } });
@@ -41,6 +41,7 @@ class RecipeCard extends React.Component {
                 <Rating icon='heart' schema={RecipesSchema} onRate={this.handleRate} maxRating={1}/>
                 {this.props.recipe.likes}</Segment>
               <Segment><Link to={`/show/${this.props.recipe._id}`}><Icon name='file alternate' />View</Link></Segment>
+              <Segment><Link to={`/edit/${this.props.recipe._id}`}><Icon name='edit' />Edit</Link></Segment>
             </Segment.Group>
           </Card.Content>
         </Card>
@@ -49,9 +50,9 @@ class RecipeCard extends React.Component {
 }
 
 /** Require a document to be passed to this component. */
-RecipeCard.propTypes = {
+RecipeCardEdit.propTypes = {
   recipe: PropTypes.object.isRequired,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */
-export default withRouter(RecipeCard);
+export default withRouter(RecipeCardEdit);

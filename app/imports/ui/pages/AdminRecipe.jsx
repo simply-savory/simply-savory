@@ -10,7 +10,7 @@ import RecipeCardEdit from '../components/RecipeCardEdit';
 
 
 /** A simple static component to render some text for the landing page. */
-class MyRecipe extends React.Component {
+class AdminRecipe extends React.Component {
   render() {
     return (
         <Container>
@@ -29,7 +29,7 @@ class MyRecipe extends React.Component {
   }
 }
 
-MyRecipe.propTypes = {
+AdminRecipe.propTypes = {
   recipes: PropTypes.array.isRequired,
   reviews: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
@@ -37,11 +37,11 @@ MyRecipe.propTypes = {
 
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription1 = Meteor.subscribe('RecipesUser');
+  const subscription1 = Meteor.subscribe('RecipesAdmin');
   const subscription2 = Meteor.subscribe('Reviews');
   return {
     recipes: Recipes.find({}).fetch(),
     reviews: Reviews.find({}).fetch(),
     ready: subscription1.ready() && subscription2.ready(),
   };
-})(MyRecipe);
+})( AdminRecipe);
