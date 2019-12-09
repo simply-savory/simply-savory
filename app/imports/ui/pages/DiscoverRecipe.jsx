@@ -32,13 +32,13 @@ class DiscoverRecipe extends React.Component {
   }
 
   renderPage() {
-    const filteredRecipe = this.props.recipes.filter(
-        (recipe) => (recipe.ingredients.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1 ||
-            (recipe.name.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1,
-    );
+      const filteredRecipe = this.props.recipes.filter(
+          (recipe) => (recipe.ingredients.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1 ||
+              (recipe.name.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1,
+      );
     return (
         <Container>
-          <Header as="h2" textAlign="center" inverted>List Recipes</Header>
+          <Header as="h2" textAlign="center" size='huge'>List Recipes</Header>
           <Input
               style={{
                 width: '500px',
@@ -49,7 +49,7 @@ class DiscoverRecipe extends React.Component {
               onChange={this.updateSearch}
           />
           <Button icon='search' onClick={this.handleClick}/>
-          <Header as="h2" textAlign="center" inverted>Try these popular recipes</Header>
+          <Header as="h2" textAlign="left">Try these popular recipes</Header>
           <Card.Group itemsPerRow={4}>
             {filteredRecipe.map((recipe, index) => <RecipeCard
                 key={index}

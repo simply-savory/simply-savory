@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Card, Image, Button, Icon, Divider, Dropdown } from 'semantic-ui-react';
+import { Container, Header, Card, Image, Button, Icon, Divider, Dropdown, Loader, Input } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { Reviews } from '/imports/api/review/Reviews';
@@ -11,15 +11,50 @@ import RecipeCardEdit from '../components/RecipeCardEdit';
 
 /** A simple static component to render some text for the landing page. */
 class AdminRecipe extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      search: '',
+      value: '',
+    };
+    this.updateSearch = this.updateSearch.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  updateSearch(event) {
+    this.setState({ value: event.target.value });
+  }
+
+  handleClick() {
+    this.setState({ search: this.state.value });
+  }
+
   render() {
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+  }
+
+  renderPage() {
+    const filteredRecipe = this.props.recipes.filter(
+        (recipe) => (recipe.ingredients.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1 ||
+            (recipe.name.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1,
+    );
     return (
         <Container>
           <Header as="h1" textAlign="center" size={'huge'}>My Recipe Book </Header>
-
+          <Input
+              style={{
+                width: '500px',
+              }}
+              placeholder='Search recipes by name or ingredient'
+              type='text'
+              value={this.state.value}
+              onChange={this.updateSearch}
+          />
+          <Button icon='search' onClick={this.handleClick}/>
           <Header as="h2" textAlign="left">Most Recent </Header>
           <Card.Group itemsPerRow={4}>
             <Card.Group>
-              {this.props.recipes.map((recipe, index) => <RecipeCardEdit
+              {filteredRecipe.map((recipe, index) => <RecipeCardEdit
                   key={index}
                   recipe={recipe}/>)}
             </Card.Group>
