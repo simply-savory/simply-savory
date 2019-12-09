@@ -37,7 +37,7 @@ MyRecipe.propTypes = {
 
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription1 = Meteor.subscribe('Recipes');
+  const subscription1 = Meteor.subscribe('RecipesUser');
   const subscription2 = Meteor.subscribe('Reviews');
   return {
     recipes: Recipes.find({}).fetch(),

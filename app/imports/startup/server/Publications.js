@@ -21,6 +21,14 @@ Meteor.publish('StuffAdmin', function publish() {
   return this.ready();
 });
 
+// This publish requires the user to be login to view any recipes
+Meteor.publish('RecipesPublic', function publish() {
+  if (this.userId) {
+    return Recipes.find();
+  }
+  return this.ready();
+});
+
 Meteor.publish('RecipesAdmin', function publish() {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return Recipes.find();
@@ -28,7 +36,7 @@ Meteor.publish('RecipesAdmin', function publish() {
   return this.ready();
 });
 
-Meteor.publish('Recipes', function publish() {
+Meteor.publish('RecipesUser', function publish() {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return Recipes.find({ owner: username });

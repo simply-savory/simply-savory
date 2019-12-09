@@ -67,7 +67,7 @@ DiscoverRecipe.propTypes = {
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription1 = Meteor.subscribe('Recipes');
+  const subscription1 = Meteor.subscribe('RecipesPublic');
   const subscription2 = Meteor.subscribe('Reviews');
   return {
     recipes: Recipes.find({}, { sort: { likes: 1 } }).fetch(),
