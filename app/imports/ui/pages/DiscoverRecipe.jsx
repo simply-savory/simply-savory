@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Card, Loader, Input } from 'semantic-ui-react';
+import { Container, Header, Card, Loader, Input, Button } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { Reviews } from '/imports/api/review/Reviews';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -13,11 +13,18 @@ class DiscoverRecipe extends React.Component {
     super();
     this.state = {
       search: '',
+      value: '',
     };
+    this.updateSearch = this.updateSearch.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   updateSearch(event) {
-    this.setState({ search: event.target.value });
+    this.setState({ value: event.target.value });
+  }
+
+  handleClick() {
+    this.setState({ search: this.state.value });
   }
 
   render() {
@@ -31,16 +38,17 @@ class DiscoverRecipe extends React.Component {
     );
     return (
         <Container>
-          <Header as="h2" textAlign="center" inverted>List Contacts</Header>
+          <Header as="h2" textAlign="center" inverted>List Recipes</Header>
           <Input
-              action={{
-                content: 'Search',
+              style={{
+                width: '500px',
               }}
-              placeholder='Search by name or ingredient'
+              placeholder='Search recipes by name or ingredient'
               type='text'
-              value={this.state.search}
-              onChange={this.updateSearch.bind(this)}
+              value={this.state.value}
+              onChange={this.updateSearch}
           />
+          <Button icon='search' onClick={this.handleClick}/>
           <Header as="h2" textAlign="center" inverted>Try these popular recipes</Header>
           <Card.Group itemsPerRow={4}>
             {filteredRecipe.map((recipe, index) => <RecipeCard
