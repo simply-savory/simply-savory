@@ -5,16 +5,12 @@ import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-class RecipeCard extends React.Component {
-  defRating = 0;
-
+class RecipeCardEdit extends React.Component {
   handleRate = (e, { rating }) => {
     if (rating === 1) {
       Recipes.update(this.props.recipe._id, { $inc: { likes: 1 } });
-      this.defRating = 1;
     } else {
       Recipes.update(this.props.recipe._id, { $inc: { likes: -1 } });
-      this.defRating = 0;
     }
   }
 
@@ -30,7 +26,7 @@ class RecipeCard extends React.Component {
             </Card.Meta>
             <Link to={`/show/${this.props.recipe._id}`}>
               <Image centered
-                     className={'cardimage'}
+                     className={"cardimage"}
                      src={this.props.recipe.image}/>
             </Link>
             <Card.Description>
@@ -42,14 +38,10 @@ class RecipeCard extends React.Component {
           <Card.Content extra>
             <Segment.Group horizontal>
               <Segment>
-                <Rating
-                    icon='heart'
-                    defaultRating={this.defRating}
-                    schema={RecipesSchema}
-                    onRate={this.handleRate}
-                    maxRating={1}/>
+                <Rating icon='heart' schema={RecipesSchema} onRate={this.handleRate} maxRating={1}/>
                 {this.props.recipe.likes}</Segment>
               <Segment><Link to={`/show/${this.props.recipe._id}`}><Icon name='file alternate' />View</Link></Segment>
+              <Segment><Link to={`/edit/${this.props.recipe._id}`}><Icon name='edit' />Edit</Link></Segment>
             </Segment.Group>
           </Card.Content>
         </Card>
@@ -58,10 +50,9 @@ class RecipeCard extends React.Component {
 }
 
 /** Require a document to be passed to this component. */
-RecipeCard.propTypes = {
+RecipeCardEdit.propTypes = {
   recipe: PropTypes.object.isRequired,
-  owner: PropTypes.string.isRequired,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */
-export default withRouter(RecipeCard);
+export default withRouter(RecipeCardEdit);

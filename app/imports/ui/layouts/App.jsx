@@ -7,7 +7,6 @@ import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
 import AddRecipe from '../pages/AddRecipe';
 import ShowRecipe from '../pages/ShowRecipe';
 import NotFound from '../pages/NotFound';
@@ -19,6 +18,7 @@ import DiscoverRecipe from '../pages/DiscoverRecipe';
 import SearchRecipe from '../pages/SearchRecipe';
 import MyRecipe from '../pages/MyRecipe';
 import EditRecipe from '../pages/EditRecipe';
+import AdminRecipe from '../pages/AdminRecipe';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -38,7 +38,7 @@ class App extends React.Component {
               <ProtectedRoute path="/add" component={AddRecipe}/>
               <ProtectedRoute path="/show/:_id" component={ShowRecipe}/>
               <ProtectedRoute path="/edit/:_id" component={EditRecipe}/>
-              <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
+              <AdminProtectedRoute path="/admin" component={AdminRecipe}/>
               <ProtectedRoute path="/signout" component={Signout}/>
               <Route component={NotFound}/>
             </Switch>
