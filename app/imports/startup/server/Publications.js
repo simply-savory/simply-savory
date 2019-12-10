@@ -23,10 +23,8 @@ Meteor.publish('StuffAdmin', function publish() {
 
 // This publish requires the user to be login to view any recipes
 Meteor.publish('RecipesPublic', function publish() {
-  if (this.userId) {
     return Recipes.find();
-  }
-  return this.ready();
+
 });
 
 Meteor.publish('RecipesAdmin', function publish() {

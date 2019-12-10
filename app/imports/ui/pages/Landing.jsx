@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Container, Header, Card, Loader, List, Message, Image } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { Recipes } from '/imports/api/recipe/Recipes';
@@ -9,17 +9,25 @@ import RecipeCard from '../components/RecipeCard';
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
+  state = { visible: true }
+  handleDismiss = () => {
+    this.setState({ visible: false })
+  }
+
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
   /** Render the page once subscriptions have been received. */
   renderPage() {
-    return (
-        <Container>
-          <Image centered src='../../../images/simply-savory-logo.png'/>
-          <Message>
-            <Message.Header>What is Simply Savory</Message.Header>
+    if (this.state.visible) {
+      return (
+
+          <Message
+              onDismiss={this.handleDismiss}>
+            <Image centered size='huge' src='../../../images/simply-savory-logo.png'/>
+            <Header textAlign='center'>Welcome to Simply Savory!</Header>
+            <h2>What is Simply Savory?</h2>
             <p>
               Simply Savory is a recipe sharing solution that creates a way for students
               (both on and off campus) to learn and share recipes that:
@@ -35,7 +43,19 @@ class Landing extends React.Component {
               <List.Item>Has an estimated number of servings per recipe.</List.Item>
               <List.Item>Has an estimate of how long it takes to make.</List.Item>
             </List>
+            <h2>How do I get started?</h2>
+            <List bulleted>
+              <List.Item>You can start browsing recipes right now by clicking the Discover Tab on the navbar </List.Item>
+              <List.Item>To post a recipe or favorite one, create an account by clicking Login -> Sign Up </List.Item>
+              <List.Item>Dismiss this notifcation by clicking the x on the top right, this information can be viewed again in the "Help" tab</List.Item>
+            </List>
+
           </Message>
+      )
+    }
+    return (
+        <Container>
+          <Image centered src='../../../images/simply-savory-logo.png'/>
           <Header as="h2" textAlign="center">New Recipes</Header>
           <Card.Group>
             {this.props.recipes.map((recipe, index) => <RecipeCard
@@ -46,6 +66,7 @@ class Landing extends React.Component {
     );
   }
 }
+
 /** Require an array of Stuff documents in the props. */
 Landing.propTypes = {
   recipes: PropTypes.array.isRequired,
