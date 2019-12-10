@@ -1,313 +1,82 @@
 import React from 'react';
-import { Container, Header, Card, Image, Button, Icon, Divider, Dropdown } from 'semantic-ui-react';
+import { Container, Header, Card, Image, Button, Icon, Divider, Dropdown, Input, Loader } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import { Meteor } from 'meteor/meteor';
+import { Reviews } from '/imports/api/review/Reviews';
+import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
+import { Recipes } from '../../api/recipe/Recipes';
+import RecipeCardEdit from '../components/RecipeCardEdit';
 
-const RecipeOptions = [
-  { key: 'Egg on burger', text: 'Egg on burger', value: 'Egg on burger' },
-  { key: 'Egg omelet', text: 'Egg omelet', value: 'Egg omelet' },
-  { key: 'Cup Noodle', text: 'Cup Noodle', value: 'Cup Noodle' },
-  { key: 'Wagyu Steak', text: 'Wagyu Steak', value: 'Wagyu Steak' },
-  { key: 'Kat', text: 'Kat', value: 'Kat' },
-];
 
 /** A simple static component to render some text for the landing page. */
 class MyRecipe extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      search: '',
+      value: '',
+    };
+    this.updateSearch = this.updateSearch.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  updateSearch(event) {
+    this.setState({ value: event.target.value });
+  }
+
+  handleClick() {
+    this.setState({ search: this.state.value });
+  }
+
   render() {
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+  }
+
+  renderPage() {
+    const filteredRecipe = this.props.recipes.filter(
+        (recipe) => (recipe.ingredients.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1 ||
+            (recipe.name.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1,
+    );
     return (
         <Container>
-          <Header as="h1" textAlign="center" size={'huge'}>My Recipes </Header>
-          <Dropdown
-              button
-              className='icon'
-              floating
-              labeled
-              icon='food'
-              options={RecipeOptions}
-              search
-              text='Search My Recipes'/>
+          <Header as="h1" textAlign="center" size={'huge'}>My Recipe Book </Header>
+          <Input
+              style={{
+                width: '300px',
+              }}
+              placeholder='Search recipes by name or ingredient'
+              type='text'
+              value={this.state.value}
+              onChange={this.updateSearch}
+              icon={<Icon name='search' link onClick={this.handleClick}/>}
+          />
           <Header as="h2" textAlign="left">Most Recent </Header>
           <Card.Group itemsPerRow={4}>
-            <Card>
-              <Card.Content>
-                <Card.Header>Egg on burger</Card.Header>
-                <Image
-                    floated='middle'
-                    size='medium'
-                    src='../../../images/sampleegg.jpg'
-                />
-                <Card.Meta>Simple , Eggs</Card.Meta>
-                <Card.Description>
-                  A simple egg meal on top of burger meat
-                </Card.Description>
-              </Card.Content>
-              <Card.Content extra>
-                <div className='ui three buttons'>
-                  <Button basic color='green'>
-                    Like
-                  </Button>
-                  <Button basic color='red'>
-                    Dislike
-                  </Button>
-                  <Button icon color={'red'}>
-                    <Icon name='heart' />
-                  </Button>
-                </div>
-              </Card.Content>
-            </Card>
-            <Card as={ Link } to='/Recipe'>
-              <Card.Content>
-                <Card.Header>Egg omelet</Card.Header>
-                <Image
-                    floated='middle'
-                    size='medium'
-                    src='../../../images/eggomm.jpg'
-                />
-                <Card.Meta>Eggs</Card.Meta>
-                <Card.Description>
-                  I am not sure what a egg omelet is
-                </Card.Description>
-              </Card.Content>
-              <Card.Content extra>
-                <div className='ui three buttons'>
-                  <Button basic color='green'>
-                    Like
-                  </Button>
-                  <Button basic color='red'>
-                    Dislike
-                  </Button>
-                  <Button icon color={'red'}>
-                    <Icon name='heart' />
-                  </Button>
-                </div>
-              </Card.Content>
-            </Card>
-            <Card>
-              <Card.Content>
-                <Card.Header>Cup noodles</Card.Header>
-                <Image
-                    floated='middle'
-                    size='medium'
-                    src='../../../images/Cup-Noodles-Curry.png'
-                />
-                <Card.Meta>Microwave</Card.Meta>
-                <Card.Description>
-                  Cup noodles for the college kids
-                </Card.Description>
-              </Card.Content>
-              <Card.Content extra>
-                <div className='ui three buttons'>
-                  <Button basic color='green'>
-                    Like
-                  </Button>
-                  <Button basic color='red'>
-                    Dislike
-                  </Button>
-                  <Button icon color={'red'}>
-                    <Icon name='heart' />
-                  </Button>
-                </div>
-              </Card.Content>
-            </Card>
-            <Card>
-              <Card.Content>
-                <Card.Header>Wagu steak</Card.Header>
-                <Image
-                    floated='middle'
-                    size='medium'
-                    src='../../../images/wagu-steak.jpg'
-                />
-                <Card.Meta>Expensive</Card.Meta>
-                <Card.Description>
-                  Very expensive steak
-                </Card.Description>
-              </Card.Content>
-              <Card.Content extra>
-                  <div className='ui three buttons'>
-                    <Button basic color='green'>
-                      Like
-                    </Button>
-                    <Button basic color='red'>
-                      Dislike
-                    </Button>
-                    <Button icon color={'red'}>
-                      <Icon name='heart' />
-                    </Button>
-                  </div>
-                </Card.Content>
-            </Card>
-            <Card>
-              <Card.Content>
-                <Card.Header>Kat</Card.Header>
-                <Image
-                    floated='middle'
-                    size='medium'
-                    src='../../../images/kat.jpg'
-                />
-                <Card.Meta>DO NOT COOK</Card.Meta>
-                <Card.Description>
-                  Just a picture of a cat
-                </Card.Description>
-              </Card.Content>
-              <Card.Content extra>
-                <div className='ui three buttons'>
-                  <Button basic color='green'>
-                    Like
-                  </Button>
-                  <Button basic color='red'>
-                    Dislike
-                  </Button>
-                  <Button icon color={'red'}>
-                    <Icon name='heart' />
-                  </Button>
-                </div>
-              </Card.Content>
-            </Card>
-          </Card.Group>
-          <Divider horizontal/>
-
-          <Header as="h2" textAlign="left">Most Popular </Header>
-          <Card.Group itemsPerRow={4}>
-            <Card>
-              <Card.Content>
-                <Card.Header>Egg on burger</Card.Header>
-                <Image
-                    floated='middle'
-                    size='medium'
-                    src='../../../images/sampleegg.jpg'
-                />
-                <Card.Meta>Simple , Eggs</Card.Meta>
-                <Card.Description>
-                  A simple egg meal on top of burger meat
-                </Card.Description>
-              </Card.Content>
-              <Card.Content extra>
-                <Card.Content extra>
-                  <div className='ui three buttons'>
-                    <Button basic color='green'>
-                      Like
-                    </Button>
-                    <Button basic color='red'>
-                      Dislike
-                    </Button>
-                    <Button icon color={'red'}>
-                      <Icon name='heart' />
-                    </Button>
-                  </div>
-                </Card.Content>
-              </Card.Content>
-            </Card>
-            <Card as={ Link } to='/Recipe'>
-              <Card.Content>
-                <Card.Header>Egg omelet</Card.Header>
-                <Image
-                    floated='middle'
-                    size='medium'
-                    src='../../../images/eggomm.jpg'
-                />
-                <Card.Meta>Eggs</Card.Meta>
-                <Card.Description>
-                  I am not sure what a egg omelet is
-                </Card.Description>
-              </Card.Content>
-              <Card.Content extra>
-                <div className='ui three buttons'>
-                  <Button basic color='green'>
-                    Like
-                  </Button>
-                  <Button basic color='red'>
-                    Dislike
-                  </Button>
-                  <Button icon color={'red'}>
-                    <Icon name='heart' />
-                  </Button>
-                </div>
-              </Card.Content>
-            </Card>
-            <Card>
-              <Card.Content>
-                <Card.Header>Cup noodles</Card.Header>
-                <Image
-                    floated='middle'
-                    size='medium'
-                    src='../../../images/Cup-Noodles-Curry.png'
-                />
-                <Card.Meta>Microwave</Card.Meta>
-                <Card.Description>
-                  Cup noodles for the college kids
-                </Card.Description>
-              </Card.Content>
-              <Card.Content extra>
-                <div className='ui three buttons'>
-                  <Button basic color='green'>
-                    Like
-                  </Button>
-                  <Button basic color='red'>
-                    Dislike
-                  </Button>
-                  <Button icon color={'red'}>
-                    <Icon name='heart' />
-                  </Button>
-                </div>
-              </Card.Content>
-            </Card>
-            <Card>
-              <Card.Content>
-                <Card.Header>Wagu steak</Card.Header>
-                <Image
-                    floated='middle'
-                    size='medium'
-                    src='../../../images/wagu-steak.jpg'
-                />
-                <Card.Meta>Expensive</Card.Meta>
-                <Card.Description>
-                  Very expensive steak
-                </Card.Description>
-              </Card.Content>
-              <Card.Content extra>
-                <div className='ui three buttons'>
-                  <Button basic color='green'>
-                    Like
-                  </Button>
-                  <Button basic color='red'>
-                    Dislike
-                  </Button>
-                  <Button icon color={'red'}>
-                    <Icon name='heart' />
-                  </Button>
-                </div>
-              </Card.Content>
-            </Card>
-            <Card>
-              <Card.Content>
-                <Card.Header>Kat</Card.Header>
-                <Image
-                    floated='middle'
-                    size='medium'
-                    src='../../../images/kat.jpg'
-                />
-                <Card.Meta>DO NOT COOK</Card.Meta>
-                <Card.Description>
-                  Just a picture of a cat
-                </Card.Description>
-              </Card.Content>
-              <Card.Content extra>
-                <div className='ui three buttons'>
-                  <Button basic color='green'>
-                    Like
-                  </Button>
-                  <Button basic color='red'>
-                    Dislike
-                  </Button>
-                  <Button icon color={'red'}>
-                    <Icon name='heart' />
-                  </Button>
-                </div>
-              </Card.Content>
-            </Card>
+            <Card.Group>
+              {filteredRecipe.map((recipe, index) => <RecipeCardEdit
+                  key={index}
+                  recipe={recipe}/>)}
+            </Card.Group>
           </Card.Group>
         </Container>
     );
   }
 }
 
-export default MyRecipe;
+MyRecipe.propTypes = {
+  recipes: PropTypes.array.isRequired,
+  reviews: PropTypes.array.isRequired,
+  ready: PropTypes.bool.isRequired,
+};
+
+export default withTracker(() => {
+  // Get access to Stuff documents.
+  const subscription1 = Meteor.subscribe('RecipesUser');
+  const subscription2 = Meteor.subscribe('Reviews');
+  return {
+    recipes: Recipes.find({}).fetch(),
+    reviews: Reviews.find({}).fetch(),
+    ready: subscription1.ready() && subscription2.ready(),
+  };
+})(MyRecipe);

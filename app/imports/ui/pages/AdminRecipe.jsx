@@ -1,14 +1,16 @@
 import React from 'react';
-import { Container, Header, Card, Loader, Input, Icon } from 'semantic-ui-react';
+import { Container, Header, Card, Image, Button, Icon, Divider, Dropdown, Loader, Input } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { Reviews } from '/imports/api/review/Reviews';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import RecipeCard from '../components/RecipeCard';
 import { Recipes } from '../../api/recipe/Recipes';
+import RecipeCardEdit from '../components/RecipeCardEdit';
+
 
 /** A simple static component to render some text for the landing page. */
-class DiscoverRecipe extends React.Component {
+class AdminRecipe extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -32,13 +34,13 @@ class DiscoverRecipe extends React.Component {
   }
 
   renderPage() {
-      const filteredRecipe = this.props.recipes.filter(
-          (recipe) => (recipe.ingredients.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1 ||
-              (recipe.name.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1,
-      );
+    const filteredRecipe = this.props.recipes.filter(
+        (recipe) => (recipe.ingredients.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1 ||
+            (recipe.name.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1,
+    );
     return (
         <Container>
-          <Header as="h2" textAlign="center" size='huge'>List Recipes</Header>
+          <Header as="h1" textAlign="center" size={'huge'}>My Recipe Book </Header>
           <Input
               style={{
                 width: '300px',
@@ -49,37 +51,32 @@ class DiscoverRecipe extends React.Component {
               onChange={this.updateSearch}
               icon={<Icon name='search' link onClick={this.handleClick}/>}
           />
-          <Header as="h2" textAlign="left">Try these popular recipes</Header>
+          <Header as="h2" textAlign="left">Most Recent </Header>
           <Card.Group itemsPerRow={4}>
-            {filteredRecipe.map((recipe, index) => <RecipeCard
-                key={index}
-                recipe={recipe}/>)}
+            <Card.Group>
+              {filteredRecipe.map((recipe, index) => <RecipeCardEdit
+                  key={index}
+                  recipe={recipe}/>)}
+            </Card.Group>
           </Card.Group>
-
         </Container>
     );
   }
 }
 
-DiscoverRecipe.propTypes = {
-  recipe: PropTypes.object.isRequired,
-};
-
-/** Require an array of Stuff documents in the props. */
-DiscoverRecipe.propTypes = {
+AdminRecipe.propTypes = {
   recipes: PropTypes.array.isRequired,
   reviews: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
-/** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription1 = Meteor.subscribe('RecipesPublic');
+  const subscription1 = Meteor.subscribe('RecipesAdmin');
   const subscription2 = Meteor.subscribe('Reviews');
   return {
-    recipes: Recipes.find({}, { sort: { likes: 1 } }).fetch(),
+    recipes: Recipes.find({}).fetch(),
     reviews: Reviews.find({}).fetch(),
     ready: subscription1.ready() && subscription2.ready(),
   };
-})(DiscoverRecipe);
+})( AdminRecipe);

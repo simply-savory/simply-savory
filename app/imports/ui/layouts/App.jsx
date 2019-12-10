@@ -7,18 +7,19 @@ import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
 import AddRecipe from '../pages/AddRecipe';
-import EditStuff from '../pages/EditStuff';
+import ShowRecipe from '../pages/ShowRecipe';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
-import DisplayRecipe from '../pages/DisplayRecipe';
+import OldRecipe from '../components/OldRecipe';
 import DiscoverRecipe from '../pages/DiscoverRecipe';
 import SearchRecipe from '../pages/SearchRecipe';
 import MyRecipe from '../pages/MyRecipe';
-import RandomRecipe from '../pages/RandomRecipe';
+import EditRecipe from '../pages/EditRecipe';
+import AdminRecipe from '../pages/AdminRecipe';
+import Help from '../pages/Help';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -30,15 +31,16 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={Landing}/>
               <Route path="/signin" component={Signin}/>
-              <Route path="/Recipe" component={DisplayRecipe}/>
+              <Route path="/Recipe" component={OldRecipe}/>
               <Route path="/Discover" component={DiscoverRecipe}/>
-              <Route path="/Random" component={RandomRecipe}/>
+              <Route path="/Help" component={Help}/>
               <Route path="/signup" component={Signup}/>
               <Route path="/Search" component={SearchRecipe}/>
               <ProtectedRoute path="/myrecipe" component={MyRecipe}/>
               <ProtectedRoute path="/add" component={AddRecipe}/>
-              <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
-              <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
+              <ProtectedRoute path="/show/:_id" component={ShowRecipe}/>
+              <ProtectedRoute path="/edit/:_id" component={EditRecipe}/>
+              <AdminProtectedRoute path="/admin" component={AdminRecipe}/>
               <ProtectedRoute path="/signout" component={Signout}/>
               <Route component={NotFound}/>
             </Switch>
