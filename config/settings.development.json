@@ -3,18 +3,34 @@
     {
       "email": "admin@foo.com",
       "password": "changeme",
-      "role": "admin"
+      "role": "admin",
+      "firstName": "Phillip",
+      "lastName": "Johnson"
     },
     {
       "email": "john@foo.com",
-      "password": "changeme"
+      "password": "changeme",
+      "firstName": "John",
+      "lastName": "Doe"
+    },
+    {
+      "email": "aujared@hawaii.edu",
+      "password": "changeme",
+      "firstName": "Jared",
+      "lastName": "Au"
+    },
+    {
+      "email": "nchu277@hawaii.edu",
+      "password": "changeme",
+      "firstName": "Nate",
+      "lastName": "Chu"
     }
   ],
   "defaultRecipes": [
     {
       "name": "Grilled Cheese",
       "cooktime": "5 Minutes",
-      "owner": "john@foo.com",
+      "owner": "nchu277@hawaii.edu",
       "likes": 5,
       "ingredients": "2 Slices of Bread \n 2 slices of american cheese\n 1 pat of butter",
       "image": "https://assets.bonappetit.com/photos/57acf62a53e63daf11a4dbee/1:1/w_1536,h_1536,c_limit/best-ever-grilled-cheese.jpg",
@@ -41,7 +57,7 @@
     {
       "name": "Scrambled Eggs",
       "cooktime": "2 Minutes",
-      "owner": "john@foo.com",
+      "owner": "aujared@hawaii.edu",
       "likes": 2,
       "ingredients": "2 large eggs \n 2 tablespoons oil \n Salt \n Pepper \nShoyu",
       "image": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/7/17/1/FN_Simple-Scrambled-Eggs_s4x3.jpg.rend.hgtvcom.826.620.suffix/1408069256231.jpeg",
@@ -59,7 +75,7 @@
     {
       "name": "Chicken Parm",
       "cooktime": "50 Minutes",
-      "owner": "john@foo.com",
+      "owner": "nchu277@hawaii.edu",
       "likes": 20,
       "ingredients": "1 1/2 c. panko bread crumbs\n1/2 tsp. garlic powder\n1/4 c. freshly grated Parmesan, plus more for garnish\n2 large eggs, beaten with 1 tbsp. water\n1/2 c. all-purpose flour\n1 1/2 lb. boneless skinless chicken cutlets\nKosher salt\nFreshly ground black pepper\nVegetable oil\n1 c. shredded mozzarella",
       "image": "https://hips.hearstapps.com/del.h-cdn.co/assets/17/06/1486652910-easy-chicken-parmp1.jpg?crop=1.0xw:1xh;center,top&resize=768:*",
@@ -77,7 +93,7 @@
     {
       "name": "Grilled Salmon",
       "cooktime": "15 Minutes",
-      "owner": "john@foo.com",
+      "owner": "nchu277@hawaii.edu",
       "likes": 53,
       "ingredients": "1 – 1 ½ lbs. salmon fillet cut into 4 pieces\nOlive oil\nFor the House Seasoning:\n¼ c. garlic powder\n¼ c. kosher salt\n¼ c. dried parsley\n¼ c. dried minced onion\n¼ c. dried basil",
       "image": "https://www.theseasonedmom.com/wp-content/uploads/2018/05/Grilled-Salmon-4.jpg",
@@ -95,7 +111,7 @@
     {
       "name": "Fried rice",
       "cooktime": "15 Minutes",
-      "owner": "john@foo.com",
+      "owner": "aujared@hawaii.edu",
       "likes": 200,
       "ingredients": "1 table spoon of cooking oil \n 1 3 cups of leftover rice \n 2 eggs \n 1/2 cup frozen carrots \n 1/2 cup frozen pea \n 3 tablespoon of soysauce \n 1/4 can of spam. \n 1 tablespoon of salt and pepper. ",
       "image": "https://www.spendwithpennies.com/wp-content/uploads/2016/02/fried-rice-recipe-22.jpg",
@@ -104,7 +120,7 @@
     {
       "name": "Spam Sandwich",
       "cooktime": "10 Minutes",
-      "owner": "john@foo.com",
+      "owner": "aujared@hawaii.edu",
       "likes": 5,
       "ingredients": "1 large egg \n 2 slices of bread \n 2 piece spam",
       "image": "https://www.spam.com/images/7/2/d/72d8148cb2ebc725d55ce4cadcd8fbb0d52f0447/simple-grilled-cheese-and-egg-spam-sandwich-655.jpg",
