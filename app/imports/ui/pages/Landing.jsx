@@ -49,9 +49,8 @@ class Landing extends React.Component {
               <List.Item>To post a recipe or favorite one, create an account by clicking Login -> Sign Up </List.Item>
               <List.Item>Dismiss this notifcation by clicking the x on the top right, this information can be viewed again in the "Help" tab</List.Item>
             </List>
-
           </Message>
-      )
+      );
     }
     return (
         <Container>
