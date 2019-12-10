@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Image, Rating, Icon, Segment } from 'semantic-ui-react';
 import { Recipes, RecipesSchema } from '/imports/api/recipe/Recipes';
+import { Favorites, FavoritesSchema } from '../../api/favorite/favorites';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 
