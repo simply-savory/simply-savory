@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Loader, Header, Segment } from 'semantic-ui-react';
+import { Grid, Loader, Header, Segment, Button, Icon } from 'semantic-ui-react';
 import { Recipes, RecipesSchema } from '/imports/api/recipe/Recipes';
 import swal from 'sweetalert';
 import AutoForm from 'uniforms-semantic/AutoForm';
@@ -11,7 +11,8 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import 'uniforms-bridge-simple-schema-2';
-import LongTextField from 'uniforms-semantic/LongTextField'; // required for Uniforms
+import LongTextField from 'uniforms-semantic/LongTextField';
+import { Redirect } from 'react-router-dom'; // required for Uniforms
 
 /** Renders the Page for editing a single document. */
 class EditRecipe extends React.Component {
@@ -27,6 +28,23 @@ class EditRecipe extends React.Component {
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+  }
+
+  handleClickDelete = () => {
+      Recipes.remove(this.props.doc._id);
+    this.setState({
+      redirect: true,
+    });
+  }
+
+  state = {
+    redirect: false,
+  }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/' />;
+    }
   }
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
@@ -45,6 +63,15 @@ class EditRecipe extends React.Component {
                 <LongTextField name='instructions'/>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
+              </Segment>
+              <Segment>
+                <div>
+                  {this.renderRedirect()}
+                </div>
+                <Button color='red' className="ui icon button" onClick={this.handleClickDelete}>
+                  <Icon className="white close icon"></Icon>
+                    Delete recipe
+                </Button>
               </Segment>
             </AutoForm>
           </Grid.Column>

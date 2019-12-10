@@ -1,27 +1,19 @@
-import React, { Component } from 'react';
-import { Container, Header, Card, Loader, List, Message, Image } from 'semantic-ui-react';
+import React from 'react';
+import { Header, Loader, List, Message, Image } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { Recipes } from '/imports/api/recipe/Recipes';
 import { Reviews } from '/imports/api/review/Reviews';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import RecipeCard from '../components/RecipeCard';
 
 /** A simple static component to render some text for the landing page. */
-class Landing extends React.Component {
-  state = { visible: true }
-  handleDismiss = () => {
-    this.setState({ visible: false })
-
-  }
-
+class Help extends React.Component {
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
   /** Render the page once subscriptions have been received. */
   renderPage() {
-    if (this.state.visible && this.props.currentUser === '') {
       return (
           <Message
               onDismiss={this.handleDismiss}>
@@ -48,33 +40,17 @@ class Landing extends React.Component {
               <List.Item>You can start browsing recipes right now by clicking the Discover Tab on the
                 navbar </List.Item>
               <List.Item>To post a recipe or favorite one, create an account by clicking Login -> Sign Up </List.Item>
-              <List.Item>Dismiss this notifcation by clicking the x on the top right, this information can be viewed
-                again in the "Help" tab, it will pop up every time you visit the landing page until you create an
-                account!</List.Item>
             </List>
           </Message>
       );
-    }
-    return (
-        <Container>
-          <Image centered src='../../../images/simply-savory-logo.png'/>
-          <Header as="h2" textAlign="center">New Recipes</Header>
-          <Card.Group>
-            {this.props.recipes.map((recipe, index) => <RecipeCard
-                key={index}
-                recipe={recipe}/>)}
-          </Card.Group>
-        </Container>
-    );
   }
 }
 
 /** Require an array of Stuff documents in the props. */
-Landing.propTypes = {
+Help.propTypes = {
   recipes: PropTypes.array.isRequired,
   reviews: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
-  currentUser: PropTypes.string,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
@@ -86,6 +62,5 @@ export default withTracker(() => {
     recipes: Recipes.find({}).fetch(),
     reviews: Reviews.find({}).fetch(),
     ready: subscription1.ready() && subscription2.ready(),
-    currentUser: Meteor.user() ? Meteor.user().username : '',
   };
-})(Landing);
+})(Help);
