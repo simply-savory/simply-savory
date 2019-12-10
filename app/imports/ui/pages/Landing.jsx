@@ -21,7 +21,7 @@ class Landing extends React.Component {
 
   /** Render the page once subscriptions have been received. */
   renderPage() {
-    if (this.state.visible) {
+    if (this.state.visible && this.props.currentUser === '') {
       return (
           <Message
               onDismiss={this.handleDismiss}>
@@ -49,7 +49,8 @@ class Landing extends React.Component {
                 navbar </List.Item>
               <List.Item>To post a recipe or favorite one, create an account by clicking Login -> Sign Up </List.Item>
               <List.Item>Dismiss this notifcation by clicking the x on the top right, this information can be viewed
-                again in the "Help" tab</List.Item>
+                again in the "Help" tab, it will pop up every time you visit the landing page until you create an
+                account!</List.Item>
             </List>
           </Message>
       );
@@ -73,6 +74,7 @@ Landing.propTypes = {
   recipes: PropTypes.array.isRequired,
   reviews: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
+  currentUser: PropTypes.string,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
@@ -84,5 +86,6 @@ export default withTracker(() => {
     recipes: Recipes.find({}).fetch(),
     reviews: Reviews.find({}).fetch(),
     ready: subscription1.ready() && subscription2.ready(),
+    currentUser: Meteor.user() ? Meteor.user().username : '',
   };
 })(Landing);
