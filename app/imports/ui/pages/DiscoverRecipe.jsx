@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Card, Loader, Input, Button } from 'semantic-ui-react';
+import { Container, Header, Card, Loader, Input, Icon } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { Reviews } from '/imports/api/review/Reviews';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -41,14 +41,14 @@ class DiscoverRecipe extends React.Component {
           <Header as="h2" textAlign="center" size='huge'>List Recipes</Header>
           <Input
               style={{
-                width: '500px',
+                width: '300px',
               }}
               placeholder='Search recipes by name or ingredient'
               type='text'
               value={this.state.value}
               onChange={this.updateSearch}
+              icon={<Icon name='search' link onClick={this.handleClick}/>}
           />
-          <Button icon='search' onClick={this.handleClick}/>
           <Header as="h2" textAlign="left">Try these popular recipes</Header>
           <Card.Group itemsPerRow={4}>
             {filteredRecipe.map((recipe, index) => <RecipeCard

@@ -43,14 +43,14 @@ class MyRecipe extends React.Component {
           <Header as="h1" textAlign="center" size={'huge'}>My Recipe Book </Header>
           <Input
               style={{
-                width: '500px',
+                width: '300px',
               }}
               placeholder='Search recipes by name or ingredient'
               type='text'
               value={this.state.value}
               onChange={this.updateSearch}
+              icon={<Icon name='search' link onClick={this.handleClick}/>}
           />
-          <Button icon='search' onClick={this.handleClick}/>
           <Header as="h2" textAlign="left">Most Recent </Header>
           <Card.Group itemsPerRow={4}>
             <Card.Group>
