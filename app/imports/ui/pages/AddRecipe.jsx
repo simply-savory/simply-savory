@@ -20,6 +20,7 @@ const formSchema = new SimpleSchema({
   ingredients: String,
   image: String,
   instructions: String,
+  displayName: String,
 });
 
 /** Renders the Page for adding a document. */
@@ -29,7 +30,8 @@ class AddRecipe extends React.Component {
   submit(data, formRef) {
     const { name, cooktime, likes, ingredients, image, instructions } = data;
     const owner = Meteor.user().username;
-    Recipes.insert({ name, cooktime, likes, ingredients, image, instructions, owner },
+    const displayName = Meteor.user().name;
+    Recipes.insert({ name, cooktime, likes, ingredients, image, instructions, owner, displayName },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');

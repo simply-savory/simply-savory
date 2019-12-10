@@ -26,7 +26,7 @@ class RecipeCard extends React.Component {
           <Card.Content>
             <Card.Header>{this.props.recipe.name}</Card.Header>
             <Card.Meta>
-              {this.props.recipe.owner}
+              {this.props.recipe.displayName}
             </Card.Meta>
             <Link to={`/show/${this.props.recipe._id}`}>
               <Image centered
