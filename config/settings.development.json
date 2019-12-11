@@ -24,6 +24,18 @@
       "password": "changeme",
       "firstName": "Nate",
       "lastName": "Chu"
+    },
+    {
+      "email": "hongf@hawaii.edu",
+      "password": "changeme",
+      "firstName": "Felix",
+      "lastName": "Hong"
+    },
+    {
+      "email": "kadeks@hawaii.edu",
+      "password": "changeme",
+      "firstName": "Kade",
+      "lastName": "Shiroma"
     }
   ],
   "defaultRecipes": [
