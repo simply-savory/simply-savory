@@ -4,7 +4,7 @@ import { Recipes } from '../../api/recipe/Recipes';
 import { Reviews } from '../../api/review/Reviews';
 import { Favorites } from '../../api/favorite/favorites';
 
-Meteor.publish('Favoites', function publish() {
+Meteor.publish('Favorites', function publish() {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return Favorites.find({ owner: username });
