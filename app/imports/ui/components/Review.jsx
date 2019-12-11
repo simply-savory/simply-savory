@@ -9,7 +9,7 @@ class DisplayRecipe extends React.Component {
     return (
         <Comment >
           <Comment.Content>
-            <Comment.Author content={this.props.review.owner} />
+            <Comment.Author content={this.props.review.displayName} />
             <Comment.Metadata content={this.props.review.createdAt.toLocaleDateString('en-US')} />
             <Comment.Text>
               {this.props.review.review}
