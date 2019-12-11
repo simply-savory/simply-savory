@@ -4,7 +4,7 @@
       "email": "admin@foo.com",
       "password": "changeme",
       "role": "admin",
-      "f,irstName": "Phillip",
+      "firstName": "Phillip",
       "lastName": "Johnson"
     },
     {
