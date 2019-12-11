@@ -61,7 +61,6 @@ class RecipeCard extends React.Component {
 /** Require a document to be passed to this component. */
 RecipeCard.propTypes = {
   recipe: PropTypes.object.isRequired,
-  owner: PropTypes.string.isRequired,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */
