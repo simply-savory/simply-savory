@@ -63,6 +63,7 @@ class RecipeCard extends React.Component {
 RecipeCard.propTypes = {
   recipe: PropTypes.object.isRequired,
   owner: PropTypes.string.isRequired,
+  favorites: PropTypes.array.isRequired,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */

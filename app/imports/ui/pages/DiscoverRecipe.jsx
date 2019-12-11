@@ -29,6 +29,7 @@ class DiscoverRecipe extends React.Component {
         (recipe) => (recipe.ingredients.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1 ||
             (recipe.name.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1,
     );
+    const favoritesIDList = this.props.favorites.pluck("favoriteID");
     return (
         <Container>
           <Header as="h2" textAlign="center" inverted>List Contacts</Header>
@@ -44,6 +45,7 @@ class DiscoverRecipe extends React.Component {
           <Header as="h2" textAlign="center" inverted>Try these popular recipes</Header>
           <Card.Group itemsPerRow={4}>
             {filteredRecipe.map((recipe, index) => <RecipeCard
+                isFavorites={favoritesIDList.contains(recipe._id)}
                 key={index}
                 recipe={recipe}/>)}
           </Card.Group>
