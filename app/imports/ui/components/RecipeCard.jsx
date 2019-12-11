@@ -10,10 +10,13 @@ class RecipeCard extends React.Component {
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
   handleRate = () => {
     const owner = Meteor.user().username;
+    let removelist = [];
     console.log(this.props.favorites);
     if (_.contains(_.pluck(this.props.favorites, 'FavoriteId'), this.props.recipe._id)) {
       Recipes.update(this.props.recipe._id, { $inc: { likes: -1 } });
-      Favorites.remove({ FavoriteId: { $eq: `${this.props.recipe._id}` } });
+      removelist = _.where(this.props.favorites, { FavoriteId: this.props.recipe._id });
+      console.log(removelist);
+      Favorites.remove({ FavoriteId: { $eq: removelist._id } });
     } else {
       Recipes.update(this.props.recipe._id, { $inc: { likes: 1 } });
       Favorites.insert({ FavoriteId: this.props.recipe._id, owner });
