@@ -7,7 +7,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Recipes } from '../../api/recipe/Recipes';
 import RecipeCardEdit from '../components/RecipeCardEdit';
-import { Favorites, FavoritesSchema } from '../../api/favorite/favorites';
+import { Favorites, FavoritesSchema } from '../../api/favorite/Favorites';
 
 
 /** A simple static component to render some text for the landing page. */
