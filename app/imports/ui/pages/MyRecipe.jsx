@@ -69,7 +69,7 @@ class MyRecipe extends React.Component {
           <Header as="h2" textAlign="left">Most Recent </Header>
           <Card.Group itemsPerRow={4}>
             <Card.Group>
-              {this.props.recipes.map((recipe, index) => <RecipeCardEdit
+              {filteredRecipe.map((recipe, index) => <RecipeCardEdit
                   favorites={this.props.favorites}
                   key={index}
                   recipe={recipe}/>)}
