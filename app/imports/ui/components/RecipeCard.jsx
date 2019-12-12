@@ -26,7 +26,7 @@ class RecipeCard extends React.Component {
           <Card.Content>
             <Card.Header>{this.props.recipe.name}</Card.Header>
             <Card.Meta>
-              {this.props.recipe.cooktime}
+              {this.props.recipe.displayName}
             </Card.Meta>
             <Link to={`/show/${this.props.recipe._id}`}>
               <Image centered
@@ -61,7 +61,6 @@ class RecipeCard extends React.Component {
 /** Require a document to be passed to this component. */
 RecipeCard.propTypes = {
   recipe: PropTypes.object.isRequired,
-  owner: PropTypes.string.isRequired,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */

@@ -16,17 +16,26 @@ class MyRecipe extends React.Component {
     this.state = {
       search: '',
       value: '',
+      reset: '',
     };
     this.updateSearch = this.updateSearch.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.searchReset = this.searchReset.bind(this);
   }
 
   updateSearch(event) {
     this.setState({ value: event.target.value });
   }
 
-  handleClick() {
-    this.setState({ search: this.state.value });
+  handleClick(e) {
+    if (e.key === 'Enter') {
+      this.setState({ search: this.state.value });
+    }
+  }
+
+  searchReset() {
+    this.setState({ search: this.state.reset });
+    this.setState({ value: this.state.reset });
   }
 
   render() {
@@ -41,16 +50,21 @@ class MyRecipe extends React.Component {
     return (
         <Container>
           <Header as="h1" textAlign="center" size={'huge'}>My Recipe Book </Header>
-          <Input
-              style={{
-                width: '300px',
-              }}
-              placeholder='Search recipes by name or ingredient'
-              type='text'
-              value={this.state.value}
-              onChange={this.updateSearch}
-              icon={<Icon name='search' link onClick={this.handleClick}/>}
-          />
+          <div>
+            <Input
+                style={{
+                  width: '300px',
+                }}
+                placeholder='Search recipes by name or ingredient'
+                type='text'
+                value={this.state.value}
+                onChange={this.updateSearch}
+                onKeyPress={this.handleClick}
+                icon= 'search'
+            /><br />
+            <Header as='a' size='tiny' color='blue' className='reset-search' onClick={this.searchReset}>Reset
+              Search</Header>
+          </div>
           <Header as="h2" textAlign="left">Most Recent </Header>
           <Card.Group itemsPerRow={4}>
             <Card.Group>

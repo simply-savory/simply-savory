@@ -4,6 +4,8 @@ import { Link, Redirect } from 'react-router-dom';
 import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
 
+
+
 /**
  * Signup component is similar to signin component, but we create a new user instead.
  */
@@ -22,7 +24,7 @@ class Signup extends React.Component {
   /** Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
   submit = () => {
     const { firstName, lastName, email, password } = this.state;
-    Accounts.createUser({ email, firstName, lastName, username: firstName || email, password }, (err) => {
+    Accounts.createUser({ email, profile: { lastName: lastName, firstName: firstName, displayName: `${firstName} ${lastName}` }, username: email, password }, (err) => {
       if (err) {
         this.setState({ error: err.reason });
       } else {

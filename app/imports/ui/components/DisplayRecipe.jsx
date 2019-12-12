@@ -1,9 +1,16 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import { Image, Comment, Grid, Header, Segment, Container, GridColumn } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import AddReview from './AddReview';
 import Review from './Review';
+
+function OwnerCheck(name, recipeid) {
+  if (Meteor.user().username === name) {
+    return (<Segment> <Link to={`/edit/${recipeid}`}>Edit Recipe</Link></Segment>);
+  }
+}
 
 class DisplayRecipe extends React.Component {
   render() {
@@ -11,6 +18,8 @@ class DisplayRecipe extends React.Component {
     const result = ingreds.split('\n');
     const instruct = this.props.recipe.instructions;
     const result2 = instruct.split('\n');
+    const ownername = this.props.recipe.owner;
+    const recipeid = this.props.recipe._id;
     return (
         <Container>
           <Header textAlign='center' size='large'>{this.props.recipe.name}</Header>
@@ -19,6 +28,7 @@ class DisplayRecipe extends React.Component {
             <Segment><b>Likes:</b> {this.props.recipe.likes}</Segment>
             <Segment><b>Date:</b> {this.props.recipe.createdAt.date}</Segment>
             <Segment><Link to={`/edit/${this.props.recipe._id}`}>Edit Recipe</Link></Segment>
+            {OwnerCheck(ownername, recipeid)}
           </Segment.Group>
           <Image size='large' centered src={this.props.recipe.image}/>
           <Grid divided padded>

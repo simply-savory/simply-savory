@@ -15,6 +15,7 @@ const RecipesSchema = new SimpleSchema({
   image: String,
   instructions: String,
   createdAt: Date,
+  displayName: String,
 
 }, { tracker: Tracker });
 
