@@ -62,7 +62,8 @@ class MyRecipe extends React.Component {
                 onKeyPress={this.handleClick}
                 icon= 'search'
             /><br />
-            <Button basic size='mini' onClick={this.searchReset}>Reset Search</Button>
+            <Header as='a' size='tiny' color='blue' className='reset-search' onClick={this.searchReset}>Reset
+              Search</Header>
           </div>
           <Header as="h2" textAlign="left">Most Recent </Header>
           <Card.Group itemsPerRow={4}>

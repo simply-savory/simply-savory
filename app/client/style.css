@@ -2,3 +2,7 @@
   width:300px !important;
   height:262px !important;
 }
+
+.reset-search{
+  text-decoration-line: underline;
+}
