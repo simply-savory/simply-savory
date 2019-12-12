@@ -1,26 +1,38 @@
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { Card, Image, Rating, Icon, Segment } from 'semantic-ui-react';
 import { Recipes, RecipesSchema } from '/imports/api/recipe/Recipes';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
+import { Favorites } from '../../api/favorite/Favorites';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class RecipeCard extends React.Component {
-  defRating = 0;
-
-  handleRate = (e, { rating }) => {
-    if (rating === 1) {
-      Recipes.update(this.props.recipe._id, { $inc: { likes: 1 } });
-      this.defRating = 1;
-    } else {
+/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
+  handleRate = () => {
+    const owner = Meteor.user().username;
+    let removelist = [];
+    console.log(this.props.favorites);
+    if (_.contains(_.pluck(this.props.favorites, 'FavoriteId'), this.props.recipe._id)) {
       Recipes.update(this.props.recipe._id, { $inc: { likes: -1 } });
-      this.defRating = 0;
+      removelist = _.findWhere(this.props.favorites, { FavoriteId: this.props.recipe._id });
+      console.log(removelist);
+      Favorites.remove(removelist._id);
+    } else {
+      Recipes.update(this.props.recipe._id, { $inc: { likes: 1 } });
+      Favorites.insert({ FavoriteId: this.props.recipe._id, owner });
     }
   }
 
   render() {
+    let defRating = 0;
+    if (_.contains(_.pluck(this.props.favorites, 'FavoriteId'), this.props.recipe._id)) {
+      defRating = 1;
+    } else {
+      defRating = 0;
+    }
     const ingreds = this.props.recipe.ingredients;
     const result = ingreds.split('\n');
+    // console.log(this.props.isFavorites);
     return (
         <Card centered>
           <Card.Content>
@@ -45,7 +57,7 @@ class RecipeCard extends React.Component {
               <Segment>
                 <Rating
                     icon='heart'
-                    defaultRating={this.defRating}
+                    defaultRating={defRating}
                     schema={RecipesSchema}
                     onRate={this.handleRate}
                     maxRating={1}/>
@@ -61,6 +73,7 @@ class RecipeCard extends React.Component {
 /** Require a document to be passed to this component. */
 RecipeCard.propTypes = {
   recipe: PropTypes.object.isRequired,
+  favorites: PropTypes.array.isRequired,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */
