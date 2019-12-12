@@ -12,6 +12,13 @@ function OwnerCheck(name, recipeid) {
   }
 }
 
+function unsignedCheck(ownername, recipeid) {
+  if (Meteor.user() === null) {
+    return(<div></div>);
+  }
+  else OwnerCheck(ownername, recipeid);
+}
+
 class DisplayRecipe extends React.Component {
   render() {
     const ingreds = this.props.recipe.ingredients;
@@ -27,8 +34,7 @@ class DisplayRecipe extends React.Component {
             <Segment><b>Cook Time:</b> {this.props.recipe.cooktime}</Segment>
             <Segment><b>Likes:</b> {this.props.recipe.likes}</Segment>
             {/*<Segment><b>Date:</b> {this.props.recipe.createdAt.date}</Segment>*/}
-            <Segment><Link to={`/edit/${this.props.recipe._id}`}>Edit Recipe</Link></Segment>
-            {OwnerCheck(ownername, recipeid)}
+            {unsignedCheck(ownername, recipeid)}
           </Segment.Group>
           <Image size='large' centered src={this.props.recipe.image}/>
           <Grid divided padded>
