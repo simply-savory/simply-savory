@@ -46,9 +46,9 @@ class DiscoverRecipe extends React.Component {
           />
           <Header as="h2" textAlign="center" inverted>Try these popular recipes</Header>
           <Card.Group itemsPerRow={4}>
-            {filteredRecipe.map((recipe, index) => <RecipeCard
+            {filteredRecipe.map((recipe) => <RecipeCard
                 favorites={this.props.favorites}
-                key={index}
+                key={recipe._id}
                 recipe={recipe}/>)}
           </Card.Group>
 
