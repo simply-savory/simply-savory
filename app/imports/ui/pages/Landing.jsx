@@ -3,6 +3,7 @@ import { Container, Header, Card, Loader, List, Message, Image } from 'semantic-
 import { Meteor } from 'meteor/meteor';
 import { Recipes } from '/imports/api/recipe/Recipes';
 import { Reviews } from '/imports/api/review/Reviews';
+import { Favorites } from '../../api/favorite/Favorites';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import RecipeCard from '../components/RecipeCard';
@@ -64,7 +65,7 @@ export default withTracker(() => {
   return {
     recipes: Recipes.find({}).fetch(),
     reviews: Reviews.find({}).fetch(),
-    favorites: Reviews.find({}).fetch(),
+    favorites: Favorites.find({}).fetch(),
     ready: subscription1.ready() && subscription2.ready() && subscription3.ready(),
   };
 })(Landing);
