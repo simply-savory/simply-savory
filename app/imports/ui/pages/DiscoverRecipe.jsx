@@ -6,6 +6,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import RecipeCard from '../components/RecipeCard';
 import { Recipes } from '../../api/recipe/Recipes';
+import { Favorites } from '../../api/favorite/Favorites';
 
 /** A simple static component to render some text for the landing page. */
 class DiscoverRecipe extends React.Component {
@@ -45,6 +46,8 @@ class DiscoverRecipe extends React.Component {
         (recipe) => (recipe.ingredients.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1 ||
             (recipe.name.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1,
     );
+    const favoritesIDList = _.pluck(this.props.favorites, 'FavoriteID');
+    //console.log(favoritesIDList);
     return (
         <Container>
           <Header as="h2" textAlign="center" size='huge'>List Recipes</Header>
@@ -65,8 +68,9 @@ class DiscoverRecipe extends React.Component {
           </div>
           <Header as="h2" textAlign="left">Try these popular recipes</Header>
           <Card.Group itemsPerRow={4}>
-            {filteredRecipe.map((recipe, index) => <RecipeCard
-                key={index}
+            {filteredRecipe.map((recipe) => <RecipeCard
+                favorites={this.props.favorites}
+                key={recipe._id}
                 recipe={recipe}/>)}
           </Card.Group>
 
@@ -75,15 +79,16 @@ class DiscoverRecipe extends React.Component {
   }
 }
 
-DiscoverRecipe.propTypes = {
+/* DiscoverRecipe.propTypes = {
   recipe: PropTypes.object.isRequired,
-};
+};*/
 
 /** Require an array of Stuff documents in the props. */
 DiscoverRecipe.propTypes = {
   recipes: PropTypes.array.isRequired,
   reviews: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
+  favorites: PropTypes.array.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
@@ -91,9 +96,11 @@ export default withTracker(() => {
   // Get access to Stuff documents.
   const subscription1 = Meteor.subscribe('RecipesPublic');
   const subscription2 = Meteor.subscribe('Reviews');
+  const subscription3 = Meteor.subscribe('Favorites');
   return {
     recipes: Recipes.find({}, { sort: { likes: 1 } }).fetch(),
     reviews: Reviews.find({}).fetch(),
-    ready: subscription1.ready() && subscription2.ready(),
+    favorites: Favorites.find({}).fetch(),
+    ready: subscription1.ready() && subscription2.ready() && subscription3.ready(),
   };
 })(DiscoverRecipe);

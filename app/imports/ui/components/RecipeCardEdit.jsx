@@ -3,18 +3,32 @@ import { Card, Image, Rating, Icon, Segment } from 'semantic-ui-react';
 import { Recipes, RecipesSchema } from '/imports/api/recipe/Recipes';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
+import { Favorites } from '../../api/favorite/Favorites';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class RecipeCardEdit extends React.Component {
-  handleRate = (e, { rating }) => {
-    if (rating === 1) {
-      Recipes.update(this.props.recipe._id, { $inc: { likes: 1 } });
-    } else {
+  handleRate = () => {
+    const owner = Meteor.user().username;
+    let removelist = [];
+    console.log(this.props.favorites);
+    if (_.contains(_.pluck(this.props.favorites, 'FavoriteId'), this.props.recipe._id)) {
       Recipes.update(this.props.recipe._id, { $inc: { likes: -1 } });
+      removelist = _.findWhere(this.props.favorites, { FavoriteId: this.props.recipe._id });
+      console.log(removelist);
+      Favorites.remove(removelist._id);
+    } else {
+      Recipes.update(this.props.recipe._id, { $inc: { likes: 1 } });
+      Favorites.insert({ FavoriteId: this.props.recipe._id, owner });
     }
   }
 
   render() {
+    let defRating = 0;
+    if (_.contains(_.pluck(this.props.favorites, 'FavoriteId'), this.props.recipe._id)) {
+      defRating = 1;
+    } else {
+      defRating = 0;
+    }
     const ingreds = this.props.recipe.ingredients;
     const result = ingreds.split('\n');
     return (
@@ -39,7 +53,7 @@ class RecipeCardEdit extends React.Component {
           <Card.Content extra>
             <Segment.Group horizontal>
               <Segment>
-                <Rating icon='heart' schema={RecipesSchema} onRate={this.handleRate} maxRating={1}/>
+                <Rating icon='heart' schema={RecipesSchema} defaultRating={defRating} onRate={this.handleRate} maxRating={1}/>
                 {this.props.recipe.likes}</Segment>
               <Segment><Link to={`/show/${this.props.recipe._id}`}><Icon name='file alternate' />View</Link></Segment>
               <Segment><Link to={`/edit/${this.props.recipe._id}`}><Icon name='edit' />Edit</Link></Segment>
@@ -53,6 +67,7 @@ class RecipeCardEdit extends React.Component {
 /** Require a document to be passed to this component. */
 RecipeCardEdit.propTypes = {
   recipe: PropTypes.object.isRequired,
+  favorites: PropTypes.array.isRequired,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */

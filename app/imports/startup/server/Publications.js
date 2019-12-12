@@ -2,7 +2,15 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Recipes } from '../../api/recipe/Recipes';
 import { Reviews } from '../../api/review/Reviews';
+import { Favorites } from '../../api/favorite/Favorites';
 
+Meteor.publish('Favorites', function publish() {
+  if (this.userId) {
+    const username = Meteor.users.findOne(this.userId).username;
+    return Favorites.find({ owner: username });
+  }
+  return this.ready();
+});
 
 // This publish requires the user to be login to view any recipes
 Meteor.publish('RecipesPublic', function publish() {
