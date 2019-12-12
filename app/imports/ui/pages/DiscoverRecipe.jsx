@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Card, Loader, Input, Icon } from 'semantic-ui-react';
+import { Container, Header, Card, Loader, Input, Button } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { Reviews } from '/imports/api/review/Reviews';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -14,17 +14,26 @@ class DiscoverRecipe extends React.Component {
     this.state = {
       search: '',
       value: '',
+      reset: '',
     };
     this.updateSearch = this.updateSearch.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.searchReset = this.searchReset.bind(this);
   }
 
   updateSearch(event) {
     this.setState({ value: event.target.value });
   }
 
-  handleClick() {
-    this.setState({ search: this.state.value });
+  handleClick(e) {
+    if (e.key === 'Enter') {
+      this.setState({ search: this.state.value });
+    }
+  }
+
+  searchReset() {
+    this.setState({ search: this.state.reset });
+    this.setState({ value: this.state.reset });
   }
 
   render() {
@@ -32,23 +41,27 @@ class DiscoverRecipe extends React.Component {
   }
 
   renderPage() {
-      const filteredRecipe = this.props.recipes.filter(
-          (recipe) => (recipe.ingredients.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1 ||
-              (recipe.name.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1,
-      );
+    const filteredRecipe = this.props.recipes.filter(
+        (recipe) => (recipe.ingredients.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1 ||
+            (recipe.name.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1,
+    );
     return (
         <Container>
           <Header as="h2" textAlign="center" size='huge'>List Recipes</Header>
-          <Input
-              style={{
-                width: '300px',
-              }}
-              placeholder='Search recipes by name or ingredient'
-              type='text'
-              value={this.state.value}
-              onChange={this.updateSearch}
-              icon={<Icon name='search' link onClick={this.handleClick}/>}
-          />
+          <div>
+            <Input
+                style={{
+                  width: '300px',
+                }}
+                placeholder='Search recipes by name or ingredient'
+                type='text'
+                value={this.state.value}
+                onChange={this.updateSearch}
+                onKeyPress={this.handleClick}
+                icon= 'search'
+            /><br />
+            <Button basic size='mini' onClick={this.searchReset}>Reset Search</Button>
+          </div>
           <Header as="h2" textAlign="left">Try these popular recipes</Header>
           <Card.Group itemsPerRow={4}>
             {filteredRecipe.map((recipe, index) => <RecipeCard
