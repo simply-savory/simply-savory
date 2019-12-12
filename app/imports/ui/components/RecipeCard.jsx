@@ -11,13 +11,10 @@ class RecipeCard extends React.Component {
   handleRate = () => {
     const owner = Meteor.user().username;
     let removelist = [];
-    removelist = _.where(this.props.favorites, { FavoriteId: this.props.recipe._id });
-    console.log(removelist);
-    Favorites.remove(removelist);
     console.log(this.props.favorites);
     if (_.contains(_.pluck(this.props.favorites, 'FavoriteId'), this.props.recipe._id)) {
       Recipes.update(this.props.recipe._id, { $inc: { likes: -1 } });
-      removelist = _.where(this.props.favorites, { FavoriteId: this.props.recipe._id });
+      removelist = _.findWhere(this.props.favorites, { FavoriteId: this.props.recipe._id });
       console.log(removelist);
       Favorites.remove(removelist._id);
     } else {
