@@ -39,6 +39,7 @@ class Landing extends React.Component {
           <Header as="h2" textAlign="center">New Recipes</Header>
           <Card.Group>
             {this.props.recipes.map((recipe, index) => <RecipeCard
+                favorites={this.props.favorites}
                 key={index}
                 recipe={recipe}/>)}
           </Card.Group>
@@ -51,6 +52,7 @@ Landing.propTypes = {
   recipes: PropTypes.array.isRequired,
   reviews: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
+  favorites: PropTypes.array.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
@@ -58,9 +60,11 @@ export default withTracker(() => {
   // Get access to Stuff documents.
   const subscription1 = Meteor.subscribe('RecipesPublic');
   const subscription2 = Meteor.subscribe('Reviews');
+  const subscription3 = Meteor.subscribe('Favorites');
   return {
     recipes: Recipes.find({}).fetch(),
     reviews: Reviews.find({}).fetch(),
-    ready: subscription1.ready() && subscription2.ready(),
+    favorites: Reviews.find({}).fetch(),
+    ready: subscription1.ready() && subscription2.ready() && subscription3.ready(),
   };
 })(Landing);
