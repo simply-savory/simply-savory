@@ -36,7 +36,7 @@ class FavoriteRecipes extends React.Component {
     );
     return (
         <Container>
-          <Header as="h2" textAlign="center" inverted>List Contacts</Header>
+          <Header as="h2" textAlign="center">My Favorites</Header>
           <Input
               action={{
                 content: 'Search',
