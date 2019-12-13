@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
-import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
+import { Container, Form, Grid, Header, Message, Segment, Checkbox } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
 
 
@@ -13,18 +13,20 @@ class Signup extends React.Component {
   /** Initialize state fields. */
   constructor(props) {
     super(props);
-    this.state = { firstName: '', lastName: '', email: '', password: '', error: '', redirectToReferer: false };
+    this.state = { firstName: '', lastName: '', email: '', password: '', error: '', redirectToReferer: false, vendor:false };
   }
-
   /** Update the form controls each time the user interacts with them. */
   handleChange = (e, { name, value }) => {
     this.setState({ [name]: value });
   }
-
+  toggleCheckBox = () => {
+    const vendor = !(this.vendor);
+    this.setState({vendor});
+  }
   /** Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
   submit = () => {
-    const { firstName, lastName, email, password } = this.state;
-    Accounts.createUser({ email, profile: { lastName: lastName, firstName: firstName, displayName: `${firstName} ${lastName}` }, username: email, password }, (err) => {
+    const { firstName, lastName, email, password, vendor } = this.state;
+    Accounts.createUser({ email, profile: { lastName: lastName, firstName: firstName, displayName: `${firstName} ${lastName}`, vendor: vendor }, username: email, password}, (err) => {
       if (err) {
         this.setState({ error: err.reason });
       } else {
@@ -85,6 +87,7 @@ class Signup extends React.Component {
                   type="password"
                   onChange={this.handleChange}
                 />
+                <Checkbox label='I am a Vendor and would like to post deals' onChange={this.toggleCheckBox}/>
                 <Form.Button content="Submit"/>
               </Segment>
             </Form>
