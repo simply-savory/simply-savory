@@ -30,7 +30,7 @@ class NavBar extends React.Component {
         <Menu.Item as={NavLink} activeClassName="active" exact to="/Help">
           <Icon name="question circle"/>Help
         </Menu.Item>
-        <Menu.Item position="right">
+        <Menu.Item position="right">x
           {this.props.currentUser === '' ? (
             <Dropdown text="Login" pointing="top right" icon={'user'}>
               <Dropdown.Menu>
