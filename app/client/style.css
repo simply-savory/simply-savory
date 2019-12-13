@@ -13,18 +13,16 @@
 
 /* Style the links inside the navigation bar */
 .topnav a {
-  float: left!important;
-  /*display: block!important;*/
   text-align: center!important;
   padding: 14px 16px!important;
   text-decoration: none!important;
-  border-bottom: 3px solid transparent!important;
+  border-bottom: 3px solid transparent;
 }
 
 .topnav a:hover {
-  border-bottom: 3px solid red!important;
+  border-bottom: 3px solid red;
 }
 
 .topnav a.active {
-  border-bottom: 3px solid green!important;
+  border-bottom: 3px solid green;
 }

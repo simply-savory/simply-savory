@@ -33,7 +33,6 @@ class DisplayRecipe extends React.Component {
           <Segment.Group horizontal>
             <Segment><b>Cook Time:</b> {this.props.recipe.cooktime}</Segment>
             <Segment><b>Likes:</b> {this.props.recipe.likes}</Segment>
-            {/*<Segment><b>Date:</b> {this.props.recipe.createdAt.date}</Segment>*/}
             {unsignedCheck(ownername, recipeid)}
           </Segment.Group>
           <Image size='large' centered src={this.props.recipe.image}/>

@@ -11,7 +11,7 @@ class NavBar extends React.Component {
   render() {
     const menuStyle = { marginBottom: '10px' };
     return (
-      <Menu className='topnav' attached="top" borderless inverted color={'green'}>
+      <Menu style={menuStyle} className='topnav' attached="top" borderless inverted >
         <Menu.Item as={NavLink} activeClassName="active" exact to="/">
           <Image size={'small'} src='../../../images/simply-savory-logo-white.png'/>
         </Menu.Item>
@@ -30,7 +30,7 @@ class NavBar extends React.Component {
         <Menu.Item as={NavLink} activeClassName="active" exact to="/Help">
           <Icon name="question circle"/>Help
         </Menu.Item>
-        <Menu.Item position="right">
+        <Menu.Item border-bottom='none' position="right">
           {this.props.currentUser === '' ? (
             <Dropdown text="Login" pointing="top right" icon={'user'}>
               <Dropdown.Menu>
