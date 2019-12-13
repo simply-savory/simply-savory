@@ -4,7 +4,7 @@ import { Roles } from 'meteor/alanning:roles';
 
 /* eslint-disable no-console */
 
-function createUser(email, password, role, firstName, lastName) {
+function createUser(email, password, role, firstName, lastName, vendor) {
   console.log(`  Creating user ${email}.`);
   const userID = Accounts.createUser({
     username: email,
@@ -14,10 +14,15 @@ function createUser(email, password, role, firstName, lastName) {
       firstName: firstName,
       lastName: lastName,
       displayName: `${firstName} ${lastName}`,
+      vendor: vendor,
     },
   });
   if (role === 'admin') {
     Roles.addUsersToRoles(userID, 'admin');
+  }
+  if (vendor === true){
+    Roles.addUserToRoles(userID, 'vendor');
+    console.log('User Added to Vendors');
   }
 }
 
