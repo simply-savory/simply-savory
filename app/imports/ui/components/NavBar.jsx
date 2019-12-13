@@ -11,9 +11,9 @@ class NavBar extends React.Component {
   render() {
     const menuStyle = { marginBottom: '10px' };
     return (
-      <Menu style={menuStyle} attached="top" borderless inverted color={'green'}>
-        <Menu.Item as={NavLink} activeClassName="" exact to="/">
-          <Image size={'small'} src='../../../images/simply-savory-logo.png'/>
+      <Menu className='topnav' attached="top" borderless inverted color={'green'}>
+        <Menu.Item as={NavLink} activeClassName="active" exact to="/">
+          <Image size={'small'} src='../../../images/simply-savory-logo-white.png'/>
         </Menu.Item>
         <Menu.Item as={NavLink} activeClassName="active" exact to="/Discover" >
           <Icon name='compass' />Discover</Menu.Item>
