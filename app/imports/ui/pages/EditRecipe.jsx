@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Loader, Header, Segment, Button, Icon } from 'semantic-ui-react';
+import { Grid, Loader, Header, Segment, Button, Popup } from 'semantic-ui-react';
 import { Recipes, RecipesSchema } from '/imports/api/recipe/Recipes';
 import swal from 'sweetalert';
 import AutoForm from 'uniforms-semantic/AutoForm';
@@ -43,7 +43,7 @@ class EditRecipe extends React.Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to='/' />;
+      return <Redirect to='/myRecipes' />;
     }
   }
 
@@ -64,16 +64,21 @@ class EditRecipe extends React.Component {
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
               </Segment>
-              <Segment>
-                <div>
-                  {this.renderRedirect()}
-                </div>
-                <Button color='red' className="ui icon button" onClick={this.handleClickDelete}>
-                  <Icon className="white close icon"></Icon>
-                    Delete recipe
-                </Button>
-              </Segment>
             </AutoForm>
+            <div>
+              {this.renderRedirect()}
+            </div>
+            <p>
+            </p>
+            <Popup
+                trigger={
+                  <Button color='red' icon='close icon' content='Delete recipe' />
+                }
+                content={<Button color='green' content='Confirm deletion' />}
+                on='click'
+                position='bottom'
+                onClick={this.handleClickDelete}
+            />
           </Grid.Column>
         </Grid>
     );
