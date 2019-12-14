@@ -15,7 +15,6 @@ Meteor.publish('Favorites', function publish() {
 // This publish requires the user to be login to view any recipes
 Meteor.publish('RecipesPublic', function publish() {
     return Recipes.find();
-
 });
 
 Meteor.publish('RecipesAdmin', function publish() {
@@ -35,9 +34,10 @@ Meteor.publish('RecipesUser', function publish() {
 
 /** This subscription publishes only the documents associated with the logged in user */
 Meteor.publish('Reviews', function publish() {
-  if (this.userId) {
+  /* if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return Reviews.find({ owner: username });
   }
-  return this.ready();
+  return this.ready(); */
+  return Reviews.find();
 });
