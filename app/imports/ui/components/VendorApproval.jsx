@@ -1,5 +1,5 @@
 import React from 'react';
-import { Comment } from 'semantic-ui-react';
+import { Table } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
@@ -7,15 +7,14 @@ import { withRouter } from 'react-router-dom';
 class AdminCheckVendor extends React.Component {
   render() {
     return (
-        <Comment >
-          <Comment.Content>
-            <Comment.Author content={this.props.review.displayName} />
-            <Comment.Metadata content={this.props.review.createdAt.toLocaleDateString('en-US')} />
-            <Comment.Text>
-              {this.props.review.review}
-            </Comment.Text>
-          </Comment.Content>
-        </Comment>
+        <Table.Row>
+          <Table.Cell>{this.props.stuff.name}</Table.Cell>
+          <Table.Cell>{this.props.stuff.quantity}</Table.Cell>
+          <Table.Cell>{this.props.stuff.condition}</Table.Cell>
+          <Table.Cell>
+            <Link to={`/edit/${this.props.stuff._id}`}>Edit</Link>
+          </Table.Cell>
+        </Table.Row>
     );
   }
 }

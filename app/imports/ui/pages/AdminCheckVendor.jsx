@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Card, Image, Button, Icon, Divider, Dropdown, Loader, Input } from 'semantic-ui-react';
+import { Container, Header, Table, Card, Image, Button, Icon, Divider, Dropdown, Loader, Input } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { Reviews } from '/imports/api/review/Reviews';
@@ -19,7 +19,19 @@ class AdminCheckVendor extends React.Component {
     return (
         <Container>
           <Header as="h1" textAlign="center" size={'huge'}>Approve Vendors </Header>
-
+          <Table celled>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>Name</Table.HeaderCell>
+                <Table.HeaderCell>Quantity</Table.HeaderCell>
+                <Table.HeaderCell>Condition</Table.HeaderCell>
+                <Table.HeaderCell>Edit</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {this.props.stuffs.map((stuff) => <StuffItem key={stuff._id} stuff={stuff} />)}
+            </Table.Body>
+          </Table>
         </Container>
     );
   }
