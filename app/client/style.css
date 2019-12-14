@@ -4,5 +4,25 @@
 }
 
 .reset-search{
-  text-decoration-line: underline;
+  text-decoration-line: underline !important;
+}
+
+.topnav {
+  background-color: #333 !important;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  text-align: center!important;
+  padding: 14px 16px!important;
+  text-decoration: none!important;
+  border-bottom: 3px solid transparent;
+}
+
+.topnav a:hover {
+  border-bottom: 3px solid red;
+}
+
+.topnav a.active {
+  border-bottom: 3px solid green;
 }
