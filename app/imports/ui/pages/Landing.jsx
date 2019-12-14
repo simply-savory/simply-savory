@@ -60,7 +60,7 @@ class Landing extends React.Component {
         <Container>
           <Image centered src='../../../images/simply-savory-logo.png'/>
           <Header as="h2" textAlign="center">New Recipes</Header>
-          <Card.Group>
+          <Card.Group itemsPerRow={4}>
             {this.props.recipes.map((recipe, index) => <RecipeCard
                 favorites={this.props.favorites}
                 key={index}
@@ -82,7 +82,7 @@ Landing.propTypes = {
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
-  // Get access to Stuff documents.
+  // Get access to recipes files documents.
   const subscription1 = Meteor.subscribe('RecipesPublic');
   const subscription2 = Meteor.subscribe('Reviews');
   const subscription3 = Meteor.subscribe('Favorites');
