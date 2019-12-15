@@ -12,8 +12,8 @@ function addRecipe(data) {
 if (Recipes.find().count() === 0) {
   if (Meteor.settings.defaultRecipes) {
     console.log('Creating recipe data.');
-    const date = new Date(Meteor.settings.defaultRecipes.createdAt);
-    Meteor.settings.defaultRecipes.createdAt = date;
+    // const date = new Date(Meteor.settings.defaultRecipes.createdAt);
+    // Meteor.settings.defaultRecipes.createdAt = date;
     Meteor.settings.defaultRecipes.map(data => addRecipe(data));
   }
 }
