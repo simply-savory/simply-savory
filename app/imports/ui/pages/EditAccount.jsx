@@ -5,7 +5,7 @@ import TextField from 'uniforms-semantic/TextField';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2';
-import { Accounts } from 'meteor/accounts-base'
+import { Accounts } from 'meteor/accounts-base';
 import SimpleSchema from 'simpl-schema';
 import SubmitField from 'uniforms-semantic/SubmitField';
 
