@@ -11,6 +11,7 @@ const ReviewsSchema = new SimpleSchema({
   recipeId: String,
   owner: String,
   createdAt: Date,
+  displayName: String,
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */

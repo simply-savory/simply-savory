@@ -46,8 +46,6 @@ class DiscoverRecipe extends React.Component {
         (recipe) => (recipe.ingredients.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1 ||
             (recipe.name.toLowerCase().indexOf(this.state.search.toLowerCase())) !== -1,
     );
-    const favoritesIDList = _.pluck(this.props.favorites, 'FavoriteID');
-    //console.log(favoritesIDList);
     return (
         <Container>
           <Header as="h2" textAlign="center" size='huge'>List Recipes</Header>
@@ -78,10 +76,6 @@ class DiscoverRecipe extends React.Component {
     );
   }
 }
-
-/* DiscoverRecipe.propTypes = {
-  recipe: PropTypes.object.isRequired,
-};*/
 
 /** Require an array of Stuff documents in the props. */
 DiscoverRecipe.propTypes = {

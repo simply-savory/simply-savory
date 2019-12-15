@@ -19,7 +19,7 @@ class NavBar extends React.Component {
           <Icon name='compass' />Discover</Menu.Item>
         {this.props.currentUser ? (
             [<Menu.Item as={NavLink} activeClassName="active" exact to="/add" key='add'>Add Recipe</Menu.Item>,
-              <Menu.Item as={NavLink} activeClassName="active" exact to="/myrecipe" key='myrecipe'>My Recipe
+              <Menu.Item as={NavLink} activeClassName="active" exact to="/myRecipes" key='myRecipe'>My Recipe
               </Menu.Item>,
               <Menu.Item as={NavLink} activeClassName="active" exact to="/myFavorites" key='/myFavorites'>My Favorites
               </Menu.Item>]

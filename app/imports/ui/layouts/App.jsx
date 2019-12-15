@@ -13,9 +13,7 @@ import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
-import OldRecipe from '../components/OldRecipe';
 import DiscoverRecipe from '../pages/DiscoverRecipe';
-import SearchRecipe from '../pages/SearchRecipe';
 import MyRecipe from '../pages/MyRecipe';
 import EditRecipe from '../pages/EditRecipe';
 import AdminRecipe from '../pages/AdminRecipe';
@@ -33,12 +31,10 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={Landing}/>
               <Route path="/signin" component={Signin}/>
-              <Route path="/Recipe" component={OldRecipe}/>
               <Route path="/Discover" component={DiscoverRecipe}/>
               <Route path="/Help" component={Help}/>
               <Route path="/signup" component={Signup}/>
-              <Route path="/Search" component={SearchRecipe}/>
-              <ProtectedRoute path="/myrecipe" component={MyRecipe}/>
+              <ProtectedRoute path="/myRecipes" component={MyRecipe}/>
               <ProtectedRoute path="/myFavorites" component={FavoriteRecipes}/>
               <ProtectedRoute path="/add" component={AddRecipe}/>
               <Route path="/show/:_id" component={ShowRecipe}/>

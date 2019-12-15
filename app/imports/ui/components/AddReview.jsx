@@ -6,6 +6,7 @@ import HiddenField from 'uniforms-semantic/HiddenField';
 import SubmitField from 'uniforms-semantic/SubmitField';
 import ErrorsField from 'uniforms-semantic/ErrorsField';
 import swal from 'sweetalert';
+import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import PropTypes from 'prop-types';
 import { Reviews, ReviewsSchema } from '../../api/review/Reviews';
@@ -15,8 +16,8 @@ class AddReview extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
-    const { review, recipeId, owner, createdAt } = data;
-    Reviews.insert({ review, recipeId, owner, createdAt },
+    const { review, recipeId, owner, createdAt, displayName } = data;
+    Reviews.insert({ review, recipeId, owner, createdAt, displayName },
         (error) => {
           if (error) {
             swal('Error', error.message, 'error');
@@ -30,6 +31,10 @@ class AddReview extends React.Component {
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   render() {
     let fRef = null;
+    let displayName = 'Anonymous';
+    if (Meteor.userId() !== null) {
+      displayName = Meteor.user().profile.displayName;
+    }
     return (
         <AutoForm ref={ref => { fRef = ref; }} schema={ReviewsSchema} onSubmit={data => this.submit(data, fRef)} >
           <Segment>
@@ -39,6 +44,7 @@ class AddReview extends React.Component {
             <HiddenField name='owner' value={this.props.owner}/>
             <HiddenField name='recipeId' value={this.props.recipeId}/>
             <HiddenField name='createdAt' value={new Date()}/>
+            <HiddenField name='displayName' value={displayName}/>
           </Segment>
         </AutoForm>
     );

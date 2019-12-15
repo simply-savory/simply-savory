@@ -21,8 +21,8 @@ class EditRecipe extends React.Component {
   submit(data) {
     const { name, cooktime, likes, ingredients, image, instructions, _id } = data;
     Recipes.update(_id, { $set: { name, cooktime, likes, ingredients, image, instructions } }, (error) => (error ?
-      swal('Error', error.message, 'error') :
-      swal('Success', 'Recipe updated successfully', 'success')));
+        swal('Error', error.message, 'error') :
+        swal('Success', 'Recipe updated successfully', 'success')));
   }
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
@@ -31,7 +31,7 @@ class EditRecipe extends React.Component {
   }
 
   handleClickDelete() {
-      Recipes.remove(this.props.doc._id);
+    Recipes.remove(this.props.doc._id);
     this.setState({
       redirect: true,
     });
@@ -53,15 +53,12 @@ class EditRecipe extends React.Component {
     return (
         <Grid container centered>
           <Grid.Column>
-            <Header as="h2" textAlign="center">Edit Recipe</Header>
+            <Header as="h2" textAlign="center">Edit account</Header>
             <AutoForm schema={RecipesSchema} onSubmit={data => this.submit(data)} model={this.props.doc}>
               <Segment>
-                <TextField label='Recipe Name' name='name'/>
-                <TextField name='cooktime'/>
-                <HiddenField name='likes' />
+                <TextField label='First name' name='name'/>
+                <TextField label='Last name' name='name'/>
                 <TextField name='ingredients'/>
-                <TextField label='Recipe Image URL' name='image'/>
-                <LongTextField name='instructions'/>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
               </Segment>
