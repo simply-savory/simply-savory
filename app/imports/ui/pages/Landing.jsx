@@ -49,7 +49,7 @@ class Landing extends React.Component {
               <List.Item>You can start browsing recipes right now by clicking the Discover Tab on the
                 navbar </List.Item>
               <List.Item>To post a recipe or favorite one, create an account by clicking Login -> Sign Up </List.Item>
-              <List.Item>Dismiss this notifcation by clicking the x on the top right, this information can be viewed
+              <List.Item>Dismiss this notification by clicking the x on the top right, this information can be viewed
                 again in the "Help" tab, it will pop up every time you visit the landing page until you create an
                 account!</List.Item>
             </List>

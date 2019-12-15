@@ -46,7 +46,6 @@ class RecipeCard extends React.Component {
                      src={this.props.recipe.image}/>
             </Link>
             <Card.Description>
-              {/* eslint-disable-next-line no-undef */}
               {_.map(result, function (item) {
                 return (<div>{item}</div>);
               })}
