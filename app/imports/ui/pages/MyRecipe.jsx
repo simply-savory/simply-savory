@@ -93,7 +93,7 @@ export default withTracker(() => {
   const subscription2 = Meteor.subscribe('Reviews');
   const subscription3 = Meteor.subscribe('Favorites');
   return {
-    recipes: Recipes.find({}).fetch(),
+    recipes: Recipes.find({}, { sort: { createdAt: -1 } }).fetch(),
     reviews: Reviews.find({}).fetch(),
     favorites: Favorites.find({}).fetch(),
     ready: subscription1.ready() && subscription2.ready() && subscription3.ready(),
