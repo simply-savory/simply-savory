@@ -19,6 +19,7 @@ import EditRecipe from '../pages/EditRecipe';
 import AdminRecipe from '../pages/AdminRecipe';
 import Help from '../pages/Help';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
+import EditAccount from '../pages/EditAccount';
 
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
@@ -39,6 +40,7 @@ class App extends React.Component {
               <ProtectedRoute path="/add" component={AddRecipe}/>
               <Route path="/show/:_id" component={ShowRecipe}/>
               <ProtectedRoute path="/edit/:_id" component={EditRecipe}/>
+              <ProtectedRoute path="/EditAccount" component={EditAccount}/>
               <AdminProtectedRoute path="/admin" component={AdminRecipe}/>
               <ProtectedRoute path="/signout" component={Signout}/>
               <Route component={NotFound}/>
