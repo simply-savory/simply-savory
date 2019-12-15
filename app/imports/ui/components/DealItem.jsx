@@ -3,8 +3,8 @@ import { Table } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-class AdminCheckVendor extends React.Component {
+/** Renders a single row in the List Deal table. See pages/ListDeal.jsx. */
+class DealItem extends React.Component {
   render() {
     return (
         <Table.Row>
@@ -20,9 +20,10 @@ class AdminCheckVendor extends React.Component {
 }
 
 /** Require a document to be passed to this component. */
-AdminCheckVendor.propTypes = {
-  review: PropTypes.object.isRequired,
+DealItem.propTypes = {
+  deal: PropTypes.object.isRequired,
+  vendor: PropTypes.object.isRequired,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */
-export default withRouter(AdminCheckVendor);
+export default withRouter(DealItem);

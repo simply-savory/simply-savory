@@ -8,6 +8,7 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import AddRecipe from '../pages/AddRecipe';
+import AddDeals from '../pages/AddDeal';
 import ShowRecipe from '../pages/ShowRecipe';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
@@ -21,6 +22,8 @@ import EditRecipe from '../pages/EditRecipe';
 import AdminRecipe from '../pages/AdminRecipe';
 import Help from '../pages/Help';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
+import DiscoverDeal from '../pages/ListDeal';
+import AddVendor from '../pages/AddVendor';
 
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
@@ -39,11 +42,14 @@ class App extends React.Component {
               <Route path="/signup" component={Signup}/>
               <Route path="/Search" component={SearchRecipe}/>
               <ProtectedRoute path="/myrecipe" component={MyRecipe}/>
+              <ProtectedRoute path="/discoverdeal" component={DiscoverDeal}/>
               <ProtectedRoute path="/myFavorites" component={FavoriteRecipes}/>
               <ProtectedRoute path="/add" component={AddRecipe}/>
               <Route path="/show/:_id" component={ShowRecipe}/>
               <ProtectedRoute path="/edit/:_id" component={EditRecipe}/>
               <AdminProtectedRoute path="/admin" component={AdminRecipe}/>
+              <VendorProtectedRoute path="/vendor" component={AddDeals}/>
+              <VendorProtectedRoute path="/addvendor" component={AddVendor}/>
               <ProtectedRoute path="/signout" component={Signout}/>
               <Route component={NotFound}/>
             </Switch>
@@ -78,12 +84,32 @@ const ProtectedRoute = ({ component: Component, ...rest }) => (
  * @param {any} { component: Component, ...rest }
  */
 const AdminProtectedRoute = ({ component: Component, ...rest }) => (
+        <Route
+            {...rest}
+            render={(props) => {
+              const isLogged = Meteor.userId() !== null;
+              const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
+              return (isLogged && isAdmin) ?
+                  (<Component {...props} />) :
+                  (<Redirect to={{ pathname: '/signin', state: { from: props.location } }}/>
+                  );
+            }}
+        />
+    );
+
+/**
+ * VendorProtectedRoute (see React Router v4 sample)
+ * Checks for Meteor login and vendor role before routing to the requested page, otherwise goes to signin page.
+ * @param {any} { component: Component, ...rest }
+ */
+const VendorProtectedRoute = ({ component: Component, ...rest }) => (
     <Route
         {...rest}
         render={(props) => {
           const isLogged = Meteor.userId() !== null;
-          const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
-          return (isLogged && isAdmin) ?
+          const isVendor = Roles.userIsInRole(Meteor.userId(), 'vendor') ||
+              Roles.userIsInRole(Meteor.userId(), 'admin');
+          return (isLogged && isVendor) ?
               (<Component {...props} />) :
               (<Redirect to={{ pathname: '/signin', state: { from: props.location } }}/>
               );
@@ -99,6 +125,12 @@ ProtectedRoute.propTypes = {
 
 /** Require a component and location to be passed to each AdminProtectedRoute. */
 AdminProtectedRoute.propTypes = {
+  component: PropTypes.func.isRequired,
+  location: PropTypes.object,
+};
+
+/** Require a component and location to be passed to each VendorProtectedRoute. */
+VendorProtectedRoute.propTypes = {
   component: PropTypes.func.isRequired,
   location: PropTypes.object,
 };

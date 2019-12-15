@@ -3,6 +3,8 @@ import { Roles } from 'meteor/alanning:roles';
 import { Recipes } from '../../api/recipe/Recipes';
 import { Reviews } from '../../api/review/Reviews';
 import { Favorites } from '../../api/favorite/Favorites';
+import { Deals } from '../../api/deal/Deals';
+import { Vendors } from '../../api/vendor/Vendors';
 
 Meteor.publish('Favorites', function publish() {
   if (this.userId) {
@@ -21,6 +23,22 @@ Meteor.publish('RecipesPublic', function publish() {
 Meteor.publish('RecipesAdmin', function publish() {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return Recipes.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish('Deals', function publish() {
+  if (this.userId && Roles.userIsInRole(this.userId, 'vendor')) {
+    const username = Meteor.users.findOne(this.userId).username;
+    return Deals.find({ owner: username });
+  }
+  return this.ready();
+});
+
+Meteor.publish('Vendors', function publish() {
+  if (this.userId && Roles.userIsInRole(this.userId, 'vendor')) {
+    const username = Meteor.users.findOne(this.userId).username;
+    return Vendors.find({ owner: username });
   }
   return this.ready();
 });

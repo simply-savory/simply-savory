@@ -1,41 +1,34 @@
 import React from 'react';
-import { Recipes } from '/imports/api/recipe/Recipes';
 import { Grid, Segment, Header } from 'semantic-ui-react';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
-import LongTextField from 'uniforms-semantic/LongTextField';
-import HiddenField from 'uniforms-semantic/HiddenField';
 import SubmitField from 'uniforms-semantic/SubmitField';
 import ErrorsField from 'uniforms-semantic/ErrorsField';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import SimpleSchema from 'simpl-schema';
+import { Vendors } from '../../api/vendor/Vendors';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const formSchema = new SimpleSchema({
-  name: String,
-  cooktime: String,
-  likes: Number,
-  ingredients: String,
-  image: String,
-  instructions: String,
+  companyName: String,
+  address: String,
 });
 
 /** Renders the Page for adding a document. */
-class AddRecipe extends React.Component {
+class AddVendor extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
-    const { name, cooktime, likes, ingredients, image, instructions } = data;
+    const { companyName, address } = data;
     const owner = Meteor.user().username;
-    const displayName = Meteor.user().profile.displayName;
-    Recipes.insert({ name, cooktime, likes, ingredients, image, instructions, owner, displayName },
+    Vendors.insert({ companyName, address, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Recipe added successfully', 'success');
+          swal('Success', 'Vendor added successfully', 'success');
           formRef.reset();
         }
       });
@@ -47,15 +40,11 @@ class AddRecipe extends React.Component {
     return (
         <Grid container centered>
           <Grid.Column>
-            <Header as="h2" textAlign="center" size="huge">Add Recipe</Header>
+            <Header as="h2" textAlign="center" size="huge">Add Vendor</Header>
             <AutoForm ref={ref => { fRef = ref; }} schema={formSchema} onSubmit={data => this.submit(data, fRef)} >
               <Segment>
-                <TextField label='Recipe Name' name='name'/>
-                <TextField name='cooktime'/>
-                <HiddenField name='likes' value={0}/>
-                <LongTextField name='ingredients'/>
-                <TextField label='Recipe Image URL' name='image'/>
-                <LongTextField name='instructions'/>
+                <TextField label='Company Name' name='companyName'/>
+                <TextField name='address'/>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
               </Segment>
@@ -66,4 +55,4 @@ class AddRecipe extends React.Component {
   }
 }
 
-export default AddRecipe;
+export default AddVendor;

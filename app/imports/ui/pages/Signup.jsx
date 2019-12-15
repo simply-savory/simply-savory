@@ -5,7 +5,6 @@ import { Container, Form, Grid, Header, Message, Segment, Checkbox } from 'seman
 import { Accounts } from 'meteor/accounts-base';
 
 
-
 /**
  * Signup component is similar to signin component, but we create a new user instead.
  */
@@ -13,35 +12,52 @@ class Signup extends React.Component {
   /** Initialize state fields. */
   constructor(props) {
     super(props);
-    this.state = { firstName: '', lastName: '', email: '', password: '', error: '', redirectToReferer: false, vendor:false };
+    this.state = { firstName: '', lastName: '',
+      email: '',
+      password: '',
+      error: '',
+      redirectToReferer: false, vendor: false };
   }
+
   /** Update the form controls each time the user interacts with them. */
   handleChange = (e, { name, value }) => {
     this.setState({ [name]: value });
   }
+
   toggleCheckBox = () => {
     const vendor = !(this.vendor);
-    this.setState({vendor});
+    this.setState({ vendor });
   }
+
   /** Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
   submit = () => {
     const { firstName, lastName, email, password, vendor } = this.state;
-    Accounts.createUser({ email, profile: { lastName: lastName, firstName: firstName, displayName: `${firstName} ${lastName}`, vendor: vendor }, username: email, password}, (err) => {
+    Accounts.createUser(
+        { email, profile:
+              { lastName: lastName, firstName: firstName, displayName: `${firstName} ${lastName}`, vendor: vendor },
+         username: email, password }, (err) => {
       if (err) {
         this.setState({ error: err.reason });
       } else {
         this.setState({ error: '', redirectToReferer: true });
       }
-    });
+    },
+);
   }
 
   /** Display the signup form. Redirect to add page after successful registration and login. */
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/' } };
+    const { addvendor } = this.props.location.state || { from: { pathname: '/addvendor' } };
     // if correct authentication, redirect to from: page instead of signup screen
+    if (this.state.vendor) {
+      return <Redirect to={addvendor}/>;
+    }// if correct authentication, redirect to from: page instead of signup screen
     if (this.state.redirectToReferer) {
       return <Redirect to={from}/>;
     }
+
+
     return (
       <Container>
         <Grid textAlign="center" verticalAlign="middle" centered columns={2}>

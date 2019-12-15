@@ -1,6 +1,6 @@
 import React from 'react';
-import { Container, Header, Card, Image, Button, Icon, Divider, Dropdown, Loader, Input } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Container, Header, Card, Loader, Input } from 'semantic-ui-react';
+import { } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { Reviews } from '/imports/api/review/Reviews';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -93,4 +93,4 @@ export default withTracker(() => {
     reviews: Reviews.find({}).fetch(),
     ready: subscription1.ready() && subscription2.ready(),
   };
-})( AdminRecipe);
+})(AdminRecipe);
