@@ -1,103 +1,130 @@
 import React from 'react';
-import { Grid, Loader, Header, Segment, Button, Popup } from 'semantic-ui-react';
-import { Recipes, RecipesSchema } from '/imports/api/recipe/Recipes';
-import swal from 'sweetalert';
+import { Grid, Header, Segment, Container, Divider } from 'semantic-ui-react';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
-import SubmitField from 'uniforms-semantic/SubmitField';
-import HiddenField from 'uniforms-semantic/HiddenField';
-import ErrorsField from 'uniforms-semantic/ErrorsField';
+import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
-import { withTracker } from 'meteor/react-meteor-data';
-import PropTypes from 'prop-types';
 import 'uniforms-bridge-simple-schema-2';
-import LongTextField from 'uniforms-semantic/LongTextField';
-import { Redirect } from 'react-router-dom'; // required for Uniforms
+import { Accounts } from 'meteor/accounts-base'
+import SimpleSchema from 'simpl-schema';
+import SubmitField from 'uniforms-semantic/SubmitField';
+
+const changePasswordSchema = new SimpleSchema({
+  currentPassword: String,
+  newPassword: String,
+  verifyPassword: String,
+});
+
+const changeNameSchema = new SimpleSchema({
+  firstName: String,
+  lastName: String,
+});
 
 /** Renders the Page for editing a single document. */
-class EditRecipe extends React.Component {
+class EditAccount extends React.Component {
 
   /** On successful submit, insert the data. */
-  submit(data) {
-    const { name, cooktime, likes, ingredients, image, instructions, _id } = data;
-    Recipes.update(_id, { $set: { name, cooktime, likes, ingredients, image, instructions } }, (error) => (error ?
-        swal('Error', error.message, 'error') :
-        swal('Success', 'Recipe updated successfully', 'success')));
+  submitChangeName(data, formRef) {
+    const { firstName, lastName } = data;
+    Meteor.users.update(Meteor.userId(),
+        { $set: { 'profile.firstName': firstName } },
+        { $set: { 'profile.lastName': lastName } },
+        (error) => {
+          if (error) {
+            swal('Error', error.message, 'error');
+          } else {
+            swal('Success', 'name updated', 'success');
+            formRef.reset();
+          }
+        });
   }
 
-  /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
-  render() {
-    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
-  }
-
-  handleClickDelete() {
-    Recipes.remove(this.props.doc._id);
-    this.setState({
-      redirect: true,
-    });
-  }
-
-  state = {
-    redirect: false,
-  }
-
-  // eslint-disable-next-line consistent-return
-  renderRedirect() {
-    if (this.state.redirect) {
-      return <Redirect to='/myRecipes' />;
+  submitChangePassword(data, formRef) {
+    const { currentPassword, newPassword, verifyPassword } = data;
+    if (newPassword !== verifyPassword) {
+      swal('Error', 'Password and verify password do not match', 'error');
+    } else {
+      Accounts.changePassword(currentPassword,
+          newPassword,
+          (error) => {
+            if (error) {
+              swal('Error', error.message, 'error');
+            } else {
+              swal('Success', 'password updated', 'success');
+              formRef.reset();
+            }
+          });
     }
   }
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
-  renderPage() {
+  render() {
+    let fRef = null;
     return (
-        <Grid container centered>
-          <Grid.Column>
-            <Header as="h2" textAlign="center">Edit account</Header>
-            <AutoForm schema={RecipesSchema} onSubmit={data => this.submit(data)} model={this.props.doc}>
-              <Segment>
-                <TextField label='First name' name='name'/>
-                <TextField label='Last name' name='name'/>
-                <TextField name='ingredients'/>
-                <SubmitField value='Submit'/>
-                <ErrorsField/>
-              </Segment>
-            </AutoForm>
-            <div>
-              {this.renderRedirect()}
-            </div>
-            <p>
-            </p>
-            <Popup
-                trigger={
-                  <Button color='red' icon='close icon' content='Delete recipe' />
-                }
-                content={<Button color='green' content='Confirm deletion' />}
-                on='click'
-                position='bottom'
-                onClick={this.handleClickDelete}
-            />
-          </Grid.Column>
-        </Grid>
+        <Container>
+          <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
+            <Grid.Column>
+              <Header as="h2" textAlign="center">
+                Edit your Account
+              </Header>
+              <AutoForm ref={ref => {
+                fRef = ref;
+              }}
+                        schema={changeNameSchema}
+                        onSubmit={data => this.submitChangeName(data, fRef)}>
+                <Segment stacked>
+                  <TextField
+                      label="First Name"
+                      icon="user"
+                      name="firstName"
+                      placeholder={`${Meteor.user().profile.firstName}`}
+                  />
+                  <TextField
+                      label="Last Name"
+                      icon="id badge"
+                      name="lastName"
+                      placeholder={`${Meteor.user().profile.lastName}`}
+                  />
+                  <SubmitField value='Submit'/>
+                </Segment>
+              </AutoForm>
+              <Divider />
+              <AutoForm ref={ref => {
+                fRef = ref;
+              }}
+                        schema={changePasswordSchema}
+                        onSubmit={data => this.submitChangePassword(data, fRef)}>
+                <Segment stacked>
+                  <TextField
+                      label="Current Password"
+                      icon="lock"
+                      name="currentPassword"
+                      placeholder="Password"
+                      type="password"
+                  />
+                  <TextField
+                      label="New Password"
+                      icon="lock"
+                      name="newPassword"
+                      placeholder="Password"
+                      type="password"
+                  />
+                  <TextField
+                      label="Verify New Password"
+                      icon="lock"
+                      name="verifyPassword"
+                      placeholder="Password"
+                      type="password"
+                  />
+                  <SubmitField value='Submit'/>
+                </Segment>
+              </AutoForm>
+            </Grid.Column>
+          </Grid>
+        </Container>
     );
   }
 }
 
-/** Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use. */
-EditRecipe.propTypes = {
-  doc: PropTypes.object,
-  model: PropTypes.object,
-  ready: PropTypes.bool.isRequired,
-};
-
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
-export default withTracker(({ match }) => {
-  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
-  const documentId = match.params._id;
-  // Get access to Stuff documents.
-  const subscription = Meteor.subscribe('RecipesUser');
-  return {
-    doc: Recipes.findOne(documentId),
-    ready: subscription.ready(),
-  };
-})(EditRecipe);
+export default (EditAccount);
