@@ -3,16 +3,16 @@ import { Container, Header, Card, Loader, List, Message, Image } from 'semantic-
 import { Meteor } from 'meteor/meteor';
 import { Recipes } from '/imports/api/recipe/Recipes';
 import { Reviews } from '/imports/api/review/Reviews';
-import { Favorites } from '../../api/favorite/Favorites';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import { Favorites } from '../../api/favorite/Favorites';
 import RecipeCard from '../components/RecipeCard';
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
   state = { visible: true }
   handleDismiss = () => {
-    this.setState({ visible: false })
+    this.setState({ visible: false });
 
   }
 
@@ -36,11 +36,8 @@ class Landing extends React.Component {
             <List bulleted>
               <List.Item>Can be made using minimal kitchen facilities (at a minimum, a toaster oven).
               </List.Item>
-              <List.Item>Can be made out of ingredients that are available within walking distance of
-                UH.</List.Item>
               <List.Item>Suit local taste sensibilities.</List.Item>
               <List.Item>Can be filtered via dietary restrictions (gluten-free, vegan, etc).</List.Item>
-              <List.Item>Have an estimated cost per serving.</List.Item>
               <List.Item>Has an estimated number of servings per recipe.</List.Item>
               <List.Item>Has an estimate of how long it takes to make.</List.Item>
             </List>
@@ -48,10 +45,11 @@ class Landing extends React.Component {
             <List bulleted>
               <List.Item>You can start browsing recipes right now by clicking the Discover Tab on the
                 navbar </List.Item>
-              <List.Item>To post a recipe or favorite one, create an account by clicking Login -> Sign Up </List.Item>
+              <List.Item>To post a recipe or favorite one, create an account by clicking Login -&gt;
+                Sign Up </List.Item>
               <List.Item>Dismiss this notifcation by clicking the x on the top right, this information can be viewed
-                again in the "Help" tab, it will pop up every time you visit the landing page until you create an
-                account!</List.Item>
+                again in the &quto;Help&quto; tab, it will pop up every time you visit the landing page until
+                you create an account!</List.Item>
             </List>
           </Message>
       );
@@ -60,7 +58,7 @@ class Landing extends React.Component {
         <Container>
           <Image centered src='../../../images/simply-savory-logo.png'/>
           <Header as="h2" textAlign="center">New Recipes</Header>
-          <Card.Group>
+          <Card.Group itemsPerRow={4}>
             {this.props.recipes.map((recipe, index) => <RecipeCard
                 favorites={this.props.favorites}
                 key={index}
@@ -82,12 +80,12 @@ Landing.propTypes = {
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
-  // Get access to Stuff documents.
+  // Get access to recipes files documents.
   const subscription1 = Meteor.subscribe('RecipesPublic');
   const subscription2 = Meteor.subscribe('Reviews');
   const subscription3 = Meteor.subscribe('Favorites');
   return {
-    recipes: Recipes.find({}).fetch(),
+    recipes: Recipes.find({}, { sort: { createdAt: -1 } }).fetch(),
     reviews: Reviews.find({}).fetch(),
     favorites: Favorites.find({}).fetch(),
     ready: subscription1.ready() && subscription2.ready() && subscription3.ready(),

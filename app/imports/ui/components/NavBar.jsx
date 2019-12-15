@@ -19,7 +19,7 @@ class NavBar extends React.Component {
           <Icon name='compass' />Discover</Menu.Item>
         {this.props.currentUser ? (
             [<Menu.Item as={NavLink} activeClassName="active" exact to="/add" key='add'>Add Recipe</Menu.Item>,
-              <Menu.Item as={NavLink} activeClassName="active" exact to="/myrecipe" key='myrecipe'>My Recipe
+              <Menu.Item as={NavLink} activeClassName="active" exact to="/myRecipes" key='myRecipe'>My Recipes
               </Menu.Item>,
               <Menu.Item as={NavLink} activeClassName="active" exact to="/myFavorites" key='/myFavorites'>My Favorites
               </Menu.Item>,
@@ -47,6 +47,7 @@ class NavBar extends React.Component {
             <Dropdown text={this.props.currentUser} pointing="top right" icon={'user'}>
               <Dropdown.Menu>
                 <Dropdown.Item icon="sign out" text="Sign Out" as={NavLink} exact to="/signout"/>
+                <Dropdown.Item icon={'user'} text={'Edit account'} as={NavLink} eaxact to={'/EditAccount'}/>
               </Dropdown.Menu>
             </Dropdown>
           )}

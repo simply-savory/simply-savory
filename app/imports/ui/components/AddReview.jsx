@@ -16,8 +16,7 @@ class AddReview extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
-    const { review, recipeId, owner, createdAt } = data;
-    const displayName = Meteor.user().profile.displayName;
+    const { review, recipeId, owner, createdAt, displayName } = data;
     Reviews.insert({ review, recipeId, owner, createdAt, displayName },
         (error) => {
           if (error) {
@@ -32,7 +31,10 @@ class AddReview extends React.Component {
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   render() {
     let fRef = null;
-    const displayName = Meteor.user().profile.displayName;
+    let displayName = 'Anonymous';
+    if (Meteor.userId() !== null) {
+      displayName = Meteor.user().profile.displayName;
+    }
     return (
         <AutoForm ref={ref => { fRef = ref; }} schema={ReviewsSchema} onSubmit={data => this.submit(data, fRef)} >
           <Segment>

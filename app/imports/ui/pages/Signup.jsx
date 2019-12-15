@@ -4,7 +4,6 @@ import { Link, Redirect } from 'react-router-dom';
 import { Container, Form, Grid, Header, Message, Segment, Checkbox } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
 
-
 /**
  * Signup component is similar to signin component, but we create a new user instead.
  */
@@ -31,18 +30,23 @@ class Signup extends React.Component {
 
   /** Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
   submit = () => {
-    const { firstName, lastName, email, password, vendor } = this.state;
-    Accounts.createUser(
-        { email, profile:
-              { lastName: lastName, firstName: firstName, displayName: `${firstName} ${lastName}`, vendor: vendor },
-         username: email, password }, (err) => {
-      if (err) {
-        this.setState({ error: err.reason });
-      } else {
-        this.setState({ error: '', redirectToReferer: true });
-      }
-    },
-);
+    const { firstName, lastName, email, password, verifyPassword } = this.state;
+    if (password !== verifyPassword) {
+      this.setState({ error: 'password and verify password do not match' });
+    } else {
+      Accounts.createUser({
+        email,
+        profile: { lastName: lastName, firstName: firstName, displayName: `${firstName} ${lastName}` },
+        username: email,
+        password,
+      }, (err) => {
+        if (err) {
+          this.setState({ error: err.reason });
+        } else {
+          this.setState({ error: '', redirectToReferer: true });
+        }
+      });
+    }
   }
 
   /** Display the signup form. Redirect to add page after successful registration and login. */
@@ -59,69 +63,77 @@ class Signup extends React.Component {
 
 
     return (
-      <Container>
-        <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
-          <Grid.Column>
-            <Header as="h2" textAlign="center">
-              Register your account
-            </Header>
-            <Form onSubmit={this.submit}>
-              <Segment stacked>
-                <Form.Input
-                    label="First Name"
-                    icon="user"
-                    iconPosition="left"
-                    name="firstName"
-                    type="firstName"
-                    placeholder="Philip.."
-                    onChange={this.handleChange}
-                />
-                <Form.Input
-                    label="Last Name"
-                    icon="id badge"
-                    iconPosition="left"
-                    name="lastName"
-                    type="lastName"
-                    placeholder="Johnson.."
-                    onChange={this.handleChange}
-                />
-                <Form.Input
-                  label="Email"
-                  icon="envelope"
-                  iconPosition="left"
-                  name="email"
-                  type="email"
-                  placeholder="E-mail address"
-                  onChange={this.handleChange}
-                />
-                <Form.Input
-                  label="Password"
-                  icon="lock"
-                  iconPosition="left"
-                  name="password"
-                  placeholder="Password"
-                  type="password"
-                  onChange={this.handleChange}
-                />
-                <Checkbox label='I am a Vendor and would like to post deals' onChange={this.toggleCheckBox}/>
-                <Form.Button content="Submit"/>
-              </Segment>
-            </Form>
-            <Message>
-              Already have an account? Login <Link to="/signin">here</Link>
-            </Message>
-            {this.state.error === '' ? (
-              ''
-            ) : (
-              <Message
-                error
-                header="Registration was not successful"
-                content={this.state.error}
-              />
-            )}
-          </Grid.Column>
-        </Grid>
-      </Container>
+        <Container>
+          <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
+            <Grid.Column>
+              <Header as="h2" textAlign="center">
+                Register your account
+              </Header>
+              <Form onSubmit={this.submit}>
+                <Segment stacked>
+                  <Form.Input
+                      label="First Name"
+                      icon="user"
+                      iconPosition="left"
+                      name="firstName"
+                      type="firstName"
+                      placeholder="Philip.."
+                      onChange={this.handleChange}
+                  />
+                  <Form.Input
+                      label="Last Name"
+                      icon="id badge"
+                      iconPosition="left"
+                      name="lastName"
+                      type="lastName"
+                      placeholder="Johnson.."
+                      onChange={this.handleChange}
+                  />
+                  <Form.Input
+                      label="Email"
+                      icon="envelope"
+                      iconPosition="left"
+                      name="email"
+                      type="email"
+                      placeholder="E-mail address"
+                      onChange={this.handleChange}
+                  />
+                  <Form.Input
+                      label="Password"
+                      icon="lock"
+                      iconPosition="left"
+                      name="password"
+                      placeholder="Password"
+                      type="password"
+                      onChange={this.handleChange}
+                  />
+                  <Form.Input
+                      label="Verify Password"
+                      icon="lock"
+                      iconPosition="left"
+                      name="verifyPassword"
+                      placeholder="Password"
+                      type="password"
+                      onChange={this.handleChange}
+                  />
+                  <Form.Button content="Submit"/>
+                </Segment>
+              </Form>
+              <Message>
+                Already have an account? Login <Link to="/signin">here</Link>
+              </Message>
+              {this.state.error === '' ? (
+                  ''
+              ) : (
+                  <Message
+                      error
+                      header="Registration was not successful"
+                      content={this.state.error}
+                  />
+              )}
+            </Grid.Column>
+          </Grid>
+        </Container>
     );
   }
 }
