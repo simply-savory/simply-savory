@@ -30,7 +30,7 @@ class DisplayRecipe extends React.Component {
         <Container>
           <Header textAlign='center' size='large'>{this.props.recipe.name}</Header>
           <Segment.Group horizontal>
-            <Segment><b>Date Created:</b> {this.props.recipe.createdAt}</Segment>
+            <Segment><b>Date Created:</b> {this.props.recipe.createdAt.toLocaleDateString('en-US')}</Segment>
             <Segment><b>Cook Time:</b> {this.props.recipe.cooktime}</Segment>
             <Segment><b>Likes:</b> {this.props.recipe.likes}</Segment>
             {unsignedCheck(ownername, recipeid)}

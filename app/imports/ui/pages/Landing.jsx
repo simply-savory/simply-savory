@@ -3,16 +3,16 @@ import { Container, Header, Card, Loader, List, Message, Image } from 'semantic-
 import { Meteor } from 'meteor/meteor';
 import { Recipes } from '/imports/api/recipe/Recipes';
 import { Reviews } from '/imports/api/review/Reviews';
-import { Favorites } from '../../api/favorite/Favorites';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import { Favorites } from '../../api/favorite/Favorites';
 import RecipeCard from '../components/RecipeCard';
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
   state = { visible: true }
   handleDismiss = () => {
-    this.setState({ visible: false })
+    this.setState({ visible: false });
 
   }
 
@@ -85,7 +85,7 @@ export default withTracker(() => {
   const subscription2 = Meteor.subscribe('Reviews');
   const subscription3 = Meteor.subscribe('Favorites');
   return {
-    recipes: Recipes.find({}).fetch(),
+    recipes: Recipes.find({}, { sort: { createdAt: -1 } }).fetch(),
     reviews: Reviews.find({}).fetch(),
     favorites: Favorites.find({}).fetch(),
     ready: subscription1.ready() && subscription2.ready() && subscription3.ready(),
