@@ -40,6 +40,17 @@
   ],
   "defaultRecipes": [
     {
+      "name": "Bowties and Broccoli",
+      "displayName": "Kade Shiroma",
+      "cooktime": "15 Minutes",
+      "owner": "kadeks@hawaii.edu",
+      "likes": 50,
+      "ingredients": "12 oz pasta \n 1 lb frozen broccoli \n 3 Tbsp butter \n 3 Tbsp grated parmesan \n salt \n pepper",
+      "image": "https://www.budgetbytes.com/wp-content/uploads/2015/09/Bowties-and-Broccoli-text-1.jpg",
+      "instructions": "1.Bring a pot of water to a boil, then add the pasta. \n 2.Boil until the pasta is al dente (7-10 minutes). \n 3.Add frozen broccoli to the boiling pasta water, turn off the heat, and let sit for 1-2 minutes, or until the broccoli is tender-crisp. \n 4.Drain the pasta and broccoli in a colander. \n 5.Transfer pasta and broccoli back to pot (with the heat off) or to a bowl and add butter. \n 6.Toss until the butter has melted and coated everything. \n 7.Add the Parmesan, salt, freshly cracked pepper, then toss to coat again. \n 8.Serve and enjoy.",
+      "createdAt": "Sat Dec 1 2019 15:59:32 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    },
+    {
       "name": "Grilled Cheese",
       "displayName": "Nate Chu",
       "cooktime": "5 Minutes",
