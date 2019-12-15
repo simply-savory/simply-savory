@@ -8,12 +8,14 @@ class DealItem extends React.Component {
   render() {
     return (
         <Table.Row>
-          <Table.Cell>{this.props.stuff.name}</Table.Cell>
-          <Table.Cell>{this.props.stuff.quantity}</Table.Cell>
-          <Table.Cell>{this.props.stuff.condition}</Table.Cell>
-          <Table.Cell>
-            <Link to={`/edit/${this.props.stuff._id}`}>Edit</Link>
-          </Table.Cell>
+          <Table.Cell>{this.props.deal.companyName}</Table.Cell>
+          <Table.Cell>{this.props.deal.address}</Table.Cell>
+          <Table.Cell>{this.props.deal.owner}</Table.Cell>
+          <Table.Cell>{this.props.deal.item}</Table.Cell>
+          <Table.Cell>{this.props.deal.discount}</Table.Cell>
+          <Table.Cell>{this.props.deal.price}</Table.Cell>
+          <Table.Cell>{this.props.deal.startTime}</Table.Cell>
+          <Table.Cell>{this.props.deal.endTime}</Table.Cell>
         </Table.Row>
     );
   }
@@ -22,7 +24,6 @@ class DealItem extends React.Component {
 /** Require a document to be passed to this component. */
 DealItem.propTypes = {
   deal: PropTypes.object.isRequired,
-  vendor: PropTypes.object.isRequired,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */

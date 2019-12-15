@@ -21,7 +21,7 @@ import AdminRecipe from '../pages/AdminRecipe';
 import Help from '../pages/Help';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
 import EditAccount from '../pages/EditAccount';
-import DiscoverDeal from '../pages/ListDeal';
+import ListDeal from '../pages/ListDeal';
 import AddVendor from '../pages/AddVendor';
 
 
@@ -39,7 +39,7 @@ class App extends React.Component {
               <Route path="/Help" component={Help}/>
               <Route path="/signup" component={Signup}/>
               <ProtectedRoute path="/myRecipes" component={MyRecipe}/>
-              <ProtectedRoute path="/discoverdeal" component={DiscoverDeal}/>
+              <ProtectedRoute path="/listdeal" component={ListDeal}/>
               <ProtectedRoute path="/myFavorites" component={FavoriteRecipes}/>
               <ProtectedRoute path="/add" component={AddRecipe}/>
               <Route path="/show/:_id" component={ShowRecipe}/>
@@ -105,8 +105,7 @@ const VendorProtectedRoute = ({ component: Component, ...rest }) => (
         {...rest}
         render={(props) => {
           const isLogged = Meteor.userId() !== null;
-          const isVendor = Roles.userIsInRole(Meteor.userId(), 'vendor') ||
-              Roles.userIsInRole(Meteor.userId(), 'admin');
+          const isVendor = Roles.userIsInRole(Meteor.userId(), 'vendor');
           return (isLogged && isVendor) ?
               (<Component {...props} />) :
               (<Redirect to={{ pathname: '/signin', state: { from: props.location } }}/>

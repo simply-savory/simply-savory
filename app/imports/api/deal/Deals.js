@@ -8,7 +8,8 @@ const Deals = new Mongo.Collection('Deals');
 /** Define a schema to specify the structure of each document in the collection. */
 const DealsSchema = new SimpleSchema({
   owner: String,
-  vendorId: String,
+  companyName: String,
+  address: String,
   item: String,
   discount: String,
   price: String,

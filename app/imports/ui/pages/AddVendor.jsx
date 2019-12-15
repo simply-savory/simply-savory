@@ -1,58 +1,74 @@
 import React from 'react';
-import { Grid, Segment, Header } from 'semantic-ui-react';
+import { Grid, Header, Segment, Container } from 'semantic-ui-react';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
-import SubmitField from 'uniforms-semantic/SubmitField';
-import ErrorsField from 'uniforms-semantic/ErrorsField';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
-import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
+import 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { Vendors } from '../../api/vendor/Vendors';
+import SubmitField from 'uniforms-semantic/SubmitField';
 
-/** Create a schema to specify the structure of the data to appear in the form. */
-const formSchema = new SimpleSchema({
+const addVendorSchema = new SimpleSchema({
   companyName: String,
   address: String,
 });
 
-/** Renders the Page for adding a document. */
+/** Renders the Page for editing a single document. */
 class AddVendor extends React.Component {
 
-  /** On submit, insert the data. */
-  submit(data, formRef) {
+  /** On successful submit, insert the data. */
+  submitAddVendor(data, formRef) {
     const { companyName, address } = data;
-    const owner = Meteor.user().username;
-    Vendors.insert({ companyName, address, owner },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          swal('Success', 'Vendor added successfully', 'success');
-          formRef.reset();
-        }
-      });
+    Meteor.users.update(Meteor.userId(),
+        { $set: { 'profile.companyName': companyName } },
+        { $set: { 'profile.address': address } },
+        (error) => {
+          if (error) {
+            swal('Error', error.message, 'error');
+          } else {
+            swal('Success', 'vendor information added', 'success');
+            formRef.reset();
+          }
+        });
   }
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   render() {
     let fRef = null;
     return (
-        <Grid container centered>
-          <Grid.Column>
-            <Header as="h2" textAlign="center" size="huge">Add Vendor</Header>
-            <AutoForm ref={ref => { fRef = ref; }} schema={formSchema} onSubmit={data => this.submit(data, fRef)} >
-              <Segment>
-                <TextField label='Company Name' name='companyName'/>
-                <TextField name='address'/>
-                <SubmitField value='Submit'/>
-                <ErrorsField/>
-              </Segment>
-            </AutoForm>
-          </Grid.Column>
-        </Grid>
+        <Container>
+          <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
+            <Grid.Column>
+              <Header as="h2" textAlign="center">
+                Edit your Account
+              </Header>
+              <AutoForm ref={ref => {
+                fRef = ref;
+              }}
+                        schema={addVendorSchema}
+                        onSubmit={data => this.submitAddVendor(data, fRef)}>
+                <Segment stacked>
+                  <TextField
+                      label="Company Name"
+                      icon="copyright"
+                      name="companyName"
+                      placeholder={'(ex: Raisin Canes)'}
+                  />
+                  <TextField
+                      label="Address"
+                      icon="address card"
+                      name="address"
+                      placeholder={'ex: 2615 S King St Unit 102, Honolulu, HI 96826'}
+                  />
+                  <SubmitField value='Submit'/>
+                </Segment>
+              </AutoForm>
+            </Grid.Column>
+          </Grid>
+        </Container>
     );
   }
 }
 
-export default AddVendor;
+/** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
+export default (AddVendor);

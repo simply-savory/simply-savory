@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import { Container, Form, Grid, Header, Message, Segment, Checkbox } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
+import { Roles } from 'meteor/alanning:roles';
+import { Meteor } from 'meteor/meteor';
 
 /**
  * Signup component is similar to signin component, but we create a new user instead.
@@ -15,30 +17,38 @@ class Signup extends React.Component {
       email: '',
       password: '',
       error: '',
-      redirectToReferer: false, vendor: false };
+      redirectToReferer: false,
+      role: false };
   }
 
   /** Update the form controls each time the user interacts with them. */
   handleChange = (e, { name, value }) => {
-    this.setState({ [name]: value });
+      this.setState({ [name]: value });
   }
 
   toggleCheckBox = () => {
-    const vendor = !(this.vendor);
-    this.setState({ vendor });
+    const role = !(this.role);
+    this.setState({ role });
   }
 
   /** Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
   submit = () => {
-    const { firstName, lastName, email, password, verifyPassword } = this.state;
+    const { firstName, lastName, email, password, verifyPassword, role } = this.state;
+    console.log(role);
     if (password !== verifyPassword) {
       this.setState({ error: 'password and verify password do not match' });
     } else {
-      Accounts.createUser({
-        email,
-        profile: { lastName: lastName, firstName: firstName, displayName: `${firstName} ${lastName}` },
+      const userID = Accounts.createUser({
         username: email,
-        password,
+        email: email,
+        password: password,
+        profile: {
+          lastName: lastName,
+          firstName: firstName,
+          displayName: `${firstName} ${lastName}`,
+          companyName: '',
+          address: '',
+        },
       }, (err) => {
         if (err) {
           this.setState({ error: err.reason });
@@ -46,6 +56,10 @@ class Signup extends React.Component {
           this.setState({ error: '', redirectToReferer: true });
         }
       });
+      console.log();
+      if (role === true) {
+        Roles.addUsersToRoles(, 'vendor');
+      }
     }
   }
 
@@ -116,6 +130,12 @@ class Signup extends React.Component {
                       type="password"
                       onChange={this.handleChange}
                   />
+                  <Form.Field>
+                    <Checkbox
+                      label="I would like to become a vendor"
+                      name="role"
+                      onChange={this.toggleCheckBox}/>
+                  </Form.Field>
                   <Form.Button content="Submit"/>
                 </Segment>
               </Form>

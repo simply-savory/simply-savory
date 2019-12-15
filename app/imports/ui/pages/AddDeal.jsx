@@ -2,15 +2,12 @@ import React from 'react';
 import { Grid, Segment, Header } from 'semantic-ui-react';
 import AutoForm from 'uniforms-semantic/AutoForm';
 import TextField from 'uniforms-semantic/TextField';
-import LongTextField from 'uniforms-semantic/LongTextField';
-import HiddenField from 'uniforms-semantic/HiddenField';
 import SubmitField from 'uniforms-semantic/SubmitField';
 import ErrorsField from 'uniforms-semantic/ErrorsField';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import 'uniforms-bridge-simple-schema-2'; // required for Uniforms
 import SimpleSchema from 'simpl-schema';
-import PropTypes from 'prop-types';
 import { Deals } from '../../api/deal/Deals';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
@@ -27,14 +24,16 @@ class AddDeal extends React.Component {
 
   /** On submit, insert the data. */
   submit(data, formRef) {
-    const { item, discount, price, endTime, startTime, vendorId } = data;
+    const { item, discount, price, endTime, startTime } = data;
     const owner = Meteor.user().username;
-    Deals.insert({ item, discount, price, endTime, startTime, owner, vendorId, owner },
+    const companyName = Meteor.user().profile.companyName;
+    const address = Meteor.user().profile.address;
+    Deals.insert({ item, discount, price, endTime, startTime, owner, companyName, address },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Recipe added successfully', 'success');
+          swal('Success', 'Deal added successfully', 'success');
           formRef.reset();
         }
       });
@@ -46,17 +45,14 @@ class AddDeal extends React.Component {
     return (
         <Grid container centered>
           <Grid.Column>
-            <Header as="h2" textAlign="center" size="huge">Add Recipe</Header>
+            <Header as="h2" textAlign="center" size="huge">Add Deal</Header>
             <AutoForm ref={ref => { fRef = ref; }} schema={formSchema} onSubmit={data => this.submit(data, fRef)} >
               <Segment>
-                <TextField label='Recipe Name' name='name'/>
-                <TextField name='cooktime'/>
-                <HiddenField name='likes' value={0}/>
-                <HiddenField name='owner' value={this.props.owner}/>
-                <HiddenField name='vendorId' value={this.props.vendorId}/>
-                <LongTextField name='ingredients'/>
-                <TextField label='Recipe Image URL' name='image'/>
-                <LongTextField name='instructions'/>
+                <TextField name='item'/>
+                <TextField name='discount'/>
+                <TextField name='price'/>
+                <TextField name='endTime'/>
+                <TextField name='startTime'/>
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
               </Segment>
@@ -66,9 +62,5 @@ class AddDeal extends React.Component {
     );
   }
 }
-AddDeal.propTypes = {
-  owner: PropTypes.string.isRequired,
-  vendorId: PropTypes.string.isRequired,
-};
 
 export default AddDeal;

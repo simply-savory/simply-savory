@@ -18,7 +18,9 @@
       "password": "changeme",
       "role": "vendor",
       "firstName": "Elon",
-      "lastName": "Musk"
+      "lastName": "Musk",
+      "companyName": "Foodland",
+      "address": "95-221 Kipapa Dr., Mililani, HI, 96789 United States"
     },
     {
       "email": "aujared@hawaii.edu",
@@ -166,6 +168,28 @@
       "image": "https://www.spam.com/images/7/2/d/72d8148cb2ebc725d55ce4cadcd8fbb0d52f0447/simple-grilled-cheese-and-egg-spam-sandwich-655.jpg",
       "instructions": "1.Crack egg into bowl \n 2.mix egg until whites and yolk combine (add salt and pepper for more flavor) \n 3. Pour into non-stick pan and heat until eggs are fluffy \n 4.Carefully slide or remove eggs onto bread slice \n 5.Fry spam slices on pan until pink or brownish color on both sides\n 6.Serve and Enjoy",
       "createdAt": "Sat Oct 31 2019 15:59:32 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    }
+  ],
+  "defaultDeals": [
+    {
+      "owner": "vendor@foo.com",
+      "companyName": "Foodland",
+      "address": "95-221 Kipapa Dr., Mililani, HI, 96789 United States",
+      "item": "72oz Boneless Skinless Chicken Breast",
+      "discount": "20%",
+      "price": "$7.29",
+      "endTime": "12/23/2019",
+      "startTime": "12/14/2019"
+    },
+    {
+      "owner": "vendor@foo.com",
+      "companyName": "Foodland",
+      "address": "95-221 Kipapa Dr., Mililani, HI, 96789 United States",
+      "item": "12ct Eggland's Best Grade A Large Eggs",
+      "discount": "20%",
+      "price": "$1.65",
+      "endTime": "12/30/2019",
+      "startTime": "12/14/2019"
     }
   ]
 }
