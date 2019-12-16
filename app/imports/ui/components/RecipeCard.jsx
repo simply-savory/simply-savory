@@ -5,6 +5,7 @@ import { Recipes, RecipesSchema } from '/imports/api/recipe/Recipes';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import { Favorites } from '../../api/favorite/Favorites';
+import { Accounts } from 'meteor/accounts-base';
 
 class RecipeCard extends React.Component {
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
@@ -22,6 +23,7 @@ class RecipeCard extends React.Component {
       Favorites.insert({ FavoriteId: this.props.recipe._id, owner });
     }
   }
+
 
   render() {
     let defRating = 0;
@@ -53,14 +55,16 @@ class RecipeCard extends React.Component {
           </Card.Content>
           <Card.Content extra>
             <Segment.Group horizontal>
-              <Segment>
-                <Rating
-                    icon='heart'
-                    defaultRating={defRating}
-                    schema={RecipesSchema}
-                    onRate={this.handleRate}
-                    maxRating={1}/>
-                {this.props.recipe.likes}</Segment>
+                { Meteor.user() !== null ? (
+                    <Segment>
+                      <Rating
+                          icon='heart'
+                          defaultRating={defRating}
+                          schema={RecipesSchema}
+                          onRate={this.handleRate}
+                          maxRating={1}/>
+                      {this.props.recipe.likes}</Segment>
+                    ) : (<div></div>)}
               <Segment><Link to={`/show/${this.props.recipe._id}`}><Icon name='file alternate' />View</Link></Segment>
             </Segment.Group>
           </Card.Content>
