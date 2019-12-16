@@ -7,6 +7,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Favorites } from '../../api/favorite/Favorites';
 import RecipeCard from '../components/RecipeCard';
+import { Link } from 'react-router-dom';
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
@@ -26,31 +27,41 @@ class Landing extends React.Component {
       return (
           <Message
               onDismiss={this.handleDismiss}>
-            <Image centered size='huge' src='../../../images/simply-savory-logo.png'/>
-            <Header textAlign='center'>Welcome to Simply Savory!</Header>
-            <h2>What is Simply Savory?</h2>
-            <p>
-              Simply Savory is a recipe sharing solution that creates a way for students
-              (both on and off campus) to learn and share recipes that:
-            </p>
-            <List bulleted>
-              <List.Item>Can be made using minimal kitchen facilities (at a minimum, a toaster oven).
-              </List.Item>
-              <List.Item>Suit local taste sensibilities.</List.Item>
-              <List.Item>Can be filtered via dietary restrictions (gluten-free, vegan, etc).</List.Item>
-              <List.Item>Has an estimated number of servings per recipe.</List.Item>
-              <List.Item>Has an estimate of how long it takes to make.</List.Item>
-            </List>
-            <h2>How do I get started?</h2>
-            <List bulleted>
-              <List.Item>You can start browsing recipes right now by clicking the Discover Tab on the
-                navbar </List.Item>
-              <List.Item>To post a recipe or favorite one, create an account by clicking Login -&gt;
-                Sign Up </List.Item>
-              <List.Item>Dismiss this notifcation by clicking the x on the top right, this information can be viewed
-                again in the &quto;Help&quto; tab, it will pop up every time you visit the landing page until
-                you create an account!</List.Item>
-            </List>
+            <Container><Image centered size='huge' src='../../../images/simply-savory-logo.png'/>
+              <Header textAlign='center'>Welcome to Simply Savory!</Header>
+              <br/>
+              <Grid centered divided>
+                <GridColumn width={8}><h2>What is Simply Savory?</h2>
+                  <p>
+                    Simply Savory is a recipe sharing solution that creates a way for students
+                    (both on and off campus) to learn and share recipes that:
+                  </p>
+                  <List bulleted>
+                    <List.Item>Can be made using minimal kitchen facilities (at a minimum, a toaster oven).
+                    </List.Item>
+                    <List.Item>Can be made out of ingredients that are available within walking distance of
+                      UH.</List.Item>
+                    <List.Item>Suit local taste sensibilitiesx</List.Item>
+                    <List.Item>Can be filtered via dietary restrictions (gluten-free, vegan, etc)</List.Item>
+                    <List.Item>Have an estimated cost per serving</List.Item>
+                    <List.Item>Have an estimated number of servings per recipe</List.Item>
+                    <List.Item>Have an estimate of how long it takes to make</List.Item>
+                  </List></GridColumn>
+                <GridColumn width={8}><h2>How do I get started?</h2>
+
+                  <List bulleted>
+                    <List.Item>You can start browsing recipes right now by clicking the <Link
+                        to="/Discover">Discover</Link> Tab on the
+                      navbar </List.Item>
+                    <List.Item>To post a recipe or favorite one, login or create an account by clicking <Link
+                        to="/signin">Sign In</Link> or
+                      <Link
+                          to="/signup"> Sign Up</Link> </List.Item>
+                    <List.Item>Dismiss this notifcation by clicking the x on the top right, this information can be viewed
+                      again in the <Link
+                          to="/Help">Help</Link> tab, it will pop up every time you visit the landing page until
+                      you create an account!</List.Item>
+                  </List></GridColumn></Grid></Container>
           </Message>
       );
     }
