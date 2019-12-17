@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Card, Loader, Input } from 'semantic-ui-react';
+import { Container, Header, Card, Loader, Input, Message } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { Reviews } from '/imports/api/review/Reviews';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -27,7 +27,7 @@ class FavoriteRecipes extends React.Component {
 
   renderPage() {
     const favoritesIDList = _.pluck(this.props.favorites, 'FavoriteId');
-    const favoritesRecipes =  _.filter(this.props.recipes, function (recipe) {
+    const favoritesRecipes = _.filter(this.props.recipes, function (recipe) {
       return _.contains(favoritesIDList, recipe._id);
     });
     const filteredRecipe = favoritesRecipes.filter(
@@ -46,14 +46,17 @@ class FavoriteRecipes extends React.Component {
               value={this.state.search}
               onChange={this.updateSearch.bind(this)}
           />
+          <Message hidden={true}>You cant see me</Message>
           <Header as="h2" textAlign="center" inverted>Try these popular recipes</Header>
+          {filteredRecipe.length === 0 ? (<p>No recipe found</p>) :
+              (
           <Card.Group itemsPerRow={4}>
             {filteredRecipe.map((recipe) => <RecipeCard
                 favorites={this.props.favorites}
                 key={recipe._id}
                 recipe={recipe}/>)}
           </Card.Group>
-
+              )}
         </Container>
     );
   }

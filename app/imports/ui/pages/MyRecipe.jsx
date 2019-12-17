@@ -65,6 +65,8 @@ class MyRecipe extends React.Component {
               Search</Header>
           </div>
           <Header as="h2" textAlign="left">Most Recent </Header>
+          {filteredRecipe.length === 0 ? (<p>No recipe found</p>) :
+              (
           <Card.Group itemsPerRow={4}>
             <Card.Group>
               {filteredRecipe.map((recipe, index) => <RecipeCardEdit
@@ -73,6 +75,7 @@ class MyRecipe extends React.Component {
                   recipe={recipe}/>)}
             </Card.Group>
           </Card.Group>
+              )}
         </Container>
     );
   }

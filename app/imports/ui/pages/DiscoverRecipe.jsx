@@ -65,7 +65,7 @@ class DiscoverRecipe extends React.Component {
               Search</Header>
           </div>
           <Header as="h2" textAlign="left">Try these popular recipes</Header>
-          {filteredRecipe.length === 0 && this.state.search !== '' ? (<p>No recipe found</p>) :
+          {filteredRecipe.length === 0 ? (<p>No recipe found</p>) :
               (
                   <Card.Group itemsPerRow={4}>
                     {filteredRecipe.map((recipe) => <RecipeCard
