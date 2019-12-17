@@ -34,6 +34,8 @@ class RecipeCard extends React.Component {
     }
     const ingreds = this.props.recipe.ingredients;
     const result = ingreds.split('\n');
+    const short = result.slice(0, 5);
+
     // console.log(this.props.isFavorites);
     return (
         <Card centered>
@@ -48,7 +50,7 @@ class RecipeCard extends React.Component {
                      src={this.props.recipe.image}/>
             </Link>
             <Card.Description>
-              {_.map(result, function (item) {
+              {_.map(short, function (item) {
                 return (<div>{item}</div>);
               })}
             </Card.Description>
