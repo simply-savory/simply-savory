@@ -1,6 +1,5 @@
 import React from 'react';
-import { Container, Header, Card, Image, Button, Icon, Divider, Dropdown, Input, Loader } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Container, Header, Card, Input, Loader } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { Reviews } from '/imports/api/review/Reviews';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -8,7 +7,6 @@ import PropTypes from 'prop-types';
 import { Recipes } from '../../api/recipe/Recipes';
 import RecipeCardEdit from '../components/RecipeCardEdit';
 import { Favorites } from '../../api/favorite/Favorites';
-
 
 /** A simple static component to render some text for the landing page. */
 class MyRecipe extends React.Component {

@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
-import { Container, Header, Card, Loader, List, Message, Image } from 'semantic-ui-react';
+import React from 'react';
+import { Container, Header, Card, Loader, List, Message, Image, Grid, GridColumn } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { Recipes } from '/imports/api/recipe/Recipes';
 import { Reviews } from '/imports/api/review/Reviews';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Favorites } from '../../api/favorite/Favorites';
 import RecipeCard from '../components/RecipeCard';
-import { Link } from 'react-router-dom';
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
   state = { visible: true }
+
   handleDismiss = () => {
     this.setState({ visible: false });
 
@@ -57,7 +58,8 @@ class Landing extends React.Component {
                         to="/signin">Sign In</Link> or
                       <Link
                           to="/signup"> Sign Up</Link> </List.Item>
-                    <List.Item>Dismiss this notifcation by clicking the x on the top right, this information can be viewed
+                    <List.Item>Dismiss this notifcation by clicking the x on the top right,
+                      this information can be viewed
                       again in the <Link
                           to="/Help">Help</Link> tab, it will pop up every time you visit the landing page until
                       you create an account!</List.Item>

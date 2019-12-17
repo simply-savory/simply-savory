@@ -14,8 +14,9 @@ function OwnerCheck(name, recipeid) {
 
 function unsignedCheck(ownername, recipeid) {
   if (Meteor.user() === null) {
-    return (<div></div>);
-  } else OwnerCheck(ownername, recipeid);
+    return (<div/>);
+  } OwnerCheck(ownername, recipeid);
+  return 0;
 }
 
 class DisplayRecipe extends React.Component {
