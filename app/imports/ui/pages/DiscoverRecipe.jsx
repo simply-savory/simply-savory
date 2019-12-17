@@ -65,13 +65,15 @@ class DiscoverRecipe extends React.Component {
               Search</Header>
           </div>
           <Header as="h2" textAlign="left">Try these popular recipes</Header>
-          <Card.Group itemsPerRow={4}>
-            {filteredRecipe.map((recipe) => <RecipeCard
-                favorites={this.props.favorites}
-                key={recipe._id}
-                recipe={recipe}/>)}
-          </Card.Group>
-
+          {filteredRecipe.length === 0 && this.state.search !== '' ? (<p>No recipe found</p>) :
+              (
+                  <Card.Group itemsPerRow={4}>
+                    {filteredRecipe.map((recipe) => <RecipeCard
+                        favorites={this.props.favorites}
+                        key={recipe._id}
+                        recipe={recipe}/>)}
+                  </Card.Group>
+              )}
         </Container>
     );
   }
