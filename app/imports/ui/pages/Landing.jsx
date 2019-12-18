@@ -71,9 +71,9 @@ class Landing extends React.Component {
           <Image centered src='../../../images/simply-savory-logo.png'/>
           <Header as="h2" textAlign="center">New Recipes</Header>
           <Card.Group itemsPerRow={4}>
-            {this.props.recipes.map((recipe, index) => <RecipeCard
+            {this.props.recipes.map((recipe) => <RecipeCard
                 favorites={this.props.favorites}
-                key={index}
+                key={recipe._id}
                 recipe={recipe}/>)}
           </Card.Group>
         </Container>

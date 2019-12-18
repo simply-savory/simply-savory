@@ -5,7 +5,7 @@ import { Reviews } from '/imports/api/review/Reviews';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Recipes } from '../../api/recipe/Recipes';
-import RecipeCardEdit from '../components/RecipeCardEdit';
+import RecipeCardEditAdmin from '../components/RecipeCardEditAdmin';
 import { Favorites } from '../../api/favorite/Favorites';
 
 
@@ -68,9 +68,9 @@ class AdminRecipe extends React.Component {
           <Header as="h2" textAlign="left">Most Recent </Header>
           <Card.Group itemsPerRow={4}>
             <Card.Group>
-              {filteredRecipe.map((recipe, index) => <RecipeCardEdit
+              {filteredRecipe.map((recipe) => <RecipeCardEditAdmin
                   favorites={this.props.favorites}
-                  key={index}
+                  key={recipe._id}
                   recipe={recipe}/>)}
             </Card.Group>
           </Card.Group>

@@ -15,7 +15,7 @@ import LongTextField from 'uniforms-semantic/LongTextField';
 import { Redirect } from 'react-router-dom'; // required for Uniforms
 
 /** Renders the Page for editing a single document. */
-class EditRecipe extends React.Component {
+class EditRecipeAdmin extends React.Component {
 
   /** On successful submit, insert the data. */
   submit(data) {
@@ -87,7 +87,7 @@ class EditRecipe extends React.Component {
 }
 
 /** Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use. */
-EditRecipe.propTypes = {
+EditRecipeAdmin.propTypes = {
   doc: PropTypes.object,
   model: PropTypes.object,
   ready: PropTypes.bool.isRequired,
@@ -98,9 +98,9 @@ export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const documentId = match.params._id;
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe('RecipesUser');
+  const subscription = Meteor.subscribe('RecipesAdmin');
   return {
     doc: Recipes.findOne(documentId),
     ready: subscription.ready(),
   };
-})(EditRecipe);
+})(EditRecipeAdmin);

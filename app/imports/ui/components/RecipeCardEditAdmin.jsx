@@ -7,7 +7,7 @@ import { Meteor } from 'meteor/meteor';
 import { Favorites } from '../../api/favorite/Favorites';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-class RecipeCardEdit extends React.Component {
+class RecipeCardEditAdmin extends React.Component {
   handleRate = () => {
     const owner = Meteor.user().username;
     if (_.contains(_.pluck(this.props.favorites, 'FavoriteId'), this.props.recipe._id)) {
@@ -55,7 +55,7 @@ class RecipeCardEdit extends React.Component {
                         defaultRating={defRating} onRate={this.handleRate} maxRating={1}/>
                 {this.props.recipe.likes}</Segment>
               <Segment><Link to={`/show/${this.props.recipe._id}`}><Icon name='file alternate' />View</Link></Segment>
-              <Segment><Link to={`/edit/${this.props.recipe._id}`}><Icon name='edit' />Edit</Link></Segment>
+              <Segment><Link to={`/editAdmin/${this.props.recipe._id}`}><Icon name='edit' />Edit</Link></Segment>
             </Segment.Group>
           </Card.Content>
         </Card>
@@ -64,10 +64,10 @@ class RecipeCardEdit extends React.Component {
 }
 
 /** Require a document to be passed to this component. */
-RecipeCardEdit.propTypes = {
+RecipeCardEditAdmin.propTypes = {
   recipe: PropTypes.object.isRequired,
   favorites: PropTypes.array.isRequired,
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */
-export default withRouter(RecipeCardEdit);
+export default withRouter(RecipeCardEditAdmin);
