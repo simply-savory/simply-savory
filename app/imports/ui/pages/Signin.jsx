@@ -31,7 +31,7 @@ export default class Signin extends React.Component {
         this.setState({ error: '', redirectToReferer: true });
       }
     });
-  }
+  };
 
   /** Render the signin form. */
   render() {

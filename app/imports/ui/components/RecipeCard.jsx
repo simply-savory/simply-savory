@@ -5,24 +5,20 @@ import { Recipes, RecipesSchema } from '/imports/api/recipe/Recipes';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import { Favorites } from '../../api/favorite/Favorites';
-import { Accounts } from 'meteor/accounts-base';
 
 class RecipeCard extends React.Component {
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
   handleRate = () => {
     const owner = Meteor.user().username;
-    let removelist = [];
-    console.log(this.props.favorites);
     if (_.contains(_.pluck(this.props.favorites, 'FavoriteId'), this.props.recipe._id)) {
       Recipes.update(this.props.recipe._id, { $inc: { likes: -1 } });
-      removelist = _.findWhere(this.props.favorites, { FavoriteId: this.props.recipe._id });
-      console.log(removelist);
-      Favorites.remove(removelist._id);
+      const removeList = _.findWhere(this.props.favorites, { FavoriteId: this.props.recipe._id });
+      Favorites.remove(removeList._id);
     } else {
       Recipes.update(this.props.recipe._id, { $inc: { likes: 1 } });
       Favorites.insert({ FavoriteId: this.props.recipe._id, owner });
     }
-  }
+  };
 
 
   render() {
@@ -66,7 +62,7 @@ class RecipeCard extends React.Component {
                           onRate={this.handleRate}
                           maxRating={1}/>
                       {this.props.recipe.likes}</Segment>
-                    ) : (<div></div>)}
+                    ) : (<div/>)}
               <Segment><Link to={`/show/${this.props.recipe._id}`}><Icon name='file alternate' />View</Link></Segment>
             </Segment.Group>
           </Card.Content>

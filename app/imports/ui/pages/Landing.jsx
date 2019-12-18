@@ -11,11 +11,10 @@ import RecipeCard from '../components/RecipeCard';
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
-  state = { visible: true }
+  state = { visible: true };
 
   handleDismiss = () => {
     this.setState({ visible: false });
-
   }
 
   render() {

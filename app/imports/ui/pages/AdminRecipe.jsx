@@ -1,12 +1,12 @@
 import React from 'react';
-import { Container, Header, Card, Image, Button, Icon, Divider, Dropdown, Loader, Input } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Container, Header, Card, Loader, Input } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import { Reviews } from '/imports/api/review/Reviews';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Recipes } from '../../api/recipe/Recipes';
 import RecipeCardEdit from '../components/RecipeCardEdit';
+import { Favorites } from '../../api/favorite/Favorites';
 
 
 /** A simple static component to render some text for the landing page. */
@@ -69,6 +69,7 @@ class AdminRecipe extends React.Component {
           <Card.Group itemsPerRow={4}>
             <Card.Group>
               {filteredRecipe.map((recipe, index) => <RecipeCardEdit
+                  favorites={this.props.favorites}
                   key={index}
                   recipe={recipe}/>)}
             </Card.Group>
@@ -82,15 +83,18 @@ AdminRecipe.propTypes = {
   recipes: PropTypes.array.isRequired,
   reviews: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
+  favorites: PropTypes.array.isRequired,
 };
 
 export default withTracker(() => {
   // Get access to Stuff documents.
   const subscription1 = Meteor.subscribe('RecipesAdmin');
   const subscription2 = Meteor.subscribe('Reviews');
+  const subscription3 = Meteor.subscribe('Favorites');
   return {
     recipes: Recipes.find({}, { sort: { createdAt: -1 } }).fetch(),
     reviews: Reviews.find({}).fetch(),
-    ready: subscription1.ready() && subscription2.ready(),
+    favorites: Favorites.find({}).fetch(),
+    ready: subscription1.ready() && subscription2.ready() && subscription3.ready(),
   };
-})( AdminRecipe);
+})(AdminRecipe);

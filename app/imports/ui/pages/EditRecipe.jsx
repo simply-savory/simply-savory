@@ -39,7 +39,7 @@ class EditRecipe extends React.Component {
 
   state = {
     redirect: false,
-  }
+  };
 
   // eslint-disable-next-line consistent-return
   renderRedirect() {
