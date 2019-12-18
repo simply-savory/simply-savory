@@ -15,7 +15,7 @@ class Landing extends React.Component {
 
   handleDismiss = () => {
     this.setState({ visible: false });
-  }
+  };
 
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;

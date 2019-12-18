@@ -35,7 +35,7 @@ class EditRecipeAdmin extends React.Component {
     this.setState({
       redirect: true,
     });
-  }
+  };
 
   state = {
     redirect: false,
