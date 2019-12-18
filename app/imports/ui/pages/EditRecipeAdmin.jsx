@@ -30,8 +30,8 @@ class EditRecipeAdmin extends React.Component {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
-  handleClickDelete() {
-      Recipes.remove(this.props.doc._id);
+  handleClickDelete = () => {
+    Recipes.remove(this.props.doc._id);
     this.setState({
       redirect: true,
     });

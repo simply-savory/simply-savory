@@ -30,8 +30,8 @@ class EditRecipe extends React.Component {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
-  handleClickDelete() {
-      Recipes.remove(this.props.doc._id);
+  handleClickDelete = () => {
+    Recipes.remove(this.props.doc._id);
     this.setState({
       redirect: true,
     });
@@ -50,6 +50,7 @@ class EditRecipe extends React.Component {
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   renderPage() {
+    console.log(this.props.doc._id);
     return (
         <Grid container centered>
           <Grid.Column>
